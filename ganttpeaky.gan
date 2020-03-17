@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Projet Durableverse" company="" webLink="https://gitlab.com/mathilda_rosset/projet-durableverse" view-date="2020-03-06" view-index="0" gantt-divider-location="300" resource-divider-location="300" version="2.8.10" locale="fr">
+<?xml version="1.0" encoding="UTF-8"?><project name="Projet Durableverse" company="" webLink="https://gitlab.com/mathilda_rosset/projet-durableverse" view-date="2020-03-10" view-index="0" gantt-divider-location="300" resource-divider-location="300" version="2.8.10" locale="fr">
     <description><![CDATA[Bonjour tout le monde, voici le GranttProject pour les tâches à effectuer pour le lot A. Je vous souhaite un bon avancement.]]></description>
     <view zooming-state="default:2" id="gantt-chart">
         <field id="tpd3" name="Nom" width="166" order="0"/>
@@ -42,13 +42,15 @@
             <notes><![CDATA[Mettre en place le dépôt Git
 Inviter l'encadrant en tant que rapporteur et les autres membres du groupe en tant que développer
 Creer première branche lot_a
-Coder le main.c
+
 
 
 ]]></notes>
             <depend id="18" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="18" name="Tâche A1.2" color="#3300ff" meeting="false" start="2020-03-17" duration="1" complete="0" thirdDate="2020-02-26" thirdDate-constraint="0" expand="true"/>
+        <task id="18" name="Tâche A1.2" color="#3300ff" meeting="false" start="2020-03-17" duration="1" complete="0" thirdDate="2020-02-26" thirdDate-constraint="0" expand="true">
+            <notes><![CDATA[Coder le main.c + tester]]></notes>
+        </task>
         <task id="2" name="Tâche A2" color="#952222" meeting="false" start="2020-03-06" duration="11" complete="0" thirdDate="2020-03-06" thirdDate-constraint="1" expand="true">
             <notes><![CDATA[Définir le type carte
 Définir le type plateau
@@ -96,6 +98,7 @@ Créer une fonction qui affiche le gagnant du jeu ou égalité le cas échéant]
     </resources>
     <allocations>
         <allocation task-id="0" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="2" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
     </allocations>
     <vacations/>
     <previous/>
