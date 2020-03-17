@@ -1,0 +1,2 @@
+- interface graphique : pouvoir utiliser souris, clavier. Boutons pour proposer les options (comme dans aptitude)
+- affichage de cartes : commande du style "help[nom_carte]" qui affiche les détails de la carte (éventuellement en ascii art pour afficher la carte en physique)
