@@ -39,19 +39,19 @@ struct board {
 /************ Defining functions ************/
 
 /* 
- * 
- * 
+ * @brief creates new board and allocates memory
+ * @return initialized board instance 
  */
 struct board new_board();
 
 /* 
- * 
+ * @brief frees memory taken by given board, including memory taken for both ensiie struct
  * 
  */
 void free_board(struct board*);
 
 /* 
- * 
+ * @brief 
  * 
  */
 void begin_turn(struct board*);
