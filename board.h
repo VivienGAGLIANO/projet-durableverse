@@ -5,11 +5,21 @@
 
 #define MAX_CARD_NUMBER 50
 
-/************ Defining types ************/
+/* -------------------------------------------------------- */
+/* -------------------- Defining types -------------------- */
+/* -------------------------------------------------------- */
+
+/* General type for the staff cards currently on the board, and the maximum number of staff
+ * cards allowed on the board
+ */
 struct board_staff {
     struct card* cards;
     int max;
 };
+
+/* General type for the students cards currently on the board (FISE and FISA),
+ * the counter and the durability and development points for each type of student card
+ */
 struct board_students {
     int FISE_count;
     int FISA_count;
@@ -19,8 +29,12 @@ struct board_students {
     int FISA_development;
 };
 
+/* General type for one player (one ENSIIE), with its Sustainable Development points (int SD),
+ * its deck, hand, and discard (which are lists/array of struct card), and the current staff cards
+ * and student cards currently on the board
+ */
 struct ensiie {
-    int DD;
+    int SD;
     struct card* deck;
     struct card hand[MAX_CARD_NUMBER];
     struct card* discard;
@@ -28,6 +42,8 @@ struct ensiie {
     struct board_students current_students;
 };
 
+/* General type for the game board, including the two players and the turn counter
+ */
 struct board {
     struct ensiie player1;
     struct ensiie player2;
@@ -35,8 +51,9 @@ struct board {
 };
 
 
-
-/************ Defining functions ************/
+/* ------------------------------------------------------------ */
+/* -------------------- Defining functions -------------------- */
+/* ------------------------------------------------------------ */
 
 /* 
  * 
