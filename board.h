@@ -68,62 +68,62 @@ struct board new_board();
 void free_board(struct board*);
 
 /* 
- * @brief 
- * 
+ * @brief updates board state at the beginning of a new turn
+ * @detail increments turn counter, handles FISA student cards turn based behaviour, updates number of space available for staff cards
  */
 void begin_turn(struct board*);
 
 /* 
- * 
- * 
+ * @brief computes number of cards drawn by player
+ * @return number of cards to be drawn
  */
 int nb_card_drawn(struct ensiie);
 
 /* 
- * 
+ * @brief draws a card for the given player
  * 
  */
 void draw(struct ensiie*);
 
 /* 
- * 
- * 
+ * @brief computes number of student cards received by the player
+ * @return number of student cards to be received
  */
 int nb_student_card_received(struct ensiie);
 
 /* 
- * 
+ * @brief adds given amount of FISE student cards to the player
  * 
  */
 void add_student_FISE(int, struct ensiie*);
 
 /* 
- * 
+ * @brief adds given amount of FISA student cards to the player
  * 
  */
 void add_student_FISA(int, struct ensiie*);
 
 /* 
- * 
- * 
+ * @brief computes Energy Points (EP) available at the beginning of the player's phase
+ * @return number of EP available
  */
 int available_EP(struct ensiie);
 
 /* 
- * 
+ * @brief allows player to play one card from its hand
  * 
  */
 void play_card(struct ensiie*);
 
 /* 
- * 
+ * @brief ends current turn, computes and updates Sustainable Development (SD) points for each player
  * 
  */
 void end_turn(struct board*);
 
 /* 
- * 
- * 
+ * @brief checks if game is over, i.e. if winning condition of having 20+ Sustainable Development (SD) points is achieved
+ * @return 1 if game is over, 0 else
  */
 int is_over(struct board);
 
