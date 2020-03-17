@@ -16,7 +16,7 @@ struct card {
 };
 
 
-//---------------------------- Staff card -----------------------------------
+/*---------------------------- Staff card -----------------------------------*/
 struct staff_effect {
     enum staff_effect_id id;
     int value;
@@ -25,7 +25,7 @@ struct staff_effect {
 enum staff_effect_id {AE1, AE2, AA1, AA2, RE1, RE2, RA1, RA2, ADD, RDD, DR, E};
 
 
-//---------------------------- Action card ----------------------------------
+/*---------------------------- Action card ----------------------------------*/
 enum action_effect {WinOneDD, DrawOneCard, PlayOneFISE, PlayOneFISA, Win6EP, RemoveOneFISEFISA, DiscardOneStaff, ShuffleDiscardDraw, IncreaseDevelopment, IncreaseDurability, RemoveAllFISEFISA};
 
 
