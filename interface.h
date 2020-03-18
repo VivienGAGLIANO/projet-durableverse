@@ -40,5 +40,5 @@ void choice_card(struct card*, struct ensiie*);
 */
 void print_end_game (struct board);
 
-@
+
 #endif
