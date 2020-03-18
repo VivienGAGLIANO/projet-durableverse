@@ -5,40 +5,47 @@
 #include "board.h"
 
 /*
-*@brief checks the turn number and if it's even or odd
-*@return turn number and if FISA appear or disappear and prints that a new one begin, prints if new staff space is available, Sustainale Development (SD) point of each players  
+*@brief prints new turn information 
+*@detail prints turn number and each player's Sustainable Development (SD) points, states if new staff space is available and if FISA appear/disappear this turn
+*
 */
 void print_new_turn(struct board);
 
 /*
-*@brief checks the phase and the player
-*@return the phase number, the player, print the board, and current player's hand
+*@brief prints new phase information
+*@detail states which player's turn it is, prints the board (student cards, staff cards, and SD points of each player) as well as the current player's hand
+*
 */
 void print_new_phase(struct board);
 
 /*
-* 
-*@return prints the current board except the hand and the discard
+*@brief prints the current board
+*@detail prints each player's SD points, student card number (FISE and FISA), staff card (by order played) and hand size
 */
 void print_board(struct board);
 
 /*
-*@detail ask how many student cards (FISE or FISA) wanted: if one is wanted, then ask which one, if more, the ask how many. 
-Then check if the quantity wanted is available. The choice is savec in variant int FISE or int FISA
+*@brief asks player which student cards he desires
+@detail asks which student cards (FISE or FISA) are wanted, in accordance with the number of student card available for this player (computed using nb_student_card_received function)
+If only one available, asks between FISE and FISA
+Else asks how many of each, and verifies that the sum equals number of student cards available
+Result is stored in given nb_FISE and nb_FISA variables
 */
-void choice_FISE_FISA(int nb_FISE*, int nb_FISA*, struct ensiie);
+void choice_FISE_FISA(int *nb_FISE, int *nb_FISA, struct ensiie);
 
 /*
-*@detail ask the player to play a hand card or to end the phase. Check if the cost < EP, if it's not then ask again with an error message.
-If all hand card cost < EP then the only choice is to end the phase
-@return prints EP, hand cards
+*@brief asks the player to play a card or end his phase
+*@detail Checks if chosen card's cost doesn't exceed available Energy Point (EP), and asks again with error message if not.
+If if all cards in hand are unplayable, the only choice given is to end the phase
+*@return if a card is chosen, a pointer towards that card, NULL if end phase
 */
-struct card choice_card(struct ensiie);
+struct card* choice_card(struct ensiie);
 
 /*
-*@return prints the winner or equality
+*@brief prints the winner or draw, depending on the result of the game
+*@pre game must be over for the function to run, i.e. function is_over must return true
 */
-void print_end_game (struct board);
+void print_end_game(struct board);
 
 
 #endif
