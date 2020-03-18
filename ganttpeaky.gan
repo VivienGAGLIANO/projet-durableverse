@@ -4,7 +4,7 @@
         <field id="tpd3" name="Nom" width="166" order="0"/>
         <field id="tpd4" name="Date de début" width="64" order="1"/>
         <field id="tpd5" name="Date de fin" width="64" order="2"/>
-        <timeline><![CDATA[7,8,2]]></timeline>
+        <timeline><![CDATA[7,2,8]]></timeline>
         <option id="color.recent"><![CDATA[#009966 #3300ff #7a3c7a #4f844f #952222 #5dd7cf]]></option>
     </view>
     <view id="resource-table">
@@ -98,7 +98,7 @@ n’est moins chère, alors seul le choix de finir sa phase est proposé au joue
     </resources>
     <allocations>
         <allocation task-id="0" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="2" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="18" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
     </allocations>
     <vacations/>
     <previous/>
