@@ -38,6 +38,24 @@ struct card {
     enum action_effect* action_effect;
 };
 
+/*
+ *@brief give the EP cost of a card
+ *@return EP cost of a card
+ */
+int EP_cost(struct card);
+
+/*
+ *@brief tell if a card is a staff or an action card
+ *@param
+ *@return 0 if it's a staff car and 1 else
+ */
+int type_of_card(struct card);
+
+/*
+ *@brief quantity of card in the deck at the beginning
+ *@return the number of same card in the deck at the beginning
+ */
+int nb_card_deck(struct card);
 
 
 #endif
