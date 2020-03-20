@@ -127,5 +127,5 @@ void end_turn(struct board*);
  */
 int is_over(struct board);
 
-
+struct 
 #endif
