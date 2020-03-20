@@ -14,8 +14,8 @@
  * cards allowed on the board
  */
 struct board_staff {
-    struct card* cards;
-    int max;
+    struct card* cards; /**< The staff cards currently on the ensiie's board */
+    int max; /**< The maximum number of staff cards of the ensiie's board at the same time */
 };
 
 /**
@@ -23,12 +23,12 @@ struct board_staff {
  * the counter and the durability and development points for each type of student card
  */
 struct board_students {
-    int FISE_count; /** The number of FISE cards currenlty on the board */
-    int FISA_count; /** The number of FISA cards currenlty on the board */
-    int FISE_durability; /** Each FISE card's durabilty */
-    int FISA_durability; /** Each FISA card's durabilty */
-    int FISE_development; /** Each FISE card's development points */
-    int FISA_development; /** Each FISA card's development points */
+    int FISE_count; /**< The number of FISE cards currenlty on the board */
+    int FISA_count; /**< The number of FISA cards currenlty on the board */
+    int FISE_durability; /**< Each FISE card's durabilty */
+    int FISA_durability; /**< Each FISA card's durabilty */
+    int FISE_development; /**< Each FISE card's development points */
+    int FISA_development; /**< Each FISA card's development points */
 };
 
 /**
@@ -37,22 +37,22 @@ struct board_students {
  * and student cards currently on the board, and a pointer to its opponent
  */
 struct ensiie {
-    int SD; /** The sustainable development points of the ensiie */
-    struct card* deck; /** The deck */
-    struct card hand[MAX_CARD_NUMBER]; /** The hand */
-    struct card* discard; /** The discard */
-    struct board_staff current_staff; /** The current staff cards currently on the board */
-    struct board_students current_students; /** The current student cards currently on the board */
-    struct ensiie* opponent; /** A pointer to the opponent ensiie */
+    int SD; /**< The sustainable development points of the ensiie */
+    struct card* deck; /**< The deck */
+    struct card hand[MAX_CARD_NUMBER]; /**< The hand */
+    struct card* discard; /**< The discard */
+    struct board_staff current_staff; /**< The current staff cards currently on the board */
+    struct board_students current_students; /**< The current student cards currently on the board */
+    struct ensiie* opponent; /**< A pointer to the opponent ensiie */
 };
 
 /**
  * @brief General type for the game board, including the two players and the turn counter
  */
 struct board {
-    struct ensiie player1; /** The first player */
-    struct ensiie player2; /** The second player */
-    int n_turn; /** The current turn number */
+    struct ensiie player1; /**< The first player */
+    struct ensiie player2; /**< The second player */
+    int n_turn; /**< The current turn number */
 };
 
 
