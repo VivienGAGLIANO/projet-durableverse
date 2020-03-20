@@ -30,8 +30,8 @@ struct board_students {
 };
 
 /* General type for one player (one ENSIIE), with its Sustainable Development points (int SD),
- * its deck, hand, and discard (which are lists/array of struct card), and the current staff cards
- * and student cards currently on the board
+ * its deck, hand, and discard (which are lists/array of struct card), the current staff cards
+ * and student cards currently on the board, and its opponent
  */
 struct ensiie {
     int SD;
@@ -40,6 +40,7 @@ struct ensiie {
     struct card* discard;
     struct board_staff current_staff;
     struct board_students current_students;
+    struct ensiie* opponent_ensiie;
 };
 
 /* General type for the game board, including the two players and the turn counter
@@ -109,11 +110,17 @@ void add_student_FISA(int, struct ensiie*);
  */
 int available_EP(struct ensiie);
 
+/*
+ *@brief start a player's phase
+ *
+ */
+void play_phase (struct ensiie*, int);
+
 /* 
  * @brief allows player to play one card from its hand
- * 
+ * @return 1 if card played, 0 if turn passed
  */
-void play_card(struct ensiie*);
+int play_card(struct ensiie*, int*);
 
 /* 
  * @brief ends current turn, computes and updates Sustainable Development (SD) points for each player
