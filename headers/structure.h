@@ -20,13 +20,13 @@ stack create_stack();
 *@brief check if the stack is empty or not
 *@return 1 is the stack is empty, else 0
 */
-int is_empty_stack(stack );
+int is_empty_stack(stack);
 
 /*
 *@brief modify the stack by pushing an element at the beginning
 *
 */
-void push_stack(int e, stack*);
+void push_stack(int, stack*);
 
 /* 
 *@brief removes the first element of the stack 
@@ -38,7 +38,7 @@ int pop_stack(stack*);
 *@brief modify the stack by pushing an element at the end 
 *
 */
-void push_last_stack(int e, stack *e);
+void push_last_stack(int, stack *);
 
 /*
 *@brief removes the last element of the stack
@@ -50,7 +50,7 @@ int pop_last_stack(stack*);
 *@brief find the position of the element in the stack
 *@return an int defining the position of the element
 */
-int get_stack_elem_position(elem e, stack);
+int get_stack_elem_position(elem , stack);
 
 /*
 *@brief computes the length of the stack
