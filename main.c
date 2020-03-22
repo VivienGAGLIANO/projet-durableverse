@@ -16,12 +16,12 @@ int main(int argc, char const *argv[]) {
         print_new_turn(game_board);
 
         if (playerOnePlaysFirst) {
-            play_phase(&game_board.player1);
-            play_phase(&game_board.player2);
+            play_phase(&game_board.player1, game_board.n_turn);
+            play_phase(&game_board.player2, game_board.n_turn);
             playerOnePlaysFirst = 0;
         } else {
-            play_phase(&game_board.player2);
-            play_phase(&game_board.player1);
+            play_phase(&game_board.player2, game_board.n_turn);
+            play_phase(&game_board.player1, game_board.n_turn);
             playerOnePlaysFirst = 1;
         }
         end_turn(&game_board);
