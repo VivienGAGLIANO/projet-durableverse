@@ -5,7 +5,7 @@
 typedef struct elm* stack;
 
 /* Defining a stack elm */
-type struct elm {
+typedef struct elm {
     int val;
     stack next;
 } elm;
@@ -63,3 +63,5 @@ int len_stack(stack);
 *
 */
 void print_stack(stack);
+
+#endif
