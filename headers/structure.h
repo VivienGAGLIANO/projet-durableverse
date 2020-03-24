@@ -50,7 +50,7 @@ int pop_last_stack(stack*);
 *@brief find the position of the element in the stack
 *@return an int defining the position of the element
 */
-int get_stack_elem_position(elem , stack);
+int get_stack_elem_position(elm , stack);
 
 /*
 *@brief computes the length of the stack
