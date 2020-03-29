@@ -1,8 +1,9 @@
 #include <stdlib.h>
 #include <time.h>
 #include "board.h"
+#include "interface.h"
 
-int main(int argc, char const *argv[]) {
+int main() {
     
     /* Initializing the game board */
     struct board game_board = new_board();
