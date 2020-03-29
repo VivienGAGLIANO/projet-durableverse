@@ -3,8 +3,6 @@
 
 #include "card.h"
 
-#define MAX_CARD_NUMBER 50
-
 /* -------------------------------------------------------- */
 /* ------------------------- Types ------------------------ */
 /* -------------------------------------------------------- */
@@ -15,7 +13,7 @@
  */
 struct board_staff {
     struct card* cards; /**< The staff cards currently on the ensiie's board */
-    int max; /**< The maximum number of staff cards of the ensiie's board at the same time */
+    int max;            /**< The maximum number of staff cards of the ensiie's board at the same time */
 };
 
 /**
@@ -23,12 +21,12 @@ struct board_staff {
  * the counter and the durability and development points for each type of student card
  */
 struct board_students {
-    int FISE_count; /**< The number of FISE cards currenlty on the board */
-    int FISA_count; /**< The number of FISA cards currenlty on the board */
-    int FISE_durability; /**< Each FISE card's durabilty */
-    int FISA_durability; /**< Each FISA card's durabilty */
-    int FISE_development; /**< Each FISE card's development points */
-    int FISA_development; /**< Each FISA card's development points */
+    int FISE_count;         /**< The number of FISE cards currenlty on the board */
+    int FISA_count;         /**< The number of FISA cards currenlty on the board */
+    int FISE_durability;    /**< Each FISE card's durabilty */
+    int FISA_durability;    /**< Each FISA card's durabilty */
+    int FISE_development;   /**< Each FISE card's development points */
+    int FISA_development;   /**< Each FISA card's development points */
 };
 
 /**
@@ -37,13 +35,19 @@ struct board_students {
  * and student cards currently on the board, and a pointer to its opponent
  */
 struct ensiie {
-    int SD; /**< The sustainable development points of the ensiie */
-    struct card* deck; /**< The deck */
-    struct card hand[MAX_CARD_NUMBER]; /**< The hand */
-    struct card* discard; /**< The discard */
-    struct board_staff current_staff; /**< The current staff cards currently on the board */
-    struct board_students current_students; /**< The current student cards currently on the board */
-    struct ensiie* opponent; /**< A pointer to the opponent ensiie */
+    int SD;                 /**< The sustainable development points of the ensiie */
+    struct card* deck;      /**< The deck */
+    struct card* hand;      /**< The hand */
+    struct card* discard;   /**< The discard */
+
+    /** The current staff cards currently on the board */
+    struct board_staff current_staff;
+
+    /** The current student cards currently on the board */
+    struct board_students current_students;
+
+    /** A pointer to the opponent ensiie */
+    struct ensiie* opponent;
 };
 
 /**
@@ -77,6 +81,13 @@ void free_board(struct board*);
  * @detail increments turn counter, handles FISA student cards turn based behaviour, updates number of space available for staff cards
  */
 void begin_turn(struct board*);
+
+/**
+ * @brief lets the ensiie to play his phase
+ * @detail calculates the EP of the ensiie, how many FISA or FISE cards the ensiie wants to play, which action and staff cards the ensiie wants to play, and applies the effect of these cards
+ * @param a pointer to the ensiie playing, and the turn number
+ */
+void play_phase(struct ensiie*, int);
 
 /**
  * @brief computes number of cards drawn by player
@@ -113,12 +124,6 @@ void add_student_FISA(int, struct ensiie*);
  * @return number of EP available
  */
 int available_EP(struct ensiie);
-
-/**
- * @brief starts a player's phase
- * @param a pointer to the ensiie playing, and the turn number
- */
-void play_phase(struct ensiie*, int);
 
 /**
  * @brief allows player to play one card from its hand
