@@ -144,31 +144,39 @@ void end_turn(struct board*);
  */
 int is_over(struct board);
 
-/*
+
+
+/* ------------------------------------------------------------ */
+/* ---------------------- Maybe unused ------------------------ */
+/* ------------------------------------------------------------ */
+
+
+/** 
  * @brief give the ensiie's deck
- * @return a pointeur towards the ensiie deck
+ * @return a pointer towards the ensiie deck
  */
 
-struct card* get_ensiie_deck(struct ensiie);
+//struct card* get_ensiie_deck(struct ensiie);
 
-/*
+/** 
  * @brief give the ensiie's deck
  * @return a table which contain all the card in the ensiie's hand
  */
 
-struct card get_ensiie_hand(struct ensiie);
+//struct card* get_ensiie_hand(struct ensiie);
 
 /*
  * @brief give the ensiie's deck
- * @return a pointeur towards the ensiie's discard
+ * @return a pointer towards the ensiie's discard
  */
 
-struct card* get_ensiie_discard(struct ensiie);
+//struct card* get_ensiie_discard(struct ensiie);
 
 /*
- * @brief tell if the tour is peer or not 
- * @return 1 if the tour is peer, else 0
+ * @brief tell if the turn is even or not 
+ * @return 1 if the turn is even, else 0
  */
+int is_even(struct board);
 
-int is_peer(struct board);
+
 #endif
