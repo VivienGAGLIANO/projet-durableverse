@@ -1,12 +1,17 @@
 #ifndef _STRUCTURE_H
 #define _STRUCTURE_H
 
+#include "card.h"
+
+
+typedef struct card stack_elm;
+
 /*Defining the stack type */
 typedef struct elm* stack;
 
 /* Defining a stack elm */
 typedef struct elm {
-    int val;
+    stack_elm val;
     stack next;
 } elm;
 
@@ -26,31 +31,31 @@ int is_empty_stack(stack);
 *@brief modify the stack by pushing an element at the beginning
 *
 */
-void push_stack(int, stack*);
+void push_stack(stack_elm, stack*);
 
 /* 
 *@brief removes the first element of the stack 
 *@return the first element which has been removed
 */
-int pop_stack(stack*);
+stack_elm pop_stack(stack*);
 
 /*
 *@brief modify the stack by pushing an element at the end 
 *
 */
-void push_last_stack(int, stack *);
+void push_last_stack(stack_elm, stack *);
 
 /*
 *@brief removes the last element of the stack
 *@return the last element which has been removed
 */
-int pop_last_stack(stack*);
+stack_elm pop_last_stack(stack*);
 
 /*
 *@brief find the position of the element in the stack
 *@return an int defining the position of the element
 */
-int get_stack_elem_position(elm , stack);
+stack_elm get_stack_elem_position(elm , stack);
 
 /*
 *@brief computes the length of the stack
