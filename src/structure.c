@@ -23,31 +23,31 @@ void push_stack(stack_elm e, stack* a){
 }
 
 stack_elm pop_stack(stack* a){
-	*a=a->next;
-	return a->val;
+	*a=(*a)->next;
+	return (*a)->val;
 }
 
 void push_last_stack(stack_elm e, stack* a){
 	stack * p;
-	while (a->next!=NULL){
-		a->next;
+	while ((*a)->next!=NULL){
+		(*a)->next;
 	}
-	p->val=e;
-	p->next=NULL;
-	a->next=p;
+	(*p)->val=e;
+	(*p)->next=NULL;
+	(*a)->next=p;
 }
 stack_elm pop_last_stack(stack* a){
-	while ((a->next)->next!=NULL){
-		*a=a->next;
+	while (((*a)->next)->next!=NULL){
+		*a=(*a)->next;
 	}
-	int p;
-	p=(a->next)->val;
-	a->next=NULL;
-	return a->val;
+	stack_elm p;
+	p=((*a)->next)->val;
+	(*a)->next=NULL;
+	return (*a)->val;
 }
 int get_stack_ele_position(elm e, stack a){
 	int i = 0;
-	while (a->val!=e){
+	while (a->val)!=e){
 		a=a->next;
 		i=i+1;
 	}
