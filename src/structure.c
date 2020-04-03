@@ -1,30 +1,33 @@
-#include "structure.h"
+#include "../headers/structure.h"
 
 stack create_stack(){
-	int a=malloc(sizeof(stack));
-	return a;
+	return NULL;
 }
 
 int is_empty_stack(stack a){
-	if (a==NULL)
-		return 1;
-	else
-		return 0;
+	return a == NULL;
 }
 
-void push_stack(int e, stack* a){
-	stack p;
-	p=*a;
-	a->val=e;
-	a->next=p;
+void push_stack(stack_elm e, stack* a){
+	stack new_cell = (stack) malloc(sizeof(struct elm));
+	
+	/* Checking malloc failure */
+	if (new_cell == NULL) {
+		perror("Memory allocation failure");
+		exit(1);
+	}
+
+	new_cell->val = e;
+	new_cell->next = *a;
+	*a = new_cell;
 }
 
-int pop_stack(stack* a){
+stack_elm pop_stack(stack* a){
 	*a=a->next;
 	return a->val;
 }
 
-void push_last_stack(int e, stack* a){
+void push_last_stack(stack_elm e, stack* a){
 	stack * p;
 	while (a->next!=NULL){
 		a->next;
@@ -33,10 +36,9 @@ void push_last_stack(int e, stack* a){
 	p->next=NULL;
 	a->next=p;
 }
-int pop_last_stack(stack* a){
+stack_elm pop_last_stack(stack* a){
 	while ((a->next)->next!=NULL){
 		*a=a->next;
-
 	}
 	int p;
 	p=(a->next)->val;
