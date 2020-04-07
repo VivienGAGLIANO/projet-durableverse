@@ -144,6 +144,17 @@ void end_turn(struct board*);
  */
 int is_over(struct board);
 
+/**
+ * @brief tell if the turn is even or not 
+ * @return 1 if the turn is even, else 0
+ */
+int is_even(struct board);
+
+/**
+ * @brief tells if new staff emplacement is available this turn
+ * @return 1 if turn is multiple of 5, 0 else
+ */
+int new_staff_available(struct board);
 
 
 /* ------------------------------------------------------------ */
@@ -171,12 +182,6 @@ int is_over(struct board);
  */
 
 //struct card* get_ensiie_discard(struct ensiie);
-
-/*
- * @brief tell if the turn is even or not 
- * @return 1 if the turn is even, else 0
- */
-int is_even(struct board);
 
 
 #endif
