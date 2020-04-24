@@ -5,9 +5,14 @@
 #include "board.h"
 
 /**
+ * @brief prints the hand
+ * @detail displays the given card list as a hand, in the format of a list with : card index in hand list, name of the card and energy cost.
+ */
+void print_hand(struct card*);
+
+/**
  * @brief prints new turn information 
  * @detail prints turn number and each player's Sustainable Development (SD) points, states if new staff space is available and if FISA appear/disappear this turn
- * 
  */
 void print_new_turn(struct board);
 
@@ -16,7 +21,7 @@ void print_new_turn(struct board);
  * @detail states which player's turn it is, prints the board (student cards, staff cards, and SD points of each player) as well as the current player's hand
  * 
  */
-void print_new_phase(struct board);
+void print_new_phase(struct board, struct ensiie);
 
 /**
  * @brief prints the current board

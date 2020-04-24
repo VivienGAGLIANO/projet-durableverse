@@ -30,12 +30,13 @@ struct board_students {
 };
 
 /**
- * @brief General type for one player (one ENSIIE), with its Sustainable Development points (int SD),
+ * @brief General type for one player (one ENSIIE), with its Sustainable Development points (int SD), its player name (char*)
  * its deck, hand, and discard (which are lists/arrays of struct card), the current staff cards
  * and student cards currently on the board, and a pointer to its opponent
  */
 struct ensiie {
     int SD;                 /**< The sustainable development points of the ensiie */
+    char* player_name;
     struct card* deck;      /**< The deck */
     struct card* hand;      /**< The hand */
     struct card* discard;   /**< The discard */

@@ -5,7 +5,6 @@
 
 struct board new_board(){
 	struct board board;
-	// board=malloc(sizeof(struct board));
 	return board;
 }
 
