@@ -1,4 +1,6 @@
-#include "board.h"
+#include "../headers/interface.h"
+#include "../headers/board.h"
+
 
 
 struct board new_board(){
@@ -26,18 +28,28 @@ void begin_turn (struct board* b){
 	}
 }
 
+void play_phase(struct ensiie* p, int a){
+
+	*nb_FISE;
+	*nb_FISA;
+	choice_FISE_FISA(nb_FISE, nb_FISA, p);
+	
+
+}
+
 int nb_card_drawn(struct ensiie p){
+
 
 }
 
 int is_over(struct board b){
-	if ((b.n_turn == 30) || b.player1.SD > 19 || b.player2.SD > 19)
+	if ((b.n_turn == 30) || b.player1.SD > 20 || b.player2.SD > 20)
 		return 1;
 	else
 		return 0;
 }
 
-int is_peer(struct board b){
+int is_even(struct board b){
 	if ((b.n_turn)%2==0)
 		return 1;
 	else
@@ -56,6 +68,23 @@ void add_student_FISA(int a, struct ensiie* p){
 	p->current_students.FISA_durability+=a;
 }
 
-void draw(struct ensiie* a){
+void draw(struct ensiie* p){
+	p->
+
+
 
 }
+
+int new_staff_available(struct board b){
+	if (b.n_turn)%5==0)
+		return 1;
+	else
+		return 0;
+	
+}
+
+void nb_student_card_received(stuct ensiie){
+
+}
+
+
