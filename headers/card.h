@@ -28,6 +28,7 @@ enum action_effect {WinOneSD, DrawOneCard, PlayOneFISE, PlayOneFISA, Win6EP, Rem
 /**
  * @brief general card type definition, for action and staff cards. Includes card's name, cost, and two pointers (one of which will be NULL) poiting towards the effect of the card, being action or staff
  */
+typedef struct card card;
 struct card {
     char* name; /**< The name of the card */
     int cost; /**< The EP cost of the card */
@@ -55,11 +56,18 @@ int type_of_card(struct card);
 int nb_card_deck(struct card);
 
 /**
- * @brief quantity of staff card in an ensiie's board
- * @return the number of same card in an ensiee's board when the other player start playing
+ * @brief quantity of this type of staff card in the player board
+ * @return the number of same card in the player1 board when the player1 start playing
  */
 
 int nb_card_board(struct ensiie, struct card);
+
+/**
+ * @brief quantity of this type of staff card in the ennemy player board
+ * @return the number of same card in the player2 board when the player1 start playing
+ */
+
+int nb_card_ennemy_board(struct ensiie, struct card);
  
 
 
