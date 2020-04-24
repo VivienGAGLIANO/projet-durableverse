@@ -1,5 +1,7 @@
 #include "card.h"
 #include "structure.h"
+#include "board.h"
+
 /*@ requires a a well-built card
 	assigns nothing
 	ensures return the cost of a

@@ -1,6 +1,7 @@
 #ifndef _CARD_H
 #define _CARD_H
 
+#include "structure.h"
 
 /* ------------------------ Staff card ------------------------ */
 /**
@@ -11,6 +12,7 @@ enum staff_effect_id {AE1, AE2, AA1, AA2, RE1, RE2, RA1, RA2, ASD, RSD, DR, E};
 /**
  * @brief staff card struct: composed of the effect of the card, as well as its "effectiveness"
  */
+typedef struct staff_effect staff_effect;
 struct staff_effect {
     enum staff_effect_id id; /**< The effect ID of the card */
     int value; /**< The value applied to the effect */
@@ -32,7 +34,7 @@ typedef struct card card;
 struct card {
     char* name; /**< The name of the card */
     int cost; /**< The EP cost of the card */
-    struct staff_effect* staff_effect; /**< The effects of the card if it is a staff card, the NULL pointer otherwise */
+    card_list staff_effect; /**< The effects of the card if it is a staff card, the NULL pointer otherwise */
     enum action_effect* action_effect; /**< The effects of the card if it is a action card, the NULL pointer otherwise */
 };
 
