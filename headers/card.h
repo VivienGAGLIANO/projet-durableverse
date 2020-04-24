@@ -35,23 +35,32 @@ struct card {
     enum action_effect* action_effect; /**< The effects of the card if it is a action card, the NULL pointer otherwise */
 };
 
-/*
+/**
  *@brief give the EP cost of a card
  *@return EP cost of a card
  */
 int EP_cost(struct card);
 
-/*
+/**
  *@brief tell if a card is a staff or an action card
  *@param
  *@return 0 if it's a staff car and 1 else
  */
 int type_of_card(struct card);
 
-/*
+/**
  *@brief quantity of card in the deck at the beginning
  *@return the number of same card in the deck at the beginning
  */
 int nb_card_deck(struct card);
+
+/**
+ * @brief quantity of staff card in an ensiie's board
+ * @return the number of same card in an ensiee's board when the other player start playing
+ */
+
+int nb_card_board(struct ensiie, struct card);
+ 
+
 
 #endif
