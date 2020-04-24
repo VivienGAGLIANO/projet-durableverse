@@ -2,45 +2,89 @@
 #include "../headers/board.h"
 
 
-
+/**
+ * @brief creates new board and allocates memory
+ * @return initialized board instance 
+ */
 struct board new_board(){
 	struct board board;
 	return board;
 }
 
+
+/**
+ * @brief frees memory taken by given board, including memory taken for both ensiie struct
+ * 
+ */
 void free_board(struct board* b){
 	free(b);
 }
 
-void begin_turn (struct board* b){
-	b->n_turn+=1;
+/**
+ * @brief updates board state at the beginning of a new turn
+ * @detail increments turn counter, handles FISA student cards turn based behaviour, updates number of space available for staff cards
+ */
+void begin_turn (struct board* board){
+	interface.print_new_turn;
+	board->n_turn+=1;
 	if (is_peer(*b)) {
-		b->player1.current_students.FISA_count=0;
-		b->player2.current_students.FISA_count=0;
-		b->player1.current_students.FISA_durability=0;
-		b->player2.current_students.FISA_durability=0;
-		b->player1.current_students.FISA_development=0;
-		b->player2.current_students.FISA_development=0;
+		board->player1.current_students.FISA_count=0;
+		board->player2.current_students.FISA_count=0;
+		board->player1.current_students.FISA_durability=0;
+		board->player2.current_students.FISA_durability=0;
+		board->player1.current_students.FISA_development=0;
+		board->player2.current_students.FISA_development=0;
 	}
-	if ((b->n_turn-1)%5==0){
-		b->player1.current_staff.max+=1;
-		b->player2.current_staff.max+=1;
+	if ((board->n_turn-1)%5==0){
+		board->player1.current_staff.max+=1;
+		board->player2.current_staff.max+=1;
+	}
+	else if ((board->n_turn-1)%10==0){
+		board->player1.current_staff.max+=2;
+		board->player2.current_staff.max+=2;
+
 	}
 }
 
-void play_phase(struct ensiie* p, int a){
-
+/**
+ * @brief lets the ensiie to play his phase
+ * @detail calculates the EP of the ensiie, how many FISA or FISE cards the ensiie wants to play, which action and staff cards the ensiie wants to play, and applies the effect of these cards
+ * @param a pointer to the ensiie playing, and the turn number
+ */
+void play_phase(struct ensiie* ensiie, int turn_number){
+	int energy_point;
 	int *nb_FISE;
 	int *nb_FISA;
-	choice_FISE_FISA(nb_FISE, nb_FISA, *p);
+	if (is_even(*board))
+	{
+		energy_point+= board->ensiie.current_students.FISE_count + 2*board->player1.current_students.FISA_count;
+	}
+	else
+		energy_point+= board->ensiie.current_students.FISE_count;
 	
+	choice_FISE_FISA(nb_FISE, nb_FISA, *ensiie);
+	choice_card(ensiie);
+	
+}
+
+/**
+ * @brief computes number of cards drawn by player
+ * @return number of cards to be drawn
+ */
+int nb_card_drawn(struct ensiie ensiie){
+	/*est ce utile?*/
+	
+}
+/**
+ * @brief draws a card for the given player
+ * 
+ */
+void draw(struct ensiie*){
+	card drawn_card=pop_card(&(ensiie.deck));
+	push_card(card drawn_card, &(ensiie.hand));
 
 }
 
-int nb_card_drawn(struct ensiie p){
-
-
-}
 
 int is_over(struct board b){
 	if ((b.n_turn == 30) || b.player1.SD > 20 || b.player2.SD > 20)
@@ -68,12 +112,7 @@ void add_student_FISA(int a, struct ensiie* p){
 	p->current_students.FISA_durability+=a;
 }
 
-void draw(struct ensiie* p){
-	
 
-
-
-}
 
 int new_staff_available(struct board b){
 	if ((b.n_turn)%5==0)
@@ -82,8 +121,13 @@ int new_staff_available(struct board b){
 		return 0;
 	
 }
+/**
+ * @brief computes number of student cards received by the player
+ * @return number of student cards to be received
+ */
+int nb_student_card_received(struct ensiie ensiie){
+	
 
-int nb_student_card_received(struct ensiie player){
 
 }
 
