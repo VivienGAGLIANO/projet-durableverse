@@ -30,9 +30,9 @@ void begin_turn (struct board* b){
 
 void play_phase(struct ensiie* p, int a){
 
-	*nb_FISE;
-	*nb_FISA;
-	choice_FISE_FISA(nb_FISE, nb_FISA, p);
+	int *nb_FISE;
+	int *nb_FISA;
+	choice_FISE_FISA(nb_FISE, nb_FISA, *p);
 	
 
 }
@@ -69,22 +69,46 @@ void add_student_FISA(int a, struct ensiie* p){
 }
 
 void draw(struct ensiie* p){
-	p->
+	
 
 
 
 }
 
 int new_staff_available(struct board b){
-	if (b.n_turn)%5==0)
+	if ((b.n_turn)%5==0)
 		return 1;
 	else
 		return 0;
 	
 }
 
-void nb_student_card_received(stuct ensiie){
+int nb_student_card_received(struct ensiie player){
 
 }
+
+
+/**
+ * @brief ends current turn, computes and updates Sustainable Development (SD) points for each player
+ * 
+ */
+void end_turn(struct board* board) {
+	int development_player1, durability_player1, development_player2, durability_player2;
+	
+	development_player1 = (board->player1.current_students.FISE_count * board->player1.current_students.FISE_development) + (is_even(*board)) ? (board->player1.current_students.FISA_count * board->player1.current_students.FISA_development) : 0;
+
+	development_player2 = (board->player2.current_students.FISE_count * board->player2.current_students.FISE_development) + (is_even(*board)) ? (board->player2.current_students.FISA_count * board->player2.current_students.FISA_development) : 0;
+
+	durability_player1 = (board->player1.current_students.FISE_count * board->player1.current_students.FISE_durability) + (is_even(*board)) ? (board->player1.current_students.FISA_count * board->player1.current_students.FISA_durability) : 0;
+
+	durability_player2 = (board->player2.current_students.FISE_count * board->player2.current_students.FISE_durability) + (is_even(*board)) ? (board->player2.current_students.FISA_count * board->player2.current_students.FISA_durability) : 0;
+
+	board->player1.SD += max(development_player1 - durability_player2 + board->player1.SD_added - board->player1.SD_removed, 0);
+
+	board->player2.SD += max(development_player2 - durability_player1 + board->player2.SD_added - board->player1.SD_removed);
+
+}
+
+
 
 
