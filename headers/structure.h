@@ -1,72 +1,33 @@
 #ifndef _STRUCTURE_H
 #define _STRUCTURE_H
 
-#include "card.h"
+#include "../lib/stack/stack.h"
+#include "../headers/card.h"
+
+typedef stack card_list;
+typedef stack effect_list;
 
 
-typedef struct card stack_elm;
+/* ------------ Cards functions ------------ */
 
-/*Defining the stack type */
-typedef struct elm* stack;
+void push_card(card card, card_list *list);
 
-/* Defining a stack elm */
-typedef struct elm {
-    stack_elm val;
-    stack next;
-} elm;
+card pop_card(card_list *list);
 
-/*
-* @brief creates a new empty stack and allocates memory
-* @return an empty stack
-*/
-stack create_stack();
+card get_card(card_list list, int index);
 
-/*
-*@brief check if the stack is empty or not
-*@return 1 is the stack is empty, else 0
-*/
-int is_empty_stack(stack);
+card remove_card(card_list *list, int index);
 
-/*
-*@brief modify the stack by pushing an element at the beginning
-*
-*/
-void push_stack(stack_elm, stack*);
 
-/* 
-*@brief removes the first element of the stack 
-*@return the first element which has been removed
-*/
-stack_elm pop_stack(stack*);
+/* ------------ Effects functions ------------ */
 
-/*
-*@brief modify the stack by pushing an element at the end 
-*
-*/
-void push_last_stack(stack_elm, stack *);
+void push_effect(staff_effect fx, effect_list *list);
 
-/*
-*@brief removes the last element of the stack
-*@return the last element which has been removed
-*/
-stack_elm pop_last_stack(stack*);
+staff_effect pop_effect(effect_list *list);
 
-/*
-*@brief find the position of the element in the stack
-*@return an int defining the position of the element
-*/
-int get_stack_elem_position(elm , stack);
+staff_effect get_effect(effect_list list, int index);
 
-/*
-*@brief computes the length of the stack
-*@return the length of the stack
-*/
-int len_stack(stack);
+staff_effect remove_effect(effect_list *list, int index);
 
-/*
-*brief print the stack [elem 1] ->[elem 2] -> [elem 3] -> ... -> []
-*
-*/
-void print_stack(stack);
 
 #endif
