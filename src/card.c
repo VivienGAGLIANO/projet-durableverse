@@ -1,4 +1,5 @@
 #include "card.h"
+#include "structure.h"
 /*@ requires a a well-built card
 	assigns nothing
 	ensures return the cost of a
@@ -30,3 +31,19 @@ int nb_card_deck(struct card a){
 		return 1;
 }
 
+int nb_card_board(struct ensiie p, struct card a){
+	int i = 0;
+	while (not(is_empty_stack(p.current_staff.cards)))
+	{
+		if (p.current_staff.cards->val==a.name)
+		{
+			i+=1;
+			p.current_staff.cards=p.current_staff.cards->next;
+		}
+		else
+		{
+			p.current_staff.cards=p.current_staff.cards->next;
+		}
+	return i;	
+	}
+}
