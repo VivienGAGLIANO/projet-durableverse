@@ -12,7 +12,7 @@
  * cards allowed on the board
  */
 struct board_staff {
-    struct card* cards; /**< The staff cards currently on the ensiie's board */
+    card_list cards; /**< The staff cards currently on the ensiie's board */
     int max;            /**< The maximum number of staff cards of the ensiie's board at the same time */
 };
 
@@ -37,9 +37,9 @@ struct board_students {
 struct ensiie {
     int SD;                 /**< The sustainable development points of the ensiie */
     char* player_name;
-    struct card* deck;      /**< The deck */
-    struct card* hand;      /**< The hand */
-    struct card* discard;   /**< The discard */
+    card_list deck;      /**< The deck */
+    card_list hand;      /**< The hand */
+    card_list discard;   /**< The discard */
 
     /** The current staff cards currently on the board */
     struct board_staff current_staff;
