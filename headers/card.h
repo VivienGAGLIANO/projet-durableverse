@@ -36,7 +36,7 @@ typedef struct card card;
 struct card {
     char* name; /**< The name of the card */
     int cost; /**< The EP cost of the card */
-    card_list staff_effect; /**< The effects of the card if it is a staff card, the NULL pointer otherwise */
+    effect_list staff_effect; /**< The effects of the card if it is a staff card, the NULL pointer otherwise */
     enum action_effect action_effect; /**< The effects of the card if it is a action card, the NULL pointer otherwise */
 };
 
