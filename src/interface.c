@@ -1,8 +1,5 @@
 #include <stdio.h>
-
 #include "../headers/interface.h"
-#include "../headers/structure.h"
-#include "../headers/board.h"
 
 
 

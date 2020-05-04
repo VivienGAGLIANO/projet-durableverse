@@ -1,6 +1,4 @@
-#include "card.h"
-#include "structure.h"
-#include "board.h"
+#include "../headers/card.h"
 
 /* --------------------- Functions for cards creation -------------------- */
 

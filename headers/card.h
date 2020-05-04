@@ -2,6 +2,7 @@
 #define _CARD_H
 
 #include "structure.h"
+#include "board.h"
 #include "../lib/ezxml/ezxml.h"
 
 /* ------------------------ Staff card ------------------------ */
