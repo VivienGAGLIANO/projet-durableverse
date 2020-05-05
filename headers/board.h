@@ -131,10 +131,10 @@ int available_EP(struct ensiie);
 
 /**
  * @brief allows player to play one card from its hand
- * @param the ensiie which is playing, and the EP 
+ * @param the ensiie which is playing, the card the player want to play and the EP 
  * @return 1 if card played, 0 if turn passed by user
  */
-int play_card(struct ensiie*, int* ep);
+int play_card(struct ensiie*, int* ep, card a);
 
 /**
  * @brief ends current turn, computes and updates Sustainable Development (SD) points for each player
