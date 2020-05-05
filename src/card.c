@@ -145,31 +145,3 @@ int nb_card_deck(struct card a){
 		return 1;
 }
 
-<<<<<<< HEAD
-=======
-int nb_card_board(struct ensiie p, struct card a) {
-	int i = 0;
-	while (!is_stack_empty(p.current_staff.cards)) {
-		if (p.current_staff.cards->head == a.name) {
-			i++;
-			p.current_staff.cards=p.current_staff.cards->tail;
-		} else {
-			p.current_staff.cards=p.current_staff.cards->tail;
-		}
-	}
-	return i;	
-}
-
-int nb_card_ennemy_board(struct ensiie p, struct card a) {
-	int i = 0;
-	while (!is_stack_empty(p.opponent->current_staff.cards)) {
-		if (p.opponent->current_staff.cards->head==a.name) {
-			i++;
-			p.opponent->current_staff.cards=p.current_staff.cards->tail;
-		} else {
-			p.opponent->current_staff.cards=p.current_staff.cards->tail;
-		}
-	}
-	return i;
-}
->>>>>>> eabc197255154f0acb3cd8a705c72cec65095a0d

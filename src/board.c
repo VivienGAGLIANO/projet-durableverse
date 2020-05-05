@@ -70,8 +70,7 @@ int is_even(struct board b)
 		return 0;
 }
 
-void add_student_FISE(int a, struct ensiie* p
-){
+void add_student_FISE(int a, struct ensiie* p){
 	p->current_students.FISE_count+=a;
 	p->current_students.FISE_development+=a;
 	p->current_students.FISE_durability+=a;
