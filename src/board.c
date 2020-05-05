@@ -52,22 +52,30 @@ int nb_card_drawn(struct ensiie p)
 		else
 			i+=0;
 	}
-
+	return i;
 }
 
-int is_over(struct board b){
-	if ((b.n_turn == 30) || b.player1.SD > 20 || b.player2.SD > 20)
-		return 1;
-	else
-		return 0;
-}
-
-int is_even(struct board b)
+void draw(struct ensiie* p)
 {
-	if ((b.n_turn)%2==0)
-		return 1;
-	else
-		return 0;
+	push_card(pop_card (p->deck), p->hand);
+}
+
+int nb_student_card_received(struct ensiie p)
+{
+	int i = 0;
+	card_list a = copy_stack(p.current_staff.cards);
+	card b;
+	while (a!=NULL)
+	{	
+		b=pop_card(&a);
+		if(b.name=="Laurent Prével")
+			i+=2;
+		else if (b.name=="Anne-Laure Ligozat" || b.name=="Catherine Dubois" || b.name=="Katrin Salhab" || b.name=="Abass Sagna")
+			i+=1;
+		else
+			i+=0;
+	}
+	return i;
 }
 
 void add_student_FISE(int a, struct ensiie* p){
@@ -83,17 +91,33 @@ void add_student_FISA(int a, struct ensiie* p)
 	p->current_students.FISA_durability+=a;
 }
 
-void draw(struct ensiie* p)
+int available_EP(struct ensiie p)
 {
-	push_card(pop_card (p->deck), p->hand);
+	return p.current_students.FISA_count*2+ p.current_students.FISE_count;
 }
 
-int new_staff_available(struct board b){
-	if (b.n_turn)%5==0)
+int play_card (struct ensiie *p, int *ep, card a){}
+
+int is_over(struct board b){
+	if ((b.n_turn == 30) || b.player1.SD > 20 || b.player2.SD > 20)
 		return 1;
 	else
 		return 0;
-	
+}
+
+int is_pair(struct board b)
+{
+	if ((b.n_turn)%2==0)
+		return 1;
+	else
+		return 0;
+}
+
+int new_staff_available(struct board b){
+	if (b.n_turn-1)%5==0)
+		return 1;
+	else
+		return 0;	
 }
 
 
