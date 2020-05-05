@@ -94,7 +94,7 @@ void begin_turn(struct board*);
 void play_phase(struct ensiie*, int);
 
 /**
- * @brief computes number of cards drawn by player
+ * @brief computes number of cards drawn by player at the beginning of his turn
  * @return number of cards to be drawn
  */
 int nb_card_drawn(struct ensiie);
@@ -106,7 +106,7 @@ int nb_card_drawn(struct ensiie);
 void draw(struct ensiie*);
 
 /**
- * @brief computes number of student cards received by the player
+ * @brief computes number of student cards received by the player at the beginning of his turn 
  * @return number of student cards to be received
  */
 int nb_student_card_received(struct ensiie);
@@ -156,7 +156,7 @@ int is_even(struct board);
 
 /**
  * @brief tells if new staff emplacement is available this turn
- * @return 1 if turn is multiple of 5, 0 else
+ * @return 1 if turn is multiple of 6, 0 else
  */
 int new_staff_available(struct board);
 
