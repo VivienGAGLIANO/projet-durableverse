@@ -2,11 +2,11 @@
 #define _STRUCTURE_H
 
 #include "../lib/stack/stack.h"
-#include "../headers/card.h"
 
 typedef stack card_list;
 typedef stack effect_list;
 
+#include "../headers/card.h"
 
 /* ------------ Cards functions ------------ */
 

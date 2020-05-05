@@ -1,23 +1,31 @@
-CC = gcc -Wall -Wextra -std=c99
+CC = gcc -Wall -Wextra -std=c99 -g
 O = obj/
-C = src/
+S = src/
 H = headers/
 B = bin/
+L = lib/
 
-durableverse : $(C)main.c $(O)card.o $(O)structure.o $(O)interface.o $(O)board.o
-	$(CC) $< -o $@ -g 
+durableverse : main.c card.o structure.o interface.o board.o stack.o $(L)ezxml/ezxml.o
+	$(CC) $^ -o $(B)$@
 
-structure.o : $(S)structure.c
-	$(CC) -c $< -o $@ -g
 
-card.o : $(S)card.c $(O)structure.o $(O)interface.o $(O)board.o
-	$(CC) -c $< -o $@ -g
+structure.o : $(S)structure.c $(H)structure.h
+	$(CC) -c $< -o $(O)$@
 
-board.o : $(S)board.c $(O)structure.o
-	$(CC) -c $< -o $@ -g
+card.o : $(S)card.c $(H)card.h
+	$(CC) -c $< -o $(O)$@
 
-interface.o : $(S)interface.c $(O)board.o $(O)structure.o $(O)card.o
-	$(CC) -c $< -o $@ -g
+board.o : $(S)board.c $(H)board.h
+	$(CC) -c $< -o $(O)$@
+
+interface.o : $(S)interface.c $(H)interface.h
+	$(CC) -c $< -o $(O)$@
+
+stack.o : $(L)stack/stack.c $(L)stack/stack.h
+	$(CC) -c $< -o $(O)$@
+
+%.o : $(S)%.c $(H)%.h
+	$(CC) -c $< -o $(O)$@
 
 
 clean : 

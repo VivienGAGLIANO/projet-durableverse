@@ -1,5 +1,7 @@
 #include <stdlib.h>
+#include <string.h>
 #include "../headers/structure.h"
+
 
 /* ------------ Cards functions ------------ */
 
