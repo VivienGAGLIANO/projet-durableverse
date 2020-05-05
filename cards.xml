@@ -134,66 +134,77 @@
             <cost>2</cost>
             <number>3</number>
             <desc>Gagnez 1 DD</desc>
+            <effect>WinOneSD</effect>
         </card>
         <card id="22">
             <name>Recrutement</name>
             <cost>2</cost>
             <number>3</number>
             <desc>Piochez une carte</desc>
+            <effect>DrawOneCard</effect>
         </card>
         <card id="23">
             <name>Rentrée FISE</name>
             <cost>3</cost>
             <number>2</number>
             <desc>Mettez en jeu une carte FISE</desc>
+            <effect>PlayOneFISE</effect>
         </card>
         <card id="24">
             <name>Rentrée FISA</name>
             <cost>3</cost>
             <number>2</number>
             <desc>Mettez en jeu une carte FISA</desc>
+            <effect>PlayOneFISA</effect>
         </card>
         <card id="25">
             <name>Energie verte</name>
             <cost>4</cost>
             <number>2</number>
             <desc>Gagnez 6 PE</desc>
+            <effect>Win6EP</effect>
         </card>
         <card id="26">
             <name>Diplomation</name>
             <cost>5</cost>
             <number>2</number>
             <desc>Retirez une carte FISE et une carte FISA du plateau de l’adversaire</desc>
+            <effect>RemoveOneFISEFISA</effect>
         </card>
         <card id="27">
             <name>Décharge</name>
             <cost>5</cost>
             <number>4</number>
             <desc>Mettez la première des cartes Personnel mise en jeu par l’adversaire dans sa défausse.</desc>
+            <effect>DiscardOneStaff</effect>
         </card>
         <card id="28">
             <name>Recyclage</name>
             <cost>10</cost>
             <number>1</number>
             <desc>Mélangez votre défausse et cette carte avec votre pioche</desc>
+            <effect>ShuffleDiscardDraw</effect>
         </card>
         <card id="29">
             <name>Zero papier</name>
             <cost>10</cost>
             <number>1</number>
             <desc>Vos cartes Élèves gagnent un point de Développement. Toute nouvelle carte Élève arrivant en jeu gagne 1 point de Développement.</desc>
+            <effect>IncreaseDevelopment</effect>
         </card>
         <card id="30">
             <name>Repas végétarien</name>
             <cost>10</cost>
             <number>1</number>
             <desc>Vos cartes Élèves gagnent un point de Durabilité. Toute nouvelle carte Élève arrivant en jeu gagne 1 point de Durabilité.</desc>
+            <effect>IncreaseDurability</effect>
         </card>
         <card id="31">
             <name>Fermeture annuelle</name>
             <cost>10</cost>
             <number>1</number>
             <desc>Retirez de tous les plateaux toutes les cartes FISE et FISA</desc>
+            <effect>RemoveAllFISEFISA</effect>
         </card>
     </actioncards>
 </cards>
