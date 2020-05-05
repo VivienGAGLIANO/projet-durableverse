@@ -74,20 +74,7 @@ enum card_type type_of_card(struct card);
  */
 int nb_card_deck(struct card);
 
-/**
- * @brief quantity of this type of staff card in the player board
- * @return the number of same card in the player1 board when the player1 start playing
- */
 
-int nb_card_board(struct ensiie, struct card);
-
-/**
- * @brief quantity of this type of staff card in the ennemy player board
- * @return the number of same card in the player2 board when the player1 start playing
- */
-
-int nb_card_ennemy_board(struct ensiie, struct card);
- 
 
 
 #endif

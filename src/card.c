@@ -114,37 +114,3 @@ int nb_card_deck(struct card a){
 		return 1;
 }
 
-int nb_card_board(struct ensiie p, struct card a){
-	int i = 0;
-	while (not(is_empty_stack(p.current_staff.cards)))
-	{
-		if (p.current_staff.cards->val==a.name)
-		{
-			i+=1;
-			p.current_staff.cards=p.current_staff.cards->next;
-		}
-		else
-		{
-			p.current_staff.cards=p.current_staff.cards->next;
-		}
-	return i;	
-	}
-}
-
-int nb_card_ennemy_board(struct ensiie p, struct card a)
-{
-	int i = 0;
-	while (not(is_empty_stack(p.opponent->current_staff.cards)))
-	{
-		if (p.opponent->current_staff.cards->val==a.name)
-		{
-			i+=1;
-			p.opponent->current_staff.cards=p.current_staff.cards->next;
-		}
-		else
-		{
-			p.opponent->current_staff.cards=p.current_staff.cards->next;
-		}
-	return i;	
-	}
-}
