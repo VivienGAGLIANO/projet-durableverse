@@ -1,7 +1,8 @@
+#include "structure.h"
+
 #ifndef _CARD_H
 #define _CARD_H
 
-#include "structure.h"
 #include "board.h"
 #include "../lib/ezxml/ezxml.h"
 
@@ -9,7 +10,7 @@
 /**
  * @brief enumeration for staff card effects
  */
-enum staff_effect_id {AE1, AE2, AA1, AA2, RE1, RE2, RA1, RA2, ADD, RDD, DR, E}; 
+enum staff_effect_id {AE1=1, AE2, AA1, AA2, RE1, RE2, RA1, RA2, ADD, RDD, DR, E}; 
 
 /**
  * @brief staff card struct: composed of the effect of the card, as well as its "effectiveness"
@@ -47,11 +48,13 @@ enum staff_effect_id convert_staff_fx_id(const char* fx_id);
 
 card_list load_cards(char* filename);
 
-card create_staff_card(char* name, int cost);
+card create_card(const char* name, int cost);
+
+card create_staff_card(const char* name, int cost);
 
 void add_staff_card_effect(card* card, staff_effect fx);
 
-card create_action_card(char* name, int cost, enum action_effect fx);
+card create_action_card(const char* name, int cost, enum action_effect fx);
 
 
 /* ------------------------ Functions for the game ----------------------- */
