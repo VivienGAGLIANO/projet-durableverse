@@ -84,8 +84,21 @@ struct board new_board(){
 	return board;
 }
 
-/* A revoir*/
 void free_board(struct board* b){
+	free_stack(&(b->player1.deck));
+	free_stack(&(b->player1.hand));
+	free_stack(&(b->player1.discard));
+	free_stack(&(b->player1.current_staff.cards));
+	free(&(b->player1.current_staff));
+	free(b->player1);
+
+	free_stack(&(b->player2.deck));
+	free_stack(&(b->player2.hand));
+	free_stack(&(b->player2.discard));
+	free_stack(&(b->player2.current_staff.cards));
+	free(&(b->player2.current_staff));
+	free(b->player2);
+
 	free(b);
 }
 
