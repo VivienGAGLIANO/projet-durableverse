@@ -1,20 +1,98 @@
 #include "../headers/interface.h"
 #include "../headers/board.h"
-
+#include "../headers/structure"
 
 
 struct board new_board(){
+	card_list all_cards= load_cards("../cards.xml");
+	
 	struct board board;
+
+	struct ensiie player1;
+	card_list deck1 = shuffle_stack(all_cards);
+	card_list hand1 = create_stack();
+	card_list discard1 = create_stack();
+	struct board_staff current_staff1 = {
+		.cards = create_stack(),
+		.max = 1
+	};
+	struct board_student current_student1 = {
+		.FISE_count = 0,
+		.FISA_count = 0,
+		.FISE_durability = 1,
+		.FISA_durability = 1,
+		.FISE_development = 1,
+		.FISA_development = 1
+	};
+	
+	struct ensiie player2;
+	card_list deck2 = shuffle_stack(all_cards);
+	card_list hand2 = create_stack();
+	card_list discard2 = create_stack();
+	struct board_staff current_staff2 = {
+		.cards = create_stack(),
+		.max = 1
+	};
+	struct board_students current_student2 = {
+		.FISE_count = 0,
+		.FISA_count = 0,
+		.FISE_durability = 1,
+		.FISA_durability = 1,
+		.FISE_development = 1,
+		.FISA_development = 1
+	};
+	
+	player1 = {
+		.SD = 0,
+		.player_name = "Jaquie",
+		.deck = deck1,
+		.hand = hand1,
+		.discard = discard1,
+		.current_staff = current_staff1,
+		.current_students = current_student1,
+		.opponent = &player2,
+		.SD_added = 0,
+		.SD_removed = 0
+
+	};
+
+	player2 = {
+		.SD = 0,
+		.player_name = "Michel",
+		.deck = deck2,
+		.hand = hand2,
+		.discard = discard2,
+		.current_staff = current_staff2,
+		.current_students = current_student2,
+		.opponent = &player1,
+		.SD_added = 0,
+		.SD_removed = 0
+	};
+
+
+	board = (struct board) malloc(sizeof(board)); 
+	board = {
+		.player1 = player1,
+		.player2 = player2,
+		.n_turn = 0
+	}
+
+	for (int i = 0; i < 3; i++) {
+		draw(&player1);
+		draw(&player2);
+	}
 	return board;
 }
 
+/* A revoir*/
 void free_board(struct board* b){
 	free(b);
 }
 
+/* A revoir */
 void begin_turn (struct board* b){
 	b->n_turn+=1;
-	if (is_peer(*b)) {
+	if (is_turn_even(*b)) {
 		b->player1.current_students.FISA_count=0;
 		b->player2.current_students.FISA_count=0;
 		b->player1.current_students.FISA_durability=0;
@@ -28,6 +106,7 @@ void begin_turn (struct board* b){
 	}
 }
 
+/* A revoir */
 void play_phase(struct ensiie* p, int a){
 
 	*nb_FISE;
@@ -36,6 +115,7 @@ void play_phase(struct ensiie* p, int a){
 	
 
 }
+
 
 int nb_card_drawn(struct ensiie p)
 {
@@ -55,11 +135,13 @@ int nb_card_drawn(struct ensiie p)
 	return i;
 }
 
+/* A revoir*/
 void draw(struct ensiie* p)
 {
 	push_card(pop_card (p->deck), p->hand);
 }
 
+/* A revoir*/
 int nb_student_card_received(struct ensiie p)
 {
 	int i = 0;
@@ -78,12 +160,14 @@ int nb_student_card_received(struct ensiie p)
 	return i;
 }
 
+/* A revoir*/
 void add_student_FISE(int a, struct ensiie* p){
 	p->current_students.FISE_count+=a;
 	p->current_students.FISE_development+=a;
 	p->current_students.FISE_durability+=a;
 }
 
+/* A revoir*/
 void add_student_FISA(int a, struct ensiie* p)
 {
 	p->current_students.FISA_count+=a;
@@ -91,6 +175,7 @@ void add_student_FISA(int a, struct ensiie* p)
 	p->current_students.FISA_durability+=a;
 }
 
+/* A revoir*/
 int available_EP(struct ensiie p)
 {
 	return p.current_students.FISA_count*2+ p.current_students.FISE_count;
@@ -105,19 +190,12 @@ int is_over(struct board b){
 		return 0;
 }
 
-int is_pair(struct board b)
-{
-	if ((b.n_turn)%2==0)
-		return 1;
-	else
-		return 0;
+int is_turn_even(struct board b) {
+	return (b.n_turn)%2 == 0;
 }
 
 int new_staff_available(struct board b){
-	if (b.n_turn-1)%5==0)
-		return 1;
-	else
-		return 0;	
+	return (b.n_turn - 1)%5 == 0;
 }
 
 
