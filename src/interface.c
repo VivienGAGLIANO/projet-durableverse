@@ -28,7 +28,7 @@ void print_new_turn(struct board board) {
     if (new_staff_available(board))
         printf("New staff emplacement available!\n");    
     
-    if (is_even(board)) 
+    if (is_turn_even(board)) 
         printf("/!\\ Turn is even : FISA now vanish from the board...\n");
     else 
         printf("/!\\ Turn is odd : FISA now appear on the board...\n");
