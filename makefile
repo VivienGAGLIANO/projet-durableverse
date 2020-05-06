@@ -5,27 +5,25 @@ H = headers/
 B = bin/
 L = lib/
 
-durableverse : main.c card.o structure.o interface.o board.o stack.o $(L)ezxml/ezxml.o
+durableverse : main.c $(O)card.o $(O)structure.o $(O)interface.o $(O)board.o $(O)stack.o $(L)ezxml/ezxml.o
 	$(CC) $^ -o $(B)$@
 
 
-structure.o : $(S)structure.c $(H)structure.h
-	$(CC) -c $< -o $(O)$@
+structure.o : $(O)structure.o
 
-card.o : $(S)card.c $(H)card.h
-	$(CC) -c $< -o $(O)$@
+card.o : $(O)card.o
 
-board.o : $(S)board.c $(H)board.h
-	$(CC) -c $< -o $(O)$@
+board.o : $(O)board.o
 
-interface.o : $(S)interface.c $(H)interface.h
-	$(CC) -c $< -o $(O)$@
+interface.o : $(O)interface.o
 
-stack.o : $(L)stack/stack.c $(L)stack/stack.h
-	$(CC) -c $< -o $(O)$@
+stack.o : $(O)stack.o
 
-%.o : $(S)%.c $(H)%.h
-	$(CC) -c $< -o $(O)$@
+$(O)stack.o : $(L)stack/stack.c $(L)stack/stack.h
+	$(CC) -c $< -o $@
+
+$(O)%.o : $(S)%.c $(H)%.h
+	$(CC) -c $< -o $@
 
 
 clean : 
