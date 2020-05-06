@@ -1,6 +1,6 @@
 #include "../headers/interface.h"
 #include "../headers/board.h"
-#include "../headers/structure"
+#include "../headers/structure.h"
 
 
 struct board new_board(){
@@ -102,21 +102,14 @@ void free_board(struct board* b){
 	free(b);
 }
 
-/* A revoir */
 void begin_turn (struct board* b){
 	b->n_turn+=1;
-	if (is_turn_even(*b)) {
-		b->player1.current_students.FISA_count=0;
-		b->player2.current_students.FISA_count=0;
-		b->player1.current_students.FISA_durability=0;
-		b->player2.current_students.FISA_durability=0;
-		b->player1.current_students.FISA_development=0;
-		b->player2.current_students.FISA_development=0;
+	if (new_staff_available(*b)) {
+		b->player1.current_staff.max++;
+		b->player2.current_staff.max++;
 	}
-	if ((b->n_turn-1)%5==0){
-		b->player1.current_staff.max+=1;
-		b->player2.current_staff.max+=1;
-	}
+
+	print_new_turn(*b);
 }
 
 /* A revoir */
