@@ -152,7 +152,7 @@ int is_over(struct board);
  * @brief tell if the turn is even or not 
  * @return 1 if the turn is even, else 0
  */
-int is_pair(struct board);
+int is_turn_even(struct board);
 
 /**
  * @brief tells if new staff emplacement is available this turn
