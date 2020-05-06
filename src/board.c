@@ -77,7 +77,7 @@ struct board new_board(){
 		.n_turn = 0
 	}
 
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 2; i++) {
 		draw(&player1);
 		draw(&player2);
 	}
@@ -122,10 +122,10 @@ void play_phase(struct ensiie* p, int a){
 
 }
 
-
+/* A revoir -> utiliser les effect list*/
 int nb_card_drawn(struct ensiie p)
 {
-	int i = 0;
+	int i = 1;
 	card_list a = copy_stack(p.current_staff.cards);
 	card b;
 	while (a!=NULL)
@@ -135,19 +135,15 @@ int nb_card_drawn(struct ensiie p)
 			i+=2;
 		else if (b.name=="Anne-Laure Ligozat" || b.name=="Catherine Dubois" || b.name=="Laurent Prével")
 			i+=1;
-		else
-			i+=0;
 	}
 	return i;
 }
 
-/* A revoir*/
-void draw(struct ensiie* p)
-{
+void draw(struct ensiie* p) {
 	push_card(pop_card (p->deck), p->hand);
 }
 
-/* A revoir*/
+/* A revoir -> utiliser les effect_list*/
 int nb_student_card_received(struct ensiie p)
 {
 	int i = 0;
@@ -166,19 +162,12 @@ int nb_student_card_received(struct ensiie p)
 	return i;
 }
 
-/* A revoir*/
-void add_student_FISE(int a, struct ensiie* p){
-	p->current_students.FISE_count+=a;
-	p->current_students.FISE_development+=a;
-	p->current_students.FISE_durability+=a;
+void add_student_FISE(int nb, struct ensiie* p){
+	p->current_students.FISE_count += nb;
 }
 
-/* A revoir*/
-void add_student_FISA(int a, struct ensiie* p)
-{
-	p->current_students.FISA_count+=a;
-	p->current_students.FISA_development+=a;
-	p->current_students.FISA_durability+=a;
+void add_student_FISA(int nb, struct ensiie* p) {
+	p->current_students.FISA_count += nb;
 }
 
 /* A revoir*/
