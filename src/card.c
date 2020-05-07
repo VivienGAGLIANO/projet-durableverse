@@ -75,7 +75,8 @@ card_list load_cards(char* filename) {
 
 card create_card(const char* name, int cost) {
 	struct card newcard;
-	newcard.name = (char*) name;
+	newcard.name = (char*) malloc(sizeof(char)*strlen(name));
+	strcpy(newcard.name, name);
 	newcard.cost = cost;
 	newcard.staff_effect = NULL;
 	newcard.action_effect = 0;
