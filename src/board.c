@@ -3,7 +3,7 @@
 #include "../headers/structure.h"
 
 
-struct board new_board(){
+struct board new_board() {
 	card_list all_cards= load_cards("../cards.xml");
 	
 	struct board *board;
@@ -83,7 +83,7 @@ struct board new_board(){
 	return *board;
 }
 
-void free_board(struct board* b){
+void free_board(struct board* b) {
 	free_stack(&(b->player1.deck));
 	free_stack(&(b->player1.hand));
 	free_stack(&(b->player1.discard));
@@ -101,7 +101,7 @@ void free_board(struct board* b){
 	free(b);
 }
 
-void begin_turn (struct board* b){
+void begin_turn (struct board* b) {
 	b->n_turn+=1;
 	if (new_staff_available(*b)) {
 		b->player1.current_staff.max++;
@@ -111,7 +111,7 @@ void begin_turn (struct board* b){
 	print_new_turn(*b);
 }
 
-void play_phase(struct board board, struct ensiie* p){
+void play_phase(struct board board, struct ensiie* p) {
 	print_new_phase(board, *p);
 	
 	//Adding student cards
@@ -154,7 +154,7 @@ int nb_student_card_received(struct ensiie p)
 	return student_card_drawn;
 }
 
-void add_student_FISE(int nb, struct ensiie* p){
+void add_student_FISE(int nb, struct ensiie* p) {
 	p->current_students.FISE_count += nb;
 }
 
@@ -288,7 +288,7 @@ void end_turn(struct board *board) {
 		board->player2.SD = 0;
 }
 
-int is_over(struct board b){
+int is_over(struct board b) {
 	return b.n_turn == 30 || ((b.player1.SD > 20 || b.player2.SD > 20) * (b.player1.SD != b.player2.SD));
 }
 
@@ -296,7 +296,7 @@ int is_turn_even(struct board b) {
 	return (b.n_turn)%2 == 0;
 }
 
-int new_staff_available(struct board b){
+int new_staff_available(struct board b) {
 	return (b.n_turn - 1)%5 == 0;
 }
 
