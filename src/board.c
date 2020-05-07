@@ -17,7 +17,7 @@ struct board new_board(){
 		.max = 1,
 		.staff_effect = create_stack()
 	};
-	struct board_student current_student1 = {
+	struct board_students current_student1 = {
 		.FISE_count = 0,
 		.FISA_count = 0,
 		.FISE_durability = 1,
@@ -170,8 +170,98 @@ int available_EP(struct board board, struct ensiie p)
 	return is_turn_even(board) * 2 * p.current_students.FISA_count + p.current_students.FISE_count;
 }
 
-// TODO
-int play_card (struct ensiie *p, int *ep, card a){}
+// /!\ Function implemented WITHOUT staff_effect list !!
+int play_card (struct ensiie *p, int *ep, card a) {
+	// a is an action card
+	if (a.action_effect != NULL) {
+		switch (a.action_effect)
+		{
+			case WinOneSD :
+				p->SD++;
+				break;
+
+			case DrawOneCard :
+				draw(p);
+				break;
+
+			case PlayOneFISE :
+				p->current_students.FISE_count++;
+				break;
+
+			case PlayOneFISA :
+				p->current_students.FISA_count++;
+				break;
+
+			case Win6EP :
+				*ep += 6;
+				break;
+
+			case RemoveOneFISEFISA :
+				p->opponent->current_students.FISE_count = max(p->opponent->current_students.FISE_count - 1, 0);
+				p->opponent->current_students.FISA_count = max(p->opponent->current_students.FISA_count - 1, 0);
+				break;
+
+			case DiscardOneStaff :
+
+				break;
+
+			case ShuffleDiscardDraw :
+				while (!is_stack_empty(p->discard))
+					push(pop(&(p->discard)), &(p->deck));
+				shuffle_stack(&(p->deck));
+				break;
+
+			case IncreaseDevelopment :
+				p->current_students.FISE_development++;
+				p->current_students.FISA_development++;
+				break;
+
+			case IncreaseDurability :
+				p->current_students.FISE_durability++;
+				p->current_students.FISA_durability++;
+				break;
+
+			case RemoveAllFISEFISA :
+				p->current_students.FISE_count = 0;
+				p->current_students.FISA_count = 0;
+				p->opponent->current_students.FISE_count = 0;
+				p->opponent->current_students.FISA_count = 0;
+				break;
+
+			default :
+				printf("Error : action card with no effect %s\nAction cancelled\n", a.name);
+				return 0;
+		}
+		*ep -= a.cost;
+		remove_card(&(p->hand), seek_stack_elem(&a, p->hand));
+		push_card(a, &(p->discard));
+		return 1;
+	}
+
+	// a is a staff card
+	if (!is_stack_empty(a.staff_effect)) {
+		// staff_card threshold not reached
+		if (stack_len(p->current_staff.cards) < p->current_staff.max) {
+			push_card(a, &(p->current_staff.cards));
+		}
+
+		// staff_card threshold reached
+		if (stack_len(p->current_staff.cards) >= p->current_staff.max) {
+			card discarded_staff;
+			push_card(discarded_staff = pop_last_card(&(p->current_staff.cards)), &(p->current_staff.cards));
+			push_card(discarded_staff, &(p->discard));
+		}
+
+		*ep -= a.cost;
+		remove_card(&(p->hand), seek_stack_elem(&a, p->hand));
+		return 1;
+	}
+
+	else {
+		printf("Error : non staff non action card %s\nAction cancelled\n", a.name);
+		return 0;
+	}
+}
 
 void end_turn(struct board *board) {
 	//SD points gained by student card
