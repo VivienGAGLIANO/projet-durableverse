@@ -168,8 +168,33 @@ int available_EP(struct board board, struct ensiie p)
 // TODO
 int play_card (struct ensiie *p, int *ep, card a){}
 
-// TODO
-void end_turn(struct board *board) {}
+void end_turn(struct board *board) {
+	//SD points gained by student card
+	board->player1.SD += board->player1.current_students.FISE_count * board->player1.current_students.FISE_development - board->player2.current_students.FISE_count * board->player2.current_students.FISE_durability + is_turn_even(*board) * (board->player1.current_students.FISA_count * board->player1.current_students.FISA_development - board->player2.current_students.FISA_count * board->player2.current_students.FISA_durability);
+	board->player2.SD += board->player2.current_students.FISE_count * board->player2.current_students.FISE_development - board->player1.current_students.FISE_count * board->player1.current_students.FISE_durability + is_turn_even(*board) * (board->player2.current_students.FISA_count * board->player2.current_students.FISA_development - board->player1.current_students.FISA_count * board->player1.current_students.FISA_durability);
+	effect_list current_effect1 = board->player1.current_staff.staff_effect;
+	effect_list current_effect2 = board->player2.current_staff.staff_effect;
+
+	//SD points gained by staff card
+	while (current_effect1 != NULL) {
+		if (current_effect1->head->id == ADD)
+			board->player1.SD += current_effect1->head->value;
+		if (current_effect1->head->id == RDD)
+			board->player2.SD -= current_effect1->head->value;
+	}
+		while (current_effect2 != NULL) {
+		if (current_effect2->head->id == ADD)
+			board->player2.SD += current_effect2->head->value;
+		if (current_effect2->head->id == RDD)
+			board->player1.SD -= current_effect2->head->value;
+	}
+
+	//Checking SD point aren't negative
+	if (board->player1.SD < 0)
+		board->player1.SD =0;
+	if (board->player2.SD < 0)
+		board->player2.SD = 0;
+}
 
 int is_over(struct board b){
 	return b.n_turn == 30 || ((b.player1.SD > 20 || b.player2.SD > 20) * (b.player1.SD != b.player2.SD));
