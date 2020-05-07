@@ -53,9 +53,6 @@ struct board new_board(){
 		.current_staff = current_staff1,
 		.current_students = current_student1,
 		.opponent = &player2,
-		.SD_added = 0,
-		.SD_removed = 0
-
 	};
 
 	player2 = {
