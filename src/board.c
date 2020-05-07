@@ -125,8 +125,13 @@ void play_phase(struct ensiie* p, int a){
 /* A revoir -> utiliser les effect list*/
 int nb_card_drawn(struct ensiie p)
 {
-	int i = 1;
-	card_list a = copy_stack(p.current_staff.cards);
+	int card_drawn = 1;
+
+	while ()
+	
+	
+	
+	/*card_list a = copy_stack(p.current_staff.cards);
 	card b;
 	while (a!=NULL)
 	{	
@@ -137,6 +142,7 @@ int nb_card_drawn(struct ensiie p)
 			i+=1;
 	}
 	return i;
+	*/
 }
 
 void draw(struct ensiie* p) {
