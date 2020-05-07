@@ -3,7 +3,6 @@
 #ifndef _CARD_H
 #define _CARD_H
 
-#include "board.h"
 #include "../lib/ezxml/ezxml.h"
 
 /* ------------------------ Staff card ------------------------ */
