@@ -14,6 +14,7 @@
 struct board_staff {
     card_list cards; /**< The staff cards currently on the ensiie's board */
     int max;            /**< The maximum number of staff cards of the ensiie's board at the same time */
+    effect_list staff_effect; /**< The list of effects offered by actual staff cards in the board_staff.cards list  */
 };
 
 /**
