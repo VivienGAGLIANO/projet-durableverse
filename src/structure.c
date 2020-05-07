@@ -23,6 +23,10 @@ card remove_card(card_list *list, int index) {
 	return *((card*) pop_stack_elem(list, index));
 }
 
+card pop_last_card(card_list *list) {
+	return *((card*) pop_last(list));
+}
+
 
 /* ------------ Effects functions ------------ */
 
@@ -42,4 +46,8 @@ staff_effect get_effect(effect_list list, int index) {
 
 staff_effect remove_effect(effect_list *list, int index) {
 	return *((staff_effect*) pop_stack_elem(list, index));
+}
+
+staff_effect pop_last_effect(effect_list *list) {
+	return *((staff_effect*) pop_last(list));
 }

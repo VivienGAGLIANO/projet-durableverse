@@ -75,7 +75,8 @@ card_list load_cards(char* filename) {
 
 card create_card(const char* name, int cost) {
 	struct card newcard;
-	newcard.name = (char*) name;
+	newcard.name = (char*) malloc(sizeof(char)*strlen(name));
+	strcpy(newcard.name, name);
 	newcard.cost = cost;
 	newcard.staff_effect = NULL;
 	newcard.action_effect = 0;
@@ -103,21 +104,26 @@ card create_action_card(const char* name, int cost, enum action_effect fx) {
 /* ------------------------ Functions for the game ----------------------- */
 /**
  * @brief gives the EP cost of a card
+ * @param card the card to get the cost of
  * @return the EP cost of a card
  */
-int EP_cost(struct card a) {
-	return a.cost;
+int EP_cost(struct card card) {
+	return card.cost;
 }
 
 /**
  * @brief tells if a card is a staff card or an action card
- * @param
+ * @param card the card to get the type of
  * @return STAFF_CARD if it's a staff car and ACTION_CARD if it's an action card
  */
-enum card_type type_of_card(struct card a) {
-	return a.action_effect ? ACTION_CARD : STAFF_CARD;
+enum card_type type_of_card(struct card card) {
+	return card.action_effect ? ACTION_CARD : STAFF_CARD;
 }
 
+/**
+ * @brief quantity of card in the deck at the beginning
+ * @return the number of same card in the deck at the beginning
+ */
 int nb_card_deck(struct card a){
 	if (type_of_card(a) == ACTION_CARD) {
 		switch (a.action_effect) {
@@ -145,3 +151,18 @@ int nb_card_deck(struct card a){
 		return 1;
 }
 
+/**
+ * @brief gets all staff effects in a list of staff cards
+ * @param cards the list of cards to get the effects of
+ * @return a effect_list of all the effects of all the cards in `cards`
+ */
+effect_list get_all_staff_effects(card_list cards) {
+	effect_list effects;
+	for (int i = 0; i < stack_len(cards); i++) {
+		effect_list card_effects = get_card(cards, i).staff_effect;
+		for (int j = 0; j < stack_len(card_effects); j++) {
+			push_effect(get_effect(card_effects, j), &effects);
+		}
+	}
+	return effects;
+}
