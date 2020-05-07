@@ -18,6 +18,7 @@ card get_card(card_list list, int index);
 
 card remove_card(card_list *list, int index);
 
+card pop_last_card(card_list *list);
 
 /* ------------ Effects functions ------------ */
 
@@ -29,5 +30,6 @@ staff_effect get_effect(effect_list list, int index);
 
 staff_effect remove_effect(effect_list *list, int index);
 
+staff_effect pop_last_effect(effect_list *list);
 
 #endif
