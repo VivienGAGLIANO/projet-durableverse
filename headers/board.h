@@ -128,7 +128,7 @@ void add_student_FISA(int, struct ensiie*);
  * @brief computes Energy Points (EP) available at the beginning of the player's phase
  * @return number of EP available
  */
-int available_EP(struct ensiie);
+int available_EP(struct board, struct ensiie);
 
 /**
  * @brief play one card from a player's hand, then actualise his EPs and apply the effect of the card immediately if it's an action card

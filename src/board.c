@@ -161,9 +161,9 @@ void add_student_FISA(int nb, struct ensiie* p) {
 }
 
 /* A revoir*/
-int available_EP(struct ensiie p)
+int available_EP(struct board board, struct ensiie p)
 {
-	return p.current_students.FISA_count*2+ p.current_students.FISE_count;
+	return is_turn_even(board) * 2 * p.current_students.FISA_count + p.current_students.FISE_count;
 }
 
 // TODO
