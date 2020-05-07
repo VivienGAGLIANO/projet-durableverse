@@ -114,14 +114,19 @@ void begin_turn (struct board* b){
 	print_new_turn(*b);
 }
 
-/* A revoir */
-void play_phase(struct ensiie* p, int a){
-
-	*nb_FISE;
-	*nb_FISA;
-	choice_FISE_FISA(nb_FISE, nb_FISA, p);
+void play_phase(struct board board, struct ensiie* p){
+	print_new_phase(board, *p);
 	
+	//Adding student cards
+	int *nb_FISE, *nb_FISA;
+	choice_FISE_FISA(nb_FISE, nb_FISA, *p);
+	add_student_FISE(*nb_FISE, p);
+	add_student_FISA(*nb_FISA, p);
 
+	//Playing cards
+	struct card *chosen_card;
+	while ((chosen_card = choice_card(*p)) != NULL)
+		play_card(p, available_EP(board, *p), *chosen_card);
 }
 
 int nb_card_drawn(struct ensiie p)
@@ -189,7 +194,7 @@ void end_turn(struct board *board) {
 			board->player1.SD -= current_effect2->head->value;
 	}
 
-	//Checking SD point aren't negative
+	//Setting SD point to 0 if they are negative
 	if (board->player1.SD < 0)
 		board->player1.SD =0;
 	if (board->player2.SD < 0)

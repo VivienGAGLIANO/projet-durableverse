@@ -90,9 +90,9 @@ void begin_turn(struct board*);
 /**
  * @brief lets the ensiie to play his phase
  * @detail calculates the EP of the ensiie, how many FISA or FISE cards the ensiie wants to play, which action and staff cards the ensiie wants to play, and applies the effect of these cards
- * @param a pointer to the ensiie playing, and the turn number
+ * @param the current board and a pointer to the ensiie currently playing
  */
-void play_phase(struct ensiie*, int);
+void play_phase(struct board, struct ensiie*);
 
 /**
  * @brief computes number of cards drawn by player at the beginning of his turn
