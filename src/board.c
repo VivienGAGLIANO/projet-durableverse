@@ -166,13 +166,14 @@ int available_EP(struct ensiie p)
 	return p.current_students.FISA_count*2+ p.current_students.FISE_count;
 }
 
+// TODO
 int play_card (struct ensiie *p, int *ep, card a){}
 
+// TODO
+void end_turn(struct board *board) {}
+
 int is_over(struct board b){
-	if ((b.n_turn == 30) || b.player1.SD > 20 || b.player2.SD > 20)
-		return 1;
-	else
-		return 0;
+	return b.n_turn == 30 || ((b.player1.SD > 20 || b.player2.SD > 20) * (b.player1.SD != b.player2.SD));
 }
 
 int is_turn_even(struct board b) {
