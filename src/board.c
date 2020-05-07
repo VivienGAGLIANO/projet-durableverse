@@ -6,7 +6,7 @@
 struct board new_board(){
 	card_list all_cards= load_cards("../cards.xml");
 	
-	struct board board;
+	struct board *board;
 
 	struct ensiie player1;
 	card_list deck1 = shuffle_stack(all_cards);
@@ -72,8 +72,8 @@ struct board new_board(){
 	};
 
 
-	board = (struct board) malloc(sizeof(board)); 
-	board = {
+	board = (struct board*) malloc(sizeof(board)); 
+	*board = {
 		.player1 = player1,
 		.player2 = player2,
 		.n_turn = 0
@@ -83,7 +83,7 @@ struct board new_board(){
 		draw(&player1);
 		draw(&player2);
 	}
-	return board;
+	return *board;
 }
 
 void free_board(struct board* b){
