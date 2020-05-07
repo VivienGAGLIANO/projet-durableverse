@@ -14,7 +14,8 @@ struct board new_board(){
 	card_list discard1 = create_stack();
 	struct board_staff current_staff1 = {
 		.cards = create_stack(),
-		.max = 1
+		.max = 1,
+		.staff_effect = create_stack()
 	};
 	struct board_student current_student1 = {
 		.FISE_count = 0,
@@ -31,7 +32,8 @@ struct board new_board(){
 	card_list discard2 = create_stack();
 	struct board_staff current_staff2 = {
 		.cards = create_stack(),
-		.max = 1
+		.max = 1,
+		.staff_effect = create_stack()
 	};
 	struct board_students current_student2 = {
 		.FISE_count = 0,
@@ -90,14 +92,14 @@ void free_board(struct board* b){
 	free_stack(&(b->player1.discard));
 	free_stack(&(b->player1.current_staff.cards));
 	free(&(b->player1.current_staff));
-	free(b->player1);
+	free(&(b->player1));
 
 	free_stack(&(b->player2.deck));
 	free_stack(&(b->player2.hand));
 	free_stack(&(b->player2.discard));
 	free_stack(&(b->player2.current_staff.cards));
 	free(&(b->player2.current_staff));
-	free(b->player2);
+	free(&(b->player2));
 
 	free(b);
 }
@@ -122,50 +124,32 @@ void play_phase(struct ensiie* p, int a){
 
 }
 
-/* A revoir -> utiliser les effect list*/
 int nb_card_drawn(struct ensiie p)
 {
 	int card_drawn = 1;
-
-	while ()
-	
-	
-	
-	/*card_list a = copy_stack(p.current_staff.cards);
-	card b;
-	while (a!=NULL)
-	{	
-		b=pop_card(&a);
-		if(b.name=="Massinissa Merabet")
-			i+=2;
-		else if (b.name=="Anne-Laure Ligozat" || b.name=="Catherine Dubois" || b.name=="Laurent Prével")
-			i+=1;
+	effect_list current_effect = p.current_staff.staff_effect;
+	while (current_effect != NULL) {
+		if (current_effect->head->id == DR)
+			card_drawn += current_effect->head->value;
+		current_effect = current_effect->tail;
 	}
-	return i;
-	*/
+	return card_drawn;
 }
 
 void draw(struct ensiie* p) {
 	push_card(pop_card (p->deck), p->hand);
 }
 
-/* A revoir -> utiliser les effect_list*/
 int nb_student_card_received(struct ensiie p)
 {
-	int i = 0;
-	card_list a = copy_stack(p.current_staff.cards);
-	card b;
-	while (a!=NULL)
-	{	
-		b=pop_card(&a);
-		if(b.name=="Laurent Prével")
-			i+=2;
-		else if (b.name=="Anne-Laure Ligozat" || b.name=="Catherine Dubois" || b.name=="Katrin Salhab" || b.name=="Abass Sagna")
-			i+=1;
-		else
-			i+=0;
+	int student_card_drawn = 1;
+	effect_list current_effect = p.current_staff.staff_effect;
+	while (current_effect != NULL) {
+		if (current_effect->head->id == E)
+			student_card_drawn += current_effect->head->value;
+		current_effect =  current_effect->tail;
 	}
-	return i;
+	return student_card_drawn;
 }
 
 void add_student_FISE(int nb, struct ensiie* p){
