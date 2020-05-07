@@ -50,9 +50,6 @@ struct ensiie {
 
     /** A pointer to the opponent ensiie */
     struct ensiie* opponent;
-
-    int SD_added;
-    int SD_removed;
 };
 
 /**
