@@ -48,23 +48,19 @@ struct board new_board(char* name1, char* name2) {
 		}
 	};
 
-	/* This will probably don't work because the
-	 * struct ensiie is copied when allocated to the board
-	 */
-	player1.opponent = &player2;
-	player2.opponent = &player1;
-
 	/* Creating the board */
 	struct board board = {
 		.player1 = player1,
 		.player2 = player2,
 		.n_turn = 0
 	};
+	
+	board.player1.opponent = &board.player2;
+	board.player2.opponent = &board.player1;
 
-	/* Same thing apply here: try this in case of failure: draw(&board.player1) */
 	for (int i = 0; i < 2; i++) {
-		draw(&player1);
-		draw(&player2);
+		draw(&board.player1);
+		draw(&board.player2);
 	}
 	return board;
 }
