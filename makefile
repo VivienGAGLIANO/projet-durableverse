@@ -11,6 +11,9 @@ durableverse : main.c $(O)card.o $(O)structure.o $(O)interface.o $(O)board.o $(O
 run: durableverse
 	bin/durableverse
 
+debug: durableverse
+	gdb bin/durableverse
+
 structure.o : $(O)structure.o
 
 card.o : $(O)card.o
