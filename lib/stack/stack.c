@@ -62,7 +62,7 @@ stack shuffle_stack(stack s) {
   s = copy_stack(s);
   stack new = create_stack();
   int n = stack_len(s);
-  srand(time(NULL));
+  // srand(time(NULL));
   while (!is_stack_empty(s)) {
     push(pop_stack_elem(&s, rand() % n), &new);
     n--;

@@ -1,3 +1,4 @@
+#include <time.h>
 #include "../headers/interface.h"
 #include "../headers/board.h"
 #include "../headers/structure.h"
@@ -7,6 +8,7 @@ struct board new_board(char* name1, char* name2) {
 	card_list all_cards = load_cards("cards.xml");
 
 	/* Creating player 1 */
+	srand(time(NULL));
 	struct ensiie player1 = {
 		.SD = 0,
 		.player_name = name1,
@@ -28,6 +30,7 @@ struct board new_board(char* name1, char* name2) {
 	};
 
 	/* Creating player 2 */
+	srand(2*time(NULL));
 	struct ensiie player2 = {
 		.SD = 0,
 		.player_name = name2,
