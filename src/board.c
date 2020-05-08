@@ -250,21 +250,92 @@ int play_card (struct ensiie *p, int *ep, card a) {
 	}
 }
 
+int compute_development(struct board board, struct ensiie p) {
+	// Basic development power (action card already counted)
+	int development_FISE = p.current_students.FISE_development;
+	int development_FISA = p.current_students.FISA_development;
+
+	effect_list player_effect = get_all_staff_effects(p.current_staff.cards);
+	effect_list opponent_effect = get_all_staff_effects(p.opponent->current_staff.cards);
+
+	// Checking if player's staff affects those number
+	while (!is_stack_empty(player_effect)) {
+		if (player_effect->head->id == AE1)
+			development_FISE += player_effect->head->value;
+		if (player_effect->head->id == AA1)
+			development_FISA += player_effect->head->value;
+		player_effect = player_effect->tail;
+	}
+
+	// Checking if opponent's staff affects those number
+	while (!is_stack_empty(opponent_effect)) {
+		if (opponent_effect->head->id == RE1) 
+			development_FISE -= opponent_effect->head->value;
+		if (opponent_effect->head->id == RA1)
+			development_FISA -= opponent_effect->head->value;
+		opponent_effect = opponent_effect->tail;
+	}
+
+	// Resetting development power to 0 if negative
+	development_FISE = development_FISE < 0 ? 0 : development_FISE;
+	development_FISA = development_FISA < 0 ? 0 : development_FISA;
+
+	// Returning actual development count, computed with student number (holding into account FISA disappearing)
+	return p.current_students.FISE_count * development_FISE + is_turn_even(board) * p.current_students.FISA_count * development_FISA;
+
+}
+
+int compute_durability(struct board board, struct ensiie p) {
+		// Basic development power (action card already counted)
+	int durability_FISE = p.current_students.FISE_durability;
+	int durability_FISA = p.current_students.FISA_durability;
+
+	effect_list player_effect = get_all_staff_effects(p.current_staff.cards);
+	effect_list opponent_effect = get_all_staff_effects(p.opponent->current_staff.cards);
+
+	// Checking if player's staff affects those number
+	while (!is_stack_empty(player_effect)) {
+		if (player_effect->head->id == AE2)
+			durability_FISE += player_effect->head->value;
+		if (player_effect->head->id == AA2)
+			durability_FISA += player_effect->head->value;
+		player_effect = player_effect->tail;
+	}
+
+	// Checking if opponent's staff affects those number
+	while (!is_stack_empty(opponent_effect)) {
+		if (opponent_effect->head->id == RE2) 
+			durability_FISE -= opponent_effect->head->value;
+		if (opponent_effect->head->id == RA2)
+			durability_FISA -= opponent_effect->head->value;
+		opponent_effect = opponent_effect->tail;
+	}
+
+	// Resetting durability power to 0 if negative
+	durability_FISE = durability_FISE < 0 ? 0 : durability_FISE;
+	durability_FISA = durability_FISA < 0 ? 0 : durability_FISA;
+
+	// Returning actual durability count, computed with student number (holding into account FISA disappearing)
+	return p.current_students.FISE_count * durability_FISE + is_turn_even(board) * p.current_students.FISA_count * durability_FISA;
+}
+
 void end_turn(struct board *board) {
 	// SD points gained by student card
-	board->player1.SD += board->player1.current_students.FISE_count * board->player1.current_students.FISE_development - board->player2.current_students.FISE_count * board->player2.current_students.FISE_durability + is_turn_even(*board) * (board->player1.current_students.FISA_count * board->player1.current_students.FISA_development - board->player2.current_students.FISA_count * board->player2.current_students.FISA_durability);
-	board->player2.SD += board->player2.current_students.FISE_count * board->player2.current_students.FISE_development - board->player1.current_students.FISE_count * board->player1.current_students.FISE_durability + is_turn_even(*board) * (board->player2.current_students.FISA_count * board->player2.current_students.FISA_development - board->player1.current_students.FISA_count * board->player1.current_students.FISA_durability);
+	board->player1.SD += compute_development(*board, board->player1) - compute_durability(*board, board->player2);
+
+	board->player2.SD += compute_development(*board, board->player2) - compute_durability(*board, board->player1);
+
 	effect_list current_effect1 = get_all_staff_effects(board->player1.current_staff.cards);
 	effect_list current_effect2 = get_all_staff_effects(board->player2.current_staff.cards);
 
 	// SD points gained by staff card
-	while (current_effect1 != NULL) {
+	while (!is_stack_empty(current_effect1)) {
 		if (current_effect1->head->id == ADD)
 			board->player1.SD += current_effect1->head->value;
 		if (current_effect1->head->id == RDD)
 			board->player2.SD -= current_effect1->head->value;
 	}
-		while (current_effect2 != NULL) {
+		while (!is_stack_empty(current_effect2)) {
 		if (current_effect2->head->id == ADD)
 			board->player2.SD += current_effect2->head->value;
 		if (current_effect2->head->id == RDD)

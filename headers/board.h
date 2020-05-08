@@ -135,6 +135,18 @@ int available_EP(struct board, struct ensiie);
 int play_card(struct ensiie*, int* , card);
 
 /**
+ * @brief computes amount of development a player has, taking into account action and staff cards effect owned by both the player and its opponent
+ * @return development count for the given player
+ */
+int compute_development(struct board, struct ensiie);
+
+/**
+ * @brief computes amount of durability a player has, taking into account action and staff cards effect owned by both the player and its opponent
+ * @return durability count for the given player
+ */
+int compute_durability(struct board, struct ensiie);
+
+/**
  * @brief ends current turn, computes and updates Sustainable Development (SD) points for each player
  * 
  */
