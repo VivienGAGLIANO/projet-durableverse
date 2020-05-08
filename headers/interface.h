@@ -3,6 +3,7 @@
 
 #include "card.h"
 #include "board.h"
+#include "colors.h"
 
 /**
  * @brief prints the hand
@@ -51,6 +52,24 @@ struct card* choice_card(struct ensiie);
  * @pre game must be over for the function to run, i.e. function is_over must return true
  */
 void print_end_game(struct board);
+
+/**
+ * @brief prints Durableverse logo and group name
+ */
+void print_logo();
+
+/**
+ * @brief clears console
+ */
+void clear_screen();
+
+/**
+ * @brief prints Durableverse logo and asks user for each player's name
+ * @param name1 name of the first player
+ * @param name2 name of the second player
+ * @post name1 and name2 are updated with the names entered by each player
+ */
+void welcome_screen(char* name1, char* name2);
 
 
 #endif

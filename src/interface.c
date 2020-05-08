@@ -72,3 +72,46 @@ void print_board(struct board board) {
 
     /* A finir */
 }
+
+
+/* Manque certaines fonctions */
+/* TODO :
+    choice_FISE_FISA
+    choice_card
+    print_end_game
+*/
+
+
+/**
+ * @brief prints Durableverse logo and group name
+ */
+void print_logo() {
+    printf(BOLDGREEN "%s", logo2);
+    printf(BOLDYELLOW "%s\n\n" RESET, peaky);
+}
+
+/**
+ * @brief clears console
+ */
+void clear_screen() {
+    system("@cls||clear");
+}
+
+/**
+ * @brief prints Durableverse logo and asks user for each player's name
+ * @param name1 name of the first player
+ * @param name2 name of the second player
+ * @post name1 and name2 are updated with the names entered by each player
+ */
+void welcome_screen(char* name1, char* name2) {
+    clear_screen();
+    print_logo();
+    printf("First player name: ");
+    scanf("%s", name1);
+
+    clear_screen();
+    print_logo();
+    printf("First player name: %s", name1);
+    printf("                2nde player name: ");
+    scanf("%s", name2);
+}
