@@ -9,7 +9,6 @@
  * @details displays the given card list as a hand, in the format of a list with : card index in hand list, name of the card and energy cost.
  */
 void print_hand(card_list cards) {
-    int i = 1;
     for (int i = 0; i < stack_len(cards); i++) {
         card card = get_card(cards, i);
         printf("[card number: %i; name: %s; cost: %i]\n", i, card.name, card.cost);
