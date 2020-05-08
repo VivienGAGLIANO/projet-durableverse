@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "../headers/interface.h"
+#include "unistd.h" // sleep 
 
 
 
@@ -67,7 +68,7 @@ void print_board(struct board board) {
     // Player 1 info
     printf("Player %s\n", board.player1.player_name);
     printf("SD : %i\n", board.player1.SD);
-    printf("Card in hand : %i\n", len_stack(board.player1.hand));
+    printf("Card in hand : %i\n", stack_len(board.player1.hand));
     
     printf("\n");
 
@@ -79,7 +80,7 @@ void print_board(struct board board) {
 
     printf("Staff cards : \n");
     for (int i = 0; i < stack_len(board.player1.current_staff.cards); i++)
-        printf("%s\n");
+        printf("%s\n", ((card*) board.player1.current_staff.cards->head)->name);
 
 
     printf("\n\nVS\n\n");
@@ -99,7 +100,7 @@ void print_board(struct board board) {
 
     printf("Staff cards : \n");
     for (int i = 0; i < stack_len(board.player2.current_staff.cards); i++)
-        printf("%s\n");
+        printf("%s\n", ((card*) board.player2.current_staff.cards->head)->name);
 }
 
 void choice_FISE_FISA(int *nb_FISE, int *nb_FISA, struct ensiie p) {
