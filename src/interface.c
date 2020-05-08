@@ -141,7 +141,7 @@ struct card* choice_card(struct board board, struct ensiie p, card* chosen_card)
     if (chosen_card_index == 0) 
         return chosen_card = NULL;
 
-    if (chosen_card_index > stack_len(p.hand)) {
+    if (chosen_card_index > stack_len(p.hand) || chosen_card_index < 0) {
         printf("Card chosen is outside hand's range. Pick again !\n");
         return chosen_card = choice_card(board, p, chosen_card);
     }
