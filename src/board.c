@@ -114,7 +114,7 @@ void play_phase(struct board board, struct ensiie* p) {
 	// Playing cards
 	struct card *chosen_card;
 	int ep = available_EP(board, *p);
-	while ((chosen_card = choice_card(*p)) != NULL)
+	while ((chosen_card = choice_card(board, *p, chosen_card)) != NULL)
 		play_card(p, &ep, *chosen_card);
 }
 
