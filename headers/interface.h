@@ -3,7 +3,7 @@
 
 #include "card.h"
 #include "board.h"
-#include "colors.h"
+#include "colors_logo.h"
 
 /**
  * @brief prints the hand
