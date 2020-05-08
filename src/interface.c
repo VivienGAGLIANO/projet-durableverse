@@ -99,6 +99,25 @@ void print_board(struct board board) {
         printf("%s\n");
 }
 
+void choice_FISE_FISA(int *nb_FISE, int *nb_FISA, struct ensiie p) {
+    int student_cards_drawn = nb_student_card_received(p);
+    printf("How many students cards do you want, %s ? You can receive %i cards this turn !\n", p.player_name, student_cards_drawn);
+
+    int FISE_wanted;
+    int FISA_wanted;
+    fscanf("%i %i \n", &FISE_wanted, &FISA_wanted);
+
+    if (FISE_wanted + FISA_wanted != student_cards_drawn) {
+        while (FISE_wanted + FISE_wanted != student_cards_drawn) {
+            printf("You have %i student card available, no more no less. Type in a correct combination !\n", student_cards_drawn);
+            fscanf("%i %i \n", &FISE_wanted, &FISA_wanted);
+        }
+    }
+
+    *nb_FISE = FISE_wanted;
+    *nb_FISA = FISA_wanted;
+}
+
 
 /* Manque certaines fonctions */
 /* TODO :
