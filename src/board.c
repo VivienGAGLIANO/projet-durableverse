@@ -128,7 +128,7 @@ int nb_card_drawn(struct ensiie p)
 {
 	int card_drawn = 1;
 	effect_list current_effect = get_all_staff_effects(p.current_staff.cards);
-	while (current_effect != NULL) {
+	while (!is_stack_empty(current_effect)) {
 		if (current_effect->head->id == DR)
 			card_drawn += current_effect->head->value;
 		current_effect = current_effect->tail;
@@ -144,7 +144,7 @@ int nb_student_card_received(struct ensiie p)
 {
 	int student_card_drawn = 1;
 	effect_list current_effect = get_all_staff_effects(p.current_staff.cards);
-	while (current_effect != NULL) {
+	while (!is_stack_empty(current_effect)) {
 		if (current_effect->head->id == E)
 			student_card_drawn += current_effect->head->value;
 		current_effect =  current_effect->tail;
