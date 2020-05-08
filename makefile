@@ -8,6 +8,8 @@ L = lib/
 durableverse : main.c $(O)card.o $(O)structure.o $(O)interface.o $(O)board.o $(O)stack.o $(L)ezxml/ezxml.o
 	$(CC) $^ -o $(B)$@
 
+run: durableverse
+	bin/durableverse
 
 structure.o : $(O)structure.o
 
@@ -20,6 +22,9 @@ interface.o : $(O)interface.o
 stack.o : $(O)stack.o
 
 $(O)stack.o : $(L)stack/stack.c $(L)stack/stack.h
+	$(CC) -c $< -o $@
+
+$(O)interface.o : $(S)interface.c $(H)interface.h $(H)colors_logo.h
 	$(CC) -c $< -o $@
 
 $(O)%.o : $(S)%.c $(H)%.h
