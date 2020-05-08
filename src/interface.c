@@ -11,7 +11,7 @@
 void print_hand(card_list cards) {
     for (int i = 0; i < stack_len(cards); i++) {
         card card = get_card(cards, i);
-        printf("[card number: %i; name: %s; cost: %i]\n", i, card.name, card.cost);
+        printf("[card number: %i; name: %s; cost: %i]\n", i+1, card.name, card.cost);
     }
 }
 
