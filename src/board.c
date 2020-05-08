@@ -193,7 +193,7 @@ int play_card(struct ensiie *p, int *ep, card a) {
 				break;
 
 			case DiscardOneStaff :
-
+				push_card(pop_last_card(&(p->opponent->current_staff.cards)), &(p->opponent->discard));
 				break;
 
 			case ShuffleDiscardDraw :
