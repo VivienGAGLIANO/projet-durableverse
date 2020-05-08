@@ -9,7 +9,7 @@
 /**
  * @brief enumeration for staff card effects
  */
-enum staff_effect_id {AE1=1, AE2, AA1, AA2, RE1, RE2, RA1, RA2, ADD, RDD, DR, E}; 
+enum staff_effect_id {AE1, AE2, AA1, AA2, RE1, RE2, RA1, RA2, ADD, RDD, DR, E}; 
 
 /**
  * @brief staff card struct: composed of the effect of the card, as well as its "effectiveness"
@@ -18,6 +18,7 @@ typedef struct staff_effect staff_effect;
 struct staff_effect {
     enum staff_effect_id id; /**< The effect ID of the card */
     int value; /**< The value applied to the effect */
+    char* desc; /**< Description of the effect */
 };
 
 
@@ -25,7 +26,7 @@ struct staff_effect {
 /**
  * @brief enumeration for action card effects
  */
-enum action_effect {WinOneSD = 1, DrawOneCard, PlayOneFISE, PlayOneFISA, Win6EP, RemoveOneFISEFISA, DiscardOneStaff, ShuffleDiscardDraw, IncreaseDevelopment, IncreaseDurability, RemoveAllFISEFISA};
+enum action_effect {WinOneSD, DrawOneCard, PlayOneFISE, PlayOneFISA, Win6EP, RemoveOneFISEFISA, DiscardOneStaff, ShuffleDiscardDraw, IncreaseDevelopment, IncreaseDurability, RemoveAllFISEFISA};
 
 
 /* ------------------------ General card ----------------------- */
@@ -35,10 +36,12 @@ enum card_type {STAFF_CARD, ACTION_CARD};
  */
 typedef struct card card;
 struct card {
+    enum card_type type; /**< The type of the card (ACTION_CARD or STAFF_CARD) */
     char* name; /**< The name of the card */
     int cost; /**< The EP cost of the card */
     effect_list staff_effect; /**< The effects of the card if it is a staff card, the NULL pointer otherwise */
     enum action_effect action_effect; /**< The effects of the card if it is a action card, the NULL pointer otherwise */
+    char* desc; /**< Description of the action card effect */
 };
 
 /* --------------------- Functions for cards creation -------------------- */
@@ -53,7 +56,7 @@ card create_staff_card(const char* name, int cost);
 
 void add_staff_card_effect(card* card, staff_effect fx);
 
-card create_action_card(const char* name, int cost, enum action_effect fx);
+card create_action_card(const char* name, int cost, enum action_effect fx, const char* desc);
 
 
 /* ------------------------ Functions for the game ----------------------- */

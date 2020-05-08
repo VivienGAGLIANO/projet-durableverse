@@ -37,6 +37,14 @@ card_list load_cards(char* filename) {
     ezxml_t xml_cards = ezxml_parse_file(filename);
 	card_list cards = create_stack();
 
+	char* effects_description[12];
+	ezxml_t xml_fx = ezxml_parse_file("cards_effects.xml");
+	for (ezxml_t fx = ezxml_child(xml_fx, "effect"); fx; fx = fx->next) {
+		enum staff_effect_id id = convert_staff_fx_id(ezxml_child(fx, "id")->txt);
+		const char* desc = ezxml_child(fx, "desc")->txt;
+		effects_description[id] = (char*) desc;
+	}
+
     ezxml_t staff_cards = ezxml_child(xml_cards, "staffcards");
     for (ezxml_t card = ezxml_child(staff_cards, "card"); card; card = card->next) {
         const char* cardname = ezxml_child(card, "name")->txt;
@@ -47,7 +55,12 @@ card_list load_cards(char* filename) {
         for (ezxml_t effect = ezxml_child(card, "effect"); effect; effect = effect->next) {
             const char* effect_id = ezxml_attr(effect, "id");
             int value = atoi(ezxml_attr(effect, "value"));
-			staff_effect fx = {convert_staff_fx_id(effect_id), value};
+			enum staff_effect_id id = convert_staff_fx_id(effect_id);
+			staff_effect fx = {
+				.id = id,
+				.value = value,
+				.desc = effects_description[id]
+			};
             add_staff_card_effect(&newcard, fx);
         }
 		// and adding it to the list
@@ -60,10 +73,10 @@ card_list load_cards(char* filename) {
         //int card_id = atoi(ezxml_attr(card, "id"));
         int cost = atoi(ezxml_child(card, "cost")->txt);
         int number = atoi(ezxml_child(card, "number")->txt);
-        //const char* desc = ezxml_child(card, "desc")->txt;
+        const char* desc = ezxml_child(card, "desc")->txt;
 		const char* fx = ezxml_child(card, "effect")->txt;
         // Creating action card...
-		struct card newcard = create_action_card(cardname, cost, convert_action_fx(fx));
+		struct card newcard = create_action_card(cardname, cost, convert_action_fx(fx), desc);
 		// and adding it to the list
 		for (int i = 0; i < number; i++)
 			push_card(newcard, &cards);
@@ -74,17 +87,17 @@ card_list load_cards(char* filename) {
 }
 
 card create_card(const char* name, int cost) {
-	struct card newcard;
-	newcard.name = (char*) malloc(sizeof(char)*strlen(name));
+	struct card newcard = {
+		.name = (char*) malloc(sizeof(char)*(strlen(name)+1)),
+		.cost = cost
+	};
 	strcpy(newcard.name, name);
-	newcard.cost = cost;
-	newcard.staff_effect = NULL;
-	newcard.action_effect = 0;
 	return newcard;
 }
 
 card create_staff_card(const char* name, int cost) {
 	card newcard = create_card(name, cost);
+	newcard.type = STAFF_CARD;
 	newcard.staff_effect = create_stack();
 	return newcard;
 }
@@ -93,9 +106,12 @@ void add_staff_card_effect(card* card, staff_effect fx) {
 	push_effect(fx, &card->staff_effect);
 }
 
-card create_action_card(const char* name, int cost, enum action_effect fx) {
+card create_action_card(const char* name, int cost, enum action_effect fx, const char* desc) {
 	card newcard = create_card(name, cost);
+	newcard.type = ACTION_CARD;
 	newcard.action_effect = fx;
+	newcard.desc = (char*) malloc(sizeof(char)*(strlen(desc)+1));
+	strcpy(newcard.desc, desc);	
 	return newcard;
 }
 
@@ -117,7 +133,7 @@ int EP_cost(struct card card) {
  * @return STAFF_CARD if it's a staff car and ACTION_CARD if it's an action card
  */
 enum card_type type_of_card(struct card card) {
-	return card.action_effect ? ACTION_CARD : STAFF_CARD;
+	return card.type;
 }
 
 /**
