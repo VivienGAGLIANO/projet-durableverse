@@ -111,7 +111,7 @@ void play_phase(struct board board, struct ensiie* p) {
 	add_student_FISA(*nb_FISA, p);
 
 	// Playing cards
-	struct card *chosen_card;
+	struct card *chosen_card = (card*) malloc(sizeof(struct card));
 	int ep = available_EP(board, *p);
 	while ((chosen_card = choice_card(board, *p, chosen_card)) != NULL)
 		play_card(p, &ep, *chosen_card);
