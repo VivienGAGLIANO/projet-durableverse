@@ -184,8 +184,8 @@ int play_card (struct ensiie *p, int *ep, card a) {
 				break;
 
 			case RemoveOneFISEFISA :
-				p->opponent->current_students.FISE_count = max(p->opponent->current_students.FISE_count - 1, 0);
-				p->opponent->current_students.FISA_count = max(p->opponent->current_students.FISA_count - 1, 0);
+				p->opponent->current_students.FISE_count -= p->opponent->current_students.FISE_count - 1 < 0 ? 0 : 1;
+				p->opponent->current_students.FISA_count -= p->opponent->current_students.FISA_count - 1 < 0 ? 0 : 1;
 				break;
 
 			case DiscardOneStaff :
