@@ -105,11 +105,11 @@ void begin_turn(struct board* b) {
 }
 
 void play_phase(struct board board, struct ensiie* p) {
-	print_new_phase(board, *p);
-	
 	// Drawing cards
 	for (int i = 0; i < nb_card_drawn(*p); i++)
 		draw(p);
+	
+	print_new_phase(board, *p);
 
 	// Adding student cards
 	int *nb_FISE, *nb_FISA;
