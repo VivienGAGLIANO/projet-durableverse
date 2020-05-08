@@ -4,7 +4,7 @@
 
 
 struct board new_board(char* name1, char* name2) {
-	card_list all_cards = load_cards("../cards.xml");
+	card_list all_cards = load_cards("cards.xml");
 
 	/* Creating player 1 */
 	struct ensiie player1 = {
