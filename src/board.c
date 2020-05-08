@@ -53,6 +53,7 @@ struct board* new_board(char* name1, char* name2) {
 
 	/* Creating the board */
 	struct board* board = (struct board*) malloc(sizeof(struct board));
+	board->n_turn = 0;
 	board->player1 = player1;
 	board->player2 = player2;
 	
