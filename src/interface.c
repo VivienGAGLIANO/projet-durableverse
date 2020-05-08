@@ -8,9 +8,9 @@
  * @details displays the given card list as a hand, in the format of a list with : card index in hand list, name of the card and energy cost.
  */
 void print_hand(card_list cards) {
-    int i = 0;
+    int i = 1;
     while(!is_stack_empty(cards)){  
-        printf("[card number : %i ; name : %s ; cost : %i]", i, cards->head->name, cards->head->cost);
+        printf("[card number : %i ; name : %s ; cost : %i]\n", i, ((card*)cards->head)->name, ((card*) cards->head)->cost);
         cards=cards->tail;
         i++;}
 }
@@ -126,15 +126,8 @@ struct card* choice_card(struct ensiie p) {
 }
 
 void print_end_game(struct board board) {
-    
+
 }
-
-/* Manque certaines fonctions */
-/* TODO :
-    choice_card
-    print_end_game
-*/
-
 
 /**
  * @brief prints Durableverse logo and group name
