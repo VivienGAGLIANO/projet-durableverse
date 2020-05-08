@@ -200,6 +200,6 @@ void welcome_screen(char* name1, char* name2) {
     clear_screen();
     print_logo();
     printf("First player name: %s", name1);
-    printf("                2nde player name: ");
+    printf("                Second player name: ");
     scanf("%s", name2);
 }
