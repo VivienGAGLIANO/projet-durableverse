@@ -198,7 +198,8 @@ int play_card(struct ensiie *p, int *ep, int card_index) {
 				break;
 
 			case DiscardOneStaff :
-				push_card(pop_last_card(&(p->opponent->current_staff.cards)), &(p->opponent->discard));
+				if (stack_len(p->opponent->current_staff.cards) > 0)
+					push_card(pop_last_card(&(p->opponent->current_staff.cards)), &(p->opponent->discard));
 				break;
 
 			case ShuffleDiscardDraw :
@@ -356,7 +357,7 @@ void end_turn(struct board *board) {
 }
 
 int is_over(struct board b) {
-	return b.n_turn == 30 || b.player1.SD > 20 || b.player2.SD > 20;
+	return b.n_turn == 30 || b.player1.SD > 3 || b.player2.SD > 3;
 }
 
 int is_turn_even(struct board b) {
