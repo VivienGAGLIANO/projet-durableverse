@@ -115,10 +115,10 @@ void play_phase(struct board board, struct ensiie* p) {
 	add_student_FISA(nb_FISA, p);
 
 	// Playing cards
-	struct card *chosen_card = (card*) malloc(sizeof(struct card));
+	int chosen_card_index;
 	int ep = available_EP(board, *p);
-	while ((chosen_card = choice_card(board, *p, chosen_card)) != NULL)
-		play_card(p, &ep, *chosen_card);
+	while ((chosen_card_index = choice_card(board, *p)) != -1)
+		play_card(p, &ep, chosen_card_index);
 }
 
 int nb_card_drawn(struct ensiie p)
@@ -162,9 +162,14 @@ int available_EP(struct board board, struct ensiie p)
 	return is_turn_even(board) * 2 * p.current_students.FISA_count + p.current_students.FISE_count;
 }
 
-int play_card(struct ensiie *p, int *ep, card a) {
+int play_card(struct ensiie *p, int *ep, int card_index) {
+	card a = get_card(p->hand, card_index);
+
 	// a is an action card
 	if (type_of_card(a) == ACTION_CARD) {
+		*ep -= a.cost;
+		remove_card(&(p->hand), card_index);
+		push_card(a, &(p->discard));
 		switch (a.action_effect)
 		{
 			case WinOneSD :
@@ -220,12 +225,9 @@ int play_card(struct ensiie *p, int *ep, card a) {
 				break;
 
 			default :
-				fprintf(stderr, "Error : action card with no effect %s\nAction cancelled\n", a.name);
+				fprintf(stderr, "Error: action card with no effect: %s", a.name);
 				return 0;
 		}
-		*ep -= a.cost;
-		remove_card(&(p->hand), seek_stack_elem(&a, p->hand));
-		push_card(a, &(p->discard));
 		return 1;
 	}
 
@@ -244,12 +246,12 @@ int play_card(struct ensiie *p, int *ep, card a) {
 		}
 
 		*ep -= a.cost;
-		remove_card(&(p->hand), seek_stack_elem(&a, p->hand));
+		remove_card(&(p->hand), card_index);
 		return 1;
 	}
 
 	else {
-		printf("Error: non staff non action card %s\nAction cancelled\n", a.name);
+		fprintf(stderr, "Error: non staff non action card: %s\nAction cancelled\n", a.name);
 		return 0;
 	}
 }

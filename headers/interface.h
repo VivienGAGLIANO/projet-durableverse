@@ -45,7 +45,7 @@ void choice_FISE_FISA(int *nb_FISE, int *nb_FISA, struct ensiie);
  * @return if a card is chosen, a pointer towards that card, NULL if end phase
  * @post chosen_card pointer is NULL if pass turn, else points towards chosen card
  */
-struct card* choice_card(struct board, struct ensiie, card*);
+int choice_card(struct board, struct ensiie);
 
 /**
  * @brief prints the winner or draw, depending on the result of the game

@@ -134,7 +134,7 @@ int available_EP(struct board, struct ensiie);
  * @pre the given card should be playable, i.e. its cost should be less than or equal to available EP
  * @return 1 if card played, 0 else
  */
-int play_card(struct ensiie*, int* , card);
+int play_card(struct ensiie *p, int *ep, int card_index);
 
 /**
  * @brief computes amount of development a player has, taking into account action and staff cards effect owned by both the player and its opponent
