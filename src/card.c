@@ -173,7 +173,7 @@ int nb_card_deck(struct card a){
  * @return a effect_list of all the effects of all the cards in `cards`
  */
 effect_list get_all_staff_effects(card_list cards) {
-	effect_list effects;
+	effect_list effects = create_stack();
 	for (int i = 0; i < stack_len(cards); i++) {
 		effect_list card_effects = get_card(cards, i).staff_effect;
 		for (int j = 0; j < stack_len(card_effects); j++) {
