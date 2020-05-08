@@ -286,7 +286,7 @@ void end_turn(struct board *board) {
 }
 
 int is_over(struct board b) {
-	return b.n_turn == 30 || ((b.player1.SD > 20 || b.player2.SD > 20) * (b.player1.SD != b.player2.SD));
+	return b.n_turn == 30 || b.player1.SD > 20 || b.player2.SD > 20;
 }
 
 int is_turn_even(struct board b) {
