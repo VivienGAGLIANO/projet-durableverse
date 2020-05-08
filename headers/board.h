@@ -67,9 +67,9 @@ struct board {
 
 /**
  * @brief creates new board and allocates memory
- * @return initialized board instance 
+ * @return a pointer towards an initialized board instance 
  */
-struct board new_board();
+struct board* new_board();
 
 /**
  * @brief frees memory taken by given board, including memory taken for both ensiie struct

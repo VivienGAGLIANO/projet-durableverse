@@ -4,7 +4,7 @@
 #include "../headers/structure.h"
 
 
-struct board new_board(char* name1, char* name2) {
+struct board* new_board(char* name1, char* name2) {
 	card_list all_cards = load_cards("cards.xml");
 
 	/* Creating player 1 */
@@ -52,18 +52,22 @@ struct board new_board(char* name1, char* name2) {
 	};
 
 	/* Creating the board */
-	struct board board = {
-		.player1 = player1,
-		.player2 = player2,
-		.n_turn = 0
-	};
+	struct board* board = (struct board*) malloc(sizeof(struct board));
+	board->player1 = player1;
+	board->player2 = player2;
 	
-	board.player1.opponent = &board.player2;
-	board.player2.opponent = &board.player1;
+	// struct board board = {
+	// 	.player1 = player1,
+	// 	.player2 = player2,
+	// 	.n_turn = 0
+	// };
+	
+	board->player1.opponent = &board->player2;
+	board->player2.opponent = &board->player1;
 
 	for (int i = 0; i < 2; i++) {
-		draw(&board.player1);
-		draw(&board.player2);
+		draw(&board->player1);
+		draw(&board->player2);
 	}
 	return board;
 }
