@@ -4,11 +4,9 @@
 
 
 struct board new_board() {
-	card_list all_cards= load_cards("../cards.xml");
-	
-	struct board *board;
+	card_list all_cards = load_cards("../cards.xml");
 
-	struct ensiie player1;
+	/* Creating player 1 */
 	card_list deck1 = shuffle_stack(all_cards);
 	card_list hand1 = create_stack();
 	card_list discard1 = create_stack();
@@ -25,8 +23,17 @@ struct board new_board() {
 		.FISE_development = 1,
 		.FISA_development = 1
 	};
-	
-	struct ensiie player2;
+	struct ensiie player1 = {
+		.SD = 0,
+		.player_name = "Jaquie",
+		.deck = deck1,
+		.hand = hand1,
+		.discard = discard1,
+		.current_staff = current_staff1,
+		.current_students = current_student1,
+	};
+
+	/* Creating player 2 */
 	card_list deck2 = shuffle_stack(all_cards);
 	card_list hand2 = create_stack();
 	card_list discard2 = create_stack();
@@ -43,19 +50,8 @@ struct board new_board() {
 		.FISE_development = 1,
 		.FISA_development = 1
 	};
-	
-	player1 = {
-		.SD = 0,
-		.player_name = "Jaquie",
-		.deck = deck1,
-		.hand = hand1,
-		.discard = discard1,
-		.current_staff = current_staff1,
-		.current_students = current_student1,
-		.opponent = &player2,
-	};
 
-	player2 = {
+	struct ensiie player2 = {
 		.SD = 0,
 		.player_name = "Michel",
 		.deck = deck2,
@@ -63,24 +59,23 @@ struct board new_board() {
 		.discard = discard2,
 		.current_staff = current_staff2,
 		.current_students = current_student2,
-		.opponent = &player1,
-		.SD_added = 0,
-		.SD_removed = 0
 	};
 
+	player1.opponent = &player2;
+	player2.opponent = &player1;
 
-	board = (struct board*) malloc(sizeof(board)); 
-	*board = {
+	/* Creating the board */
+	struct board board = {
 		.player1 = player1,
 		.player2 = player2,
 		.n_turn = 0
-	}
+	};
 
 	for (int i = 0; i < 2; i++) {
 		draw(&player1);
 		draw(&player2);
 	}
-	return *board;
+	return board;
 }
 
 void free_board(struct board* b) {
@@ -139,7 +134,7 @@ int nb_card_drawn(struct ensiie p)
 }
 
 void draw(struct ensiie* p) {
-	push_card(pop_card (p->deck), p->hand);
+	push_card(pop_card(&(p->deck)), &(p->hand));
 }
 
 int nb_student_card_received(struct ensiie p)
@@ -170,7 +165,7 @@ int available_EP(struct board board, struct ensiie p)
 // /!\ Function implemented WITHOUT staff_effect list !!
 int play_card (struct ensiie *p, int *ep, card a) {
 	// a is an action card
-	if (a.action_effect != NULL) {
+	if (type_of_card(a) == ACTION_CARD) {
 		switch (a.action_effect)
 		{
 			case WinOneSD :
@@ -205,7 +200,7 @@ int play_card (struct ensiie *p, int *ep, card a) {
 			case ShuffleDiscardDraw :
 				while (!is_stack_empty(p->discard))
 					push(pop(&(p->discard)), &(p->deck));
-				shuffle_stack(&(p->deck));
+				p->deck = shuffle_stack(p->deck);
 				break;
 
 			case IncreaseDevelopment :
@@ -226,7 +221,7 @@ int play_card (struct ensiie *p, int *ep, card a) {
 				break;
 
 			default :
-				printf("Error : action card with no effect %s\nAction cancelled\n", a.name);
+				fprintf(stderr, "Error : action card with no effect %s\nAction cancelled\n", a.name);
 				return 0;
 		}
 		*ep -= a.cost;
@@ -255,19 +250,19 @@ int play_card (struct ensiie *p, int *ep, card a) {
 	}
 
 	else {
-		printf("Error : non staff non action card %s\nAction cancelled\n", a.name);
+		printf("Error: non staff non action card %s\nAction cancelled\n", a.name);
 		return 0;
 	}
 }
 
 void end_turn(struct board *board) {
-	//SD points gained by student card
+	// SD points gained by student card
 	board->player1.SD += board->player1.current_students.FISE_count * board->player1.current_students.FISE_development - board->player2.current_students.FISE_count * board->player2.current_students.FISE_durability + is_turn_even(*board) * (board->player1.current_students.FISA_count * board->player1.current_students.FISA_development - board->player2.current_students.FISA_count * board->player2.current_students.FISA_durability);
 	board->player2.SD += board->player2.current_students.FISE_count * board->player2.current_students.FISE_development - board->player1.current_students.FISE_count * board->player1.current_students.FISE_durability + is_turn_even(*board) * (board->player2.current_students.FISA_count * board->player2.current_students.FISA_development - board->player1.current_students.FISA_count * board->player1.current_students.FISA_durability);
 	effect_list current_effect1 = board->player1.current_staff.staff_effect;
 	effect_list current_effect2 = board->player2.current_staff.staff_effect;
 
-	//SD points gained by staff card
+	// SD points gained by staff card
 	while (current_effect1 != NULL) {
 		if (current_effect1->head->id == ADD)
 			board->player1.SD += current_effect1->head->value;
@@ -281,9 +276,9 @@ void end_turn(struct board *board) {
 			board->player1.SD -= current_effect2->head->value;
 	}
 
-	//Setting SD point to 0 if they are negative
+	// Setting SD point to 0 if they are negative
 	if (board->player1.SD < 0)
-		board->player1.SD =0;
+		board->player1.SD = 0;
 	if (board->player2.SD < 0)
 		board->player2.SD = 0;
 }
