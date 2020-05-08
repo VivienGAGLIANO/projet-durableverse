@@ -137,37 +137,6 @@ enum card_type type_of_card(struct card card) {
 }
 
 /**
- * @brief quantity of card in the deck at the beginning
- * @return the number of same card in the deck at the beginning
- */
-int nb_card_deck(struct card a){
-	if (type_of_card(a) == ACTION_CARD) {
-		switch (a.action_effect) {
-			case WinOneSD:
-			case DrawOneCard:
-				/* il y a 3 cartes "gagner un DD" et 3 cartes "piocher une carte" dans le deck en début de partie */
-				return 3;
-				break;
-			case PlayOneFISE:
-			case PlayOneFISA:
-			case Win6EP:
-			case RemoveOneFISEFISA:
-				/* il y a 2 cartes "jouer un Fisa", "jouer un FISE", "gagner 6 points d'énergie", "enlever une carte FISA OU FISE" dans le deck en début de partie */
-				return 2;
-				break;
-			case DiscardOneStaff:
-				/* il y a 4 carte "retirer une carte personnel" dans le deck au début */		
-				return 4;
-				break;
-			default:
-				return 1;
-		}
-	}
-	else /* il y a une carte personnel de chaque type dans le deck au début*/
-		return 1;
-}
-
-/**
  * @brief gets all staff effects in a list of staff cards
  * @param cards the list of cards to get the effects of
  * @return a effect_list of all the effects of all the cards in `cards`

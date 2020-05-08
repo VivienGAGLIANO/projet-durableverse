@@ -56,12 +56,6 @@ struct board* new_board(char* name1, char* name2) {
 	board->player1 = player1;
 	board->player2 = player2;
 	
-	// struct board board = {
-	// 	.player1 = player1,
-	// 	.player2 = player2,
-	// 	.n_turn = 0
-	// };
-	
 	board->player1.opponent = &board->player2;
 	board->player2.opponent = &board->player1;
 

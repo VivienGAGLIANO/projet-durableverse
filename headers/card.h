@@ -75,12 +75,6 @@ int EP_cost(struct card);
 enum card_type type_of_card(struct card);
 
 /**
- * @brief quantity of card in the deck at the beginning
- * @return the number of same card in the deck at the beginning
- */
-int nb_card_deck(struct card);
-
-/**
  * @brief gets all staff effects in a list of staff cards
  * @param cards the list of cards to get the effects of
  * @return a effect_list of all the effects of all the cards in `cards`
