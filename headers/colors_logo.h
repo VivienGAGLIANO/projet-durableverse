@@ -32,7 +32,7 @@ ________                     ___.   .__                                 \n\
         \\/                  \\/    \\/          \\/          \\/           \\/     \\/\n"
 
 
-#define logo2 "\
+#define LOGO2 "\
     ____                   __    __                            \n\
    / __ \\__  ___________ _/ /_  / /__ _   _____  _____________ \n\
   / / / / / / / ___/ __ `/ __ \\/ / _ \\ | / / _ \\/ ___/ ___/ _ \\\n\
@@ -43,5 +43,8 @@ ________                     ___.   .__                                 \n\
 #define PEAKY_BLINDERS \
 "                                             ~ Peaky Blinders ~  \n"
 
+#define LOGO            LOGO1
+#define LOGO_COLOR      BOLDGREEN
+#define GROUPNAME_COLOR BOLDYELLOW
 
 #endif

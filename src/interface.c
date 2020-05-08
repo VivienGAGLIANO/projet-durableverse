@@ -164,8 +164,8 @@ void print_end_game(struct board board) {
  * @brief prints Durableverse logo and group name
  */
 void print_logo() {
-    printf(BOLDGREEN "%s", LOGO1);
-    printf(BOLDYELLOW "%s\n\n" RESET, PEAKY_BLINDERS);
+    printf(LOGO_COLOR      "%s"      RESET, LOGO);
+    printf(GROUPNAME_COLOR "%s\n\n"  RESET, PEAKY_BLINDERS);
 }
 
 /**
