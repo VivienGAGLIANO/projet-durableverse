@@ -128,7 +128,9 @@ int available_EP(struct board, struct ensiie);
 
 /**
  * @brief play one card from a player's hand, then actualise his EPs and apply the effect of the card immediately if it's an action card
- * @param the ensiie which is playing, the card the player want to play and the EP.
+ * @param p a pointer to the ensiie which is playing
+ * @param ep a pointer to the EP
+ * @param a the card the player want to play
  * @pre the given card should be playable, i.e. its cost should be less than or equal to available EP
  * @return 1 if card played, 0 else
  */
