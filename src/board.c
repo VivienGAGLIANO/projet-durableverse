@@ -162,7 +162,7 @@ int available_EP(struct board board, struct ensiie p)
 	return is_turn_even(board) * 2 * p.current_students.FISA_count + p.current_students.FISE_count;
 }
 
-int play_card (struct ensiie *p, int *ep, card a) {
+int play_card(struct ensiie *p, int *ep, card a) {
 	// a is an action card
 	if (type_of_card(a) == ACTION_CARD) {
 		switch (a.action_effect)
