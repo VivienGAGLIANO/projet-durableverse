@@ -126,7 +126,15 @@ struct card* choice_card(struct ensiie p) {
 }
 
 void print_end_game(struct board board) {
+    clear_screen();
 
+    printf("Game finished !\n");
+
+    if (board.player1.SD == board.player2.SD)
+        printf("It's a draw !\n");
+
+    else 
+        printf("%s is the winner ! Congratulations\n");
 }
 
 /**
