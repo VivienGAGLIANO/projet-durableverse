@@ -83,7 +83,7 @@ void print_board(struct board board) {
         printf("%s\n", ((card*) board.player1.current_staff.cards->head)->name);
 
 
-    printf("\n\nVS\n\n");
+    printf("\n\nVS\n\n\n");
 
     // Player 2 info
     printf("Player %s\n", board.player2.player_name);
@@ -133,7 +133,9 @@ void choice_FISE_FISA(int *nb_FISE, int *nb_FISA, struct ensiie p) {
 struct card* choice_card(struct board board, struct ensiie p, card* chosen_card) {
     print_hand(p.hand);
 
-    printf("What card would you like to play ? (type 0 if you wish to pass turn)\n");
+    int EP = available_EP(board, p);
+
+    printf("You have %i Energy Point available, what card would you like to play ? (type 0 if you wish to pass turn)\n", EP);
     int chosen_card_index;
 
     scanf("%i", &chosen_card_index);
@@ -146,7 +148,7 @@ struct card* choice_card(struct board board, struct ensiie p, card* chosen_card)
         return chosen_card = choice_card(board, p, chosen_card);
     }
 
-    if (get_card(p.hand, chosen_card_index - 1).cost > available_EP(board, p)) {
+    if (get_card(p.hand, chosen_card_index - 1).cost > EP) {
         printf("You don't have enough Energy Points for that ! Pick again ! \n");
         return chosen_card = choice_card(board, p, chosen_card);
     }
