@@ -121,7 +121,29 @@ void choice_FISE_FISA(int *nb_FISE, int *nb_FISA, struct ensiie p) {
     *nb_FISA = FISA_wanted;
 }
 
-struct card* choice_card(struct ensiie p) {
+struct card* choice_card(struct board board, struct ensiie p, card* chosen_card) {
+    print_hand(p.hand);
+
+    printf("What card would you like to play ? (type 0 if you wish to pass turn)\n");
+    int chosen_card_index;
+
+    fscanf("%i\n", &chosen_card_index);
+
+    if (chosen_card_index < 0) 
+        return chosen_card = NULL;
+
+    if (chosen_card_index > stack_len(p.hand)) {
+        printf("Card chosen is outside hand's range. Pick again !\n");
+        return chosen_card = choice_card(board, p, chosen_card);
+    }
+
+    if (get_card(p.hand, chosen_card_index - 1).cost > available_EP(board, p)) {
+        prtinf("You don't have enough Energy Points for that ! Pick again ! \n");
+        return chosen_card = choice_card(board, p, chosen_card);
+    }
+    *chosen_card = get_card(p.hand, chosen_card_index - 1);
+    return chosen_card;
+
 
 }
 

@@ -41,11 +41,11 @@ void choice_FISE_FISA(int *nb_FISE, int *nb_FISA, struct ensiie);
 
 /**
  * @brief asks the player to play a card or end his phase
- * @details Checks if chosen card's cost doesn't exceed available Energy Point (EP), and asks again with error message if it does.
- * If if all cards in hand are unplayable, the only choice given is to end the phase
+ * @details Checks if chosen card's cost doesn't exceed available Energy Point (EP) (calls available_EP with given board), and asks again with error message if it does. Stores the return value in given chosen_card pointer
  * @return if a card is chosen, a pointer towards that card, NULL if end phase
+ * @post chosen_card pointer is NULL if pass turn, else points towards chosen card
  */
-struct card* choice_card(struct ensiie);
+struct card* choice_card(struct board, struct ensiie, card*);
 
 /**
  * @brief prints the winner or draw, depending on the result of the game
