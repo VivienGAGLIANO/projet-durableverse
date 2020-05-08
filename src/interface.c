@@ -36,7 +36,7 @@ void print_new_turn(struct board board) {
         printf("/!\\ Turn is even : FISA now vanish from the board...\n");
     else 
         printf("/!\\ Turn is odd : FISA now appear on the board...\n");
-    sleep(5);
+    sleep(1);
 }
 
 
