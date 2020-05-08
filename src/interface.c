@@ -136,9 +136,9 @@ struct card* choice_card(struct board board, struct ensiie p, card* chosen_card)
     printf("What card would you like to play ? (type 0 if you wish to pass turn)\n");
     int chosen_card_index;
 
-    scanf("%i\n", &chosen_card_index);
+    scanf("%i", &chosen_card_index);
 
-    if (chosen_card_index < 0) 
+    if (chosen_card_index == 0) 
         return chosen_card = NULL;
 
     if (chosen_card_index > stack_len(p.hand)) {

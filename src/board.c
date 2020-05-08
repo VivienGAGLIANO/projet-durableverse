@@ -104,8 +104,8 @@ void play_phase(struct board board, struct ensiie* p) {
 	print_new_phase(board, *p);
 
 	// Adding student cards
-	int *nb_FISE = NULL;
-	int *nb_FISA = NULL;
+	int *nb_FISE = (int*) malloc(sizeof(int));
+	int *nb_FISA = (int*) malloc(sizeof(int));
 	choice_FISE_FISA(nb_FISE, nb_FISA, *p);
 	add_student_FISE(*nb_FISE, p);
 	add_student_FISA(*nb_FISA, p);
