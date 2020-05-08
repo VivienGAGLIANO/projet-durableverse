@@ -7,58 +7,50 @@ struct board new_board(char* name1, char* name2) {
 	card_list all_cards = load_cards("../cards.xml");
 
 	/* Creating player 1 */
-	card_list deck1 = shuffle_stack(all_cards);
-	card_list hand1 = create_stack();
-	card_list discard1 = create_stack();
-	struct board_staff current_staff1 = {
-		.cards = create_stack(),
-		.max = 1
-	};
-	struct board_students current_student1 = {
-		.FISE_count = 0,
-		.FISA_count = 0,
-		.FISE_durability = 1,
-		.FISA_durability = 1,
-		.FISE_development = 1,
-		.FISA_development = 1
-	};
 	struct ensiie player1 = {
 		.SD = 0,
 		.player_name = name1,
-		.deck = deck1,
-		.hand = hand1,
-		.discard = discard1,
-		.current_staff = current_staff1,
-		.current_students = current_student1,
+		.deck = shuffle_stack(all_cards),
+		.hand = create_stack(),
+		.discard = create_stack(),
+		.current_staff = {
+			.cards = create_stack(),
+			.max = 1
+		},
+		.current_students = {
+			.FISE_count = 0,
+			.FISA_count = 0,
+			.FISE_durability = 1,
+			.FISA_durability = 1,
+			.FISE_development = 1,
+			.FISA_development = 1
+		}
 	};
 
 	/* Creating player 2 */
-	card_list deck2 = shuffle_stack(all_cards);
-	card_list hand2 = create_stack();
-	card_list discard2 = create_stack();
-	struct board_staff current_staff2 = {
-		.cards = create_stack(),
-		.max = 1
-	};
-	struct board_students current_student2 = {
-		.FISE_count = 0,
-		.FISA_count = 0,
-		.FISE_durability = 1,
-		.FISA_durability = 1,
-		.FISE_development = 1,
-		.FISA_development = 1
-	};
-
 	struct ensiie player2 = {
 		.SD = 0,
 		.player_name = name2,
-		.deck = deck2,
-		.hand = hand2,
-		.discard = discard2,
-		.current_staff = current_staff2,
-		.current_students = current_student2,
+		.deck = shuffle_stack(all_cards),
+		.hand = create_stack(),
+		.discard = create_stack(),
+		.current_staff = {
+			.cards = create_stack(),
+			.max = 1
+		},
+		.current_students = {
+			.FISE_count = 0,
+			.FISA_count = 0,
+			.FISE_durability = 1,
+			.FISA_durability = 1,
+			.FISE_development = 1,
+			.FISA_development = 1
+		}
 	};
 
+	/* This will probably don't work because the
+	 * struct ensiie is copied when allocated to the board
+	 */
 	player1.opponent = &player2;
 	player2.opponent = &player1;
 
@@ -69,6 +61,7 @@ struct board new_board(char* name1, char* name2) {
 		.n_turn = 0
 	};
 
+	/* Same thing apply here: try this in case of failure: draw(&board.player1) */
 	for (int i = 0; i < 2; i++) {
 		draw(&player1);
 		draw(&player2);
