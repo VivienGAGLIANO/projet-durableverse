@@ -3,7 +3,7 @@
 #include "../headers/structure.h"
 
 
-struct board new_board() {
+struct board new_board(char* name1, char* name2) {
 	card_list all_cards = load_cards("../cards.xml");
 
 	/* Creating player 1 */
@@ -25,7 +25,7 @@ struct board new_board() {
 	};
 	struct ensiie player1 = {
 		.SD = 0,
-		.player_name = "Jaquie",
+		.player_name = name1,
 		.deck = deck1,
 		.hand = hand1,
 		.discard = discard1,
@@ -53,7 +53,7 @@ struct board new_board() {
 
 	struct ensiie player2 = {
 		.SD = 0,
-		.player_name = "Michel",
+		.player_name = name2,
 		.deck = deck2,
 		.hand = hand2,
 		.discard = discard2,

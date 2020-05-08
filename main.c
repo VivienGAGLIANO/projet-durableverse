@@ -6,7 +6,9 @@
 int main() {
     
     /* Initializing the game board */
-    struct board game_board = new_board();
+    char name1[256], name2[256];
+    welcome_screen(name1, name2);
+    struct board game_board = new_board(name1, name2);
 
     /* Choosing randomly the first player */
     srand(time(NULL));
