@@ -88,7 +88,7 @@ void print_board(struct board board) {
     // Player 2 info
     printf("Player %s\n", board.player2.player_name);
     printf("SD : %i\n", board.player2.SD);
-    printf("Card in hand : %i\n", len_stack(board.player2.hand));
+    printf("Card in hand : %i\n", stack_len(board.player2.hand));
     
     printf("\n");
 
@@ -109,12 +109,12 @@ void choice_FISE_FISA(int *nb_FISE, int *nb_FISA, struct ensiie p) {
 
     int FISE_wanted;
     int FISA_wanted;
-    fscanf("%i %i \n", &FISE_wanted, &FISA_wanted);
+    scanf("%i %i \n", &FISE_wanted, &FISA_wanted);
 
     if (FISE_wanted + FISA_wanted != student_cards_drawn) {
         while (FISE_wanted + FISE_wanted != student_cards_drawn) {
             printf("You have %i student card available, no more no less. Type in a correct combination !\n", student_cards_drawn);
-            fscanf("%i %i \n", &FISE_wanted, &FISA_wanted);
+            scanf("%i %i \n", &FISE_wanted, &FISA_wanted);
         }
     }
 
@@ -128,7 +128,7 @@ struct card* choice_card(struct board board, struct ensiie p, card* chosen_card)
     printf("What card would you like to play ? (type 0 if you wish to pass turn)\n");
     int chosen_card_index;
 
-    fscanf("%i\n", &chosen_card_index);
+    scanf("%i\n", &chosen_card_index);
 
     if (chosen_card_index < 0) 
         return chosen_card = NULL;
@@ -139,7 +139,7 @@ struct card* choice_card(struct board board, struct ensiie p, card* chosen_card)
     }
 
     if (get_card(p.hand, chosen_card_index - 1).cost > available_EP(board, p)) {
-        prtinf("You don't have enough Energy Points for that ! Pick again ! \n");
+        printf("You don't have enough Energy Points for that ! Pick again ! \n");
         return chosen_card = choice_card(board, p, chosen_card);
     }
     *chosen_card = get_card(p.hand, chosen_card_index - 1);
@@ -157,7 +157,7 @@ void print_end_game(struct board board) {
         printf("It's a draw !\n");
 
     else 
-        printf("%s is the winner ! Congratulations\n");
+        printf("%s is the winner ! Congratulations\n", board.player1.SD > board.player2.SD ? board.player1.player_name : board.player2.player_name);
 }
 
 /**
