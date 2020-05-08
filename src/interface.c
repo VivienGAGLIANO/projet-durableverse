@@ -118,7 +118,13 @@ void choice_FISE_FISA(int *nb_FISE, int *nb_FISA, struct ensiie p) {
     *nb_FISA = FISA_wanted;
 }
 
+struct card* choice_card(struct ensiie p) {
 
+}
+
+void print_end_game(struct board board) {
+    
+}
 
 /* Manque certaines fonctions */
 /* TODO :
