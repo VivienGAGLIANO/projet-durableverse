@@ -12,8 +12,7 @@ struct board new_board(char* name1, char* name2) {
 	card_list discard1 = create_stack();
 	struct board_staff current_staff1 = {
 		.cards = create_stack(),
-		.max = 1,
-		.staff_effect = create_stack()
+		.max = 1
 	};
 	struct board_students current_student1 = {
 		.FISE_count = 0,
@@ -39,8 +38,7 @@ struct board new_board(char* name1, char* name2) {
 	card_list discard2 = create_stack();
 	struct board_staff current_staff2 = {
 		.cards = create_stack(),
-		.max = 1,
-		.staff_effect = create_stack()
+		.max = 1
 	};
 	struct board_students current_student2 = {
 		.FISE_count = 0,
@@ -117,14 +115,15 @@ void play_phase(struct board board, struct ensiie* p) {
 
 	//Playing cards
 	struct card *chosen_card;
+	int ep = available_EP(board, *p);
 	while ((chosen_card = choice_card(*p)) != NULL)
-		play_card(p, available_EP(board, *p), *chosen_card);
+		play_card(p, &ep, *chosen_card);
 }
 
 int nb_card_drawn(struct ensiie p)
 {
 	int card_drawn = 1;
-	effect_list current_effect = p.current_staff.staff_effect;
+	effect_list current_effect = get_all_staff_effects(p.current_staff.cards);
 	while (current_effect != NULL) {
 		if (current_effect->head->id == DR)
 			card_drawn += current_effect->head->value;
@@ -140,7 +139,7 @@ void draw(struct ensiie* p) {
 int nb_student_card_received(struct ensiie p)
 {
 	int student_card_drawn = 1;
-	effect_list current_effect = p.current_staff.staff_effect;
+	effect_list current_effect = get_all_staff_effects(p.current_staff.cards);
 	while (current_effect != NULL) {
 		if (current_effect->head->id == E)
 			student_card_drawn += current_effect->head->value;
@@ -162,7 +161,6 @@ int available_EP(struct board board, struct ensiie p)
 	return is_turn_even(board) * 2 * p.current_students.FISA_count + p.current_students.FISE_count;
 }
 
-// /!\ Function implemented WITHOUT staff_effect list !!
 int play_card (struct ensiie *p, int *ep, card a) {
 	// a is an action card
 	if (type_of_card(a) == ACTION_CARD) {
@@ -259,8 +257,8 @@ void end_turn(struct board *board) {
 	// SD points gained by student card
 	board->player1.SD += board->player1.current_students.FISE_count * board->player1.current_students.FISE_development - board->player2.current_students.FISE_count * board->player2.current_students.FISE_durability + is_turn_even(*board) * (board->player1.current_students.FISA_count * board->player1.current_students.FISA_development - board->player2.current_students.FISA_count * board->player2.current_students.FISA_durability);
 	board->player2.SD += board->player2.current_students.FISE_count * board->player2.current_students.FISE_development - board->player1.current_students.FISE_count * board->player1.current_students.FISE_durability + is_turn_even(*board) * (board->player2.current_students.FISA_count * board->player2.current_students.FISA_development - board->player1.current_students.FISA_count * board->player1.current_students.FISA_durability);
-	effect_list current_effect1 = board->player1.current_staff.staff_effect;
-	effect_list current_effect2 = board->player2.current_staff.staff_effect;
+	effect_list current_effect1 = get_all_staff_effects(board->player1.current_staff.cards);
+	effect_list current_effect2 = get_all_staff_effects(board->player2.current_staff.cards);
 
 	// SD points gained by staff card
 	while (current_effect1 != NULL) {
