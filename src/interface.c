@@ -61,16 +61,42 @@ void print_new_phase(struct board board, struct ensiie current_player) {
  * @details prints each player's SD points, student card number (FISE and FISA), staff card (by order played) and hand size
  */
 void print_board(struct board board) {
+    // Player 1 info
     printf("Player %s\n", board.player1.player_name);
     printf("SD : %i\n", board.player1.SD);
     printf("Card in hand : %i\n", len_stack(board.player1.hand));
     
     printf("\n");
 
+    printf("Student cards : \n");
     printf("FISE : %i\n", board.player1.current_students.FISE_count);
     printf("FISA : %i\n", board.player1.current_students.FISA_count);
 
-    /* A finir */
+    printf("\n");
+
+    printf("Staff cards : \n");
+    for (int i = 0; i < stack_len(board.player1.current_staff.cards); i++)
+        printf("%s\n");
+
+
+    printf("\n\nVS\n\n");
+
+    // Player 2 info
+    printf("Player %s\n", board.player2.player_name);
+    printf("SD : %i\n", board.player2.SD);
+    printf("Card in hand : %i\n", len_stack(board.player2.hand));
+    
+    printf("\n");
+
+    printf("Student cards : \n");
+    printf("FISE : %i\n", board.player2.current_students.FISE_count);
+    printf("FISA : %i\n", board.player2.current_students.FISA_count);
+
+    printf("\n");
+
+    printf("Staff cards : \n");
+    for (int i = 0; i < stack_len(board.player2.current_staff.cards); i++)
+        printf("%s\n");
 }
 
 
