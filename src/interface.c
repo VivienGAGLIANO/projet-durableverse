@@ -61,16 +61,61 @@ void print_new_phase(struct board board, struct ensiie current_player) {
  * @details prints each player's SD points, student card number (FISE and FISA), staff card (by order played) and hand size
  */
 void print_board(struct board board) {
+    // Player 1 info
     printf("Player %s\n", board.player1.player_name);
     printf("SD : %i\n", board.player1.SD);
     printf("Card in hand : %i\n", len_stack(board.player1.hand));
     
     printf("\n");
 
+    printf("Student cards : \n");
     printf("FISE : %i\n", board.player1.current_students.FISE_count);
     printf("FISA : %i\n", board.player1.current_students.FISA_count);
 
-    /* A finir */
+    printf("\n");
+
+    printf("Staff cards : \n");
+    for (int i = 0; i < stack_len(board.player1.current_staff.cards); i++)
+        printf("%s\n");
+
+
+    printf("\n\nVS\n\n");
+
+    // Player 2 info
+    printf("Player %s\n", board.player2.player_name);
+    printf("SD : %i\n", board.player2.SD);
+    printf("Card in hand : %i\n", len_stack(board.player2.hand));
+    
+    printf("\n");
+
+    printf("Student cards : \n");
+    printf("FISE : %i\n", board.player2.current_students.FISE_count);
+    printf("FISA : %i\n", board.player2.current_students.FISA_count);
+
+    printf("\n");
+
+    printf("Staff cards : \n");
+    for (int i = 0; i < stack_len(board.player2.current_staff.cards); i++)
+        printf("%s\n");
+}
+
+void choice_FISE_FISA(int *nb_FISE, int *nb_FISA, struct ensiie p) {
+    int student_cards_drawn = nb_student_card_received(p);
+    printf("How many students cards do you want, %s ? You can receive %i cards this turn !\n", p.player_name, student_cards_drawn);
+
+    int FISE_wanted;
+    int FISA_wanted;
+    fscanf("%i %i \n", &FISE_wanted, &FISA_wanted);
+
+    if (FISE_wanted + FISA_wanted != student_cards_drawn) {
+        while (FISE_wanted + FISE_wanted != student_cards_drawn) {
+            printf("You have %i student card available, no more no less. Type in a correct combination !\n", student_cards_drawn);
+            fscanf("%i %i \n", &FISE_wanted, &FISA_wanted);
+        }
+    }
+
+    *nb_FISE = FISE_wanted;
+    *nb_FISA = FISA_wanted;
 }
 
 
