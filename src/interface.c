@@ -119,9 +119,9 @@ void choice_FISE_FISA(int *nb_FISE, int *nb_FISA, struct ensiie p) {
 }
 
 
+
 /* Manque certaines fonctions */
 /* TODO :
-    choice_FISE_FISA
     choice_card
     print_end_game
 */
