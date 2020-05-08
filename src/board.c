@@ -122,8 +122,8 @@ int nb_card_drawn(struct ensiie p)
 	int card_drawn = 1;
 	effect_list current_effect = get_all_staff_effects(p.current_staff.cards);
 	while (!is_stack_empty(current_effect)) {
-		if (current_effect->head->id == DR)
-			card_drawn += current_effect->head->value;
+		if (((staff_effect*) current_effect->head)->id == DR)
+			card_drawn += ((staff_effect*) current_effect->head)->value;
 		current_effect = current_effect->tail;
 	}
 	return card_drawn;
@@ -138,8 +138,8 @@ int nb_student_card_received(struct ensiie p)
 	int student_card_drawn = 1;
 	effect_list current_effect = get_all_staff_effects(p.current_staff.cards);
 	while (!is_stack_empty(current_effect)) {
-		if (current_effect->head->id == E)
-			student_card_drawn += current_effect->head->value;
+		if (((staff_effect*) current_effect->head)->id == E)
+			student_card_drawn += ((staff_effect*) current_effect->head)->value;
 		current_effect =  current_effect->tail;
 	}
 	return student_card_drawn;
@@ -260,19 +260,19 @@ int compute_development(struct board board, struct ensiie p) {
 
 	// Checking if player's staff affects those number
 	while (!is_stack_empty(player_effect)) {
-		if (player_effect->head->id == AE1)
-			development_FISE += player_effect->head->value;
-		if (player_effect->head->id == AA1)
-			development_FISA += player_effect->head->value;
+		if (((staff_effect*) player_effect->head)->id == AE1)
+			development_FISE += ((staff_effect*) player_effect->head)->value;
+		if (((staff_effect*) player_effect->head)->id == AA1)
+			development_FISA += ((staff_effect*) player_effect->head)->value;
 		player_effect = player_effect->tail;
 	}
 
 	// Checking if opponent's staff affects those number
 	while (!is_stack_empty(opponent_effect)) {
-		if (opponent_effect->head->id == RE1) 
-			development_FISE -= opponent_effect->head->value;
-		if (opponent_effect->head->id == RA1)
-			development_FISA -= opponent_effect->head->value;
+		if (((staff_effect*) opponent_effect->head)->id == RE1) 
+			development_FISE -= ((staff_effect*) opponent_effect->head)->value;
+		if (((staff_effect*) opponent_effect->head)->id == RA1)
+			development_FISA -= ((staff_effect*) opponent_effect->head)->value;
 		opponent_effect = opponent_effect->tail;
 	}
 
@@ -295,19 +295,19 @@ int compute_durability(struct board board, struct ensiie p) {
 
 	// Checking if player's staff affects those number
 	while (!is_stack_empty(player_effect)) {
-		if (player_effect->head->id == AE2)
-			durability_FISE += player_effect->head->value;
-		if (player_effect->head->id == AA2)
-			durability_FISA += player_effect->head->value;
+		if (((staff_effect*) player_effect->head)->id == AE2)
+			durability_FISE += ((staff_effect*) player_effect->head)->value;
+		if (((staff_effect*) player_effect->head)->id == AA2)
+			durability_FISA += ((staff_effect*) player_effect->head)->value;
 		player_effect = player_effect->tail;
 	}
 
 	// Checking if opponent's staff affects those number
 	while (!is_stack_empty(opponent_effect)) {
-		if (opponent_effect->head->id == RE2) 
-			durability_FISE -= opponent_effect->head->value;
-		if (opponent_effect->head->id == RA2)
-			durability_FISA -= opponent_effect->head->value;
+		if (((staff_effect*) opponent_effect->head)->id == RE2) 
+			durability_FISE -= ((staff_effect*) opponent_effect->head)->value;
+		if (((staff_effect*) opponent_effect->head)->id == RA2)
+			durability_FISA -= ((staff_effect*) opponent_effect->head)->value;
 		opponent_effect = opponent_effect->tail;
 	}
 
@@ -330,16 +330,16 @@ void end_turn(struct board *board) {
 
 	// SD points gained by staff card
 	while (!is_stack_empty(current_effect1)) {
-		if (current_effect1->head->id == ADD)
-			board->player1.SD += current_effect1->head->value;
-		if (current_effect1->head->id == RDD)
-			board->player2.SD -= current_effect1->head->value;
+		if (((staff_effect*) current_effect1->head)->id == ADD)
+			board->player1.SD += ((staff_effect*) current_effect1->head)->value;
+		if (((staff_effect*) current_effect1->head)->id == RDD)
+			board->player2.SD -= ((staff_effect*) current_effect1->head)->value;
 	}
 		while (!is_stack_empty(current_effect2)) {
-		if (current_effect2->head->id == ADD)
-			board->player2.SD += current_effect2->head->value;
-		if (current_effect2->head->id == RDD)
-			board->player1.SD -= current_effect2->head->value;
+		if (((staff_effect*) current_effect2->head)->id == ADD)
+			board->player2.SD += ((staff_effect*) current_effect2->head)->value;
+		if (((staff_effect*) current_effect2->head)->id == RDD)
+			board->player1.SD -= ((staff_effect*) current_effect2->head)->value;
 	}
 
 	// Setting SD point to 0 if they are negative
