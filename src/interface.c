@@ -10,10 +10,10 @@
  */
 void print_hand(card_list cards) {
     int i = 1;
-    while(!is_stack_empty(cards)){  
-        printf("[card number : %i ; name : %s ; cost : %i]\n", i, ((card*)cards->head)->name, ((card*) cards->head)->cost);
-        cards=cards->tail;
-        i++;}
+    for (int i = 0; i < stack_len(cards); i++) {
+        card card = get_card(cards, i);
+        printf("[card number: %i; name: %s; cost: %i]\n", i, card.name, card.cost);
+    }
 }
 
 /**
