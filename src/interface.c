@@ -138,7 +138,7 @@ struct card* choice_card(struct board board, struct ensiie p, card* chosen_card)
 
     scanf("%i", &chosen_card_index);
 
-    if (chosen_card_index < 0) 
+    if (chosen_card_index == 0) 
         return chosen_card = NULL;
 
     if (chosen_card_index > stack_len(p.hand)) {
