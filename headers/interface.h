@@ -9,7 +9,7 @@
  * @brief prints the hand
  * @details displays the given card list as a hand, in the format of a list with : card index in hand list, name of the card and energy cost.
  */
-void print_hand(struct card*);
+void print_hand(card_list cards);
 
 /**
  * @brief prints new turn information 
