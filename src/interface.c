@@ -109,12 +109,20 @@ void choice_FISE_FISA(int *nb_FISE, int *nb_FISA, struct ensiie p) {
 
     int FISE_wanted;
     int FISA_wanted;
-    scanf("%i %i \n", &FISE_wanted, &FISA_wanted);
+    printf("FISE cards desired ?\n");
+    scanf("%i", &FISE_wanted);
+
+    printf("FISA cards desired ?\n");
+    scanf("%i", &FISA_wanted);
 
     if (FISE_wanted + FISA_wanted != student_cards_drawn) {
         while (FISE_wanted + FISE_wanted != student_cards_drawn) {
             printf("You have %i student card available, no more no less. Type in a correct combination !\n", student_cards_drawn);
-            scanf("%i %i \n", &FISE_wanted, &FISA_wanted);
+            printf("FISE cards desired ?\n");
+            scanf("%i", &FISE_wanted);
+
+            printf("FISA cards desired ?\n");
+            scanf("%i", &FISA_wanted);
         }
     }
 
