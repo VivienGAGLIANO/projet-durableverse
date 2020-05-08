@@ -87,7 +87,7 @@ void free_board(struct board* b) {
 	free(b);
 }
 
-void begin_turn (struct board* b) {
+void begin_turn(struct board* b) {
 	b->n_turn+=1;
 	if (new_staff_available(*b)) {
 		b->player1.current_staff.max++;
@@ -98,15 +98,19 @@ void begin_turn (struct board* b) {
 }
 
 void play_phase(struct board board, struct ensiie* p) {
-	print_new_phase(board, *p);
+	// Drawing cards
+	for (int i = 0; i < nb_card_drawn(*p); i++)
+		draw(p);
 	
-	//Adding student cards
+	print_new_phase(board, *p);
+
+	// Adding student cards
 	int *nb_FISE, *nb_FISA;
 	choice_FISE_FISA(nb_FISE, nb_FISA, *p);
 	add_student_FISE(*nb_FISE, p);
 	add_student_FISA(*nb_FISA, p);
 
-	//Playing cards
+	// Playing cards
 	struct card *chosen_card;
 	int ep = available_EP(board, *p);
 	while ((chosen_card = choice_card(*p)) != NULL)
@@ -275,7 +279,7 @@ void end_turn(struct board *board) {
 }
 
 int is_over(struct board b) {
-	return b.n_turn == 30 || ((b.player1.SD > 20 || b.player2.SD > 20) * (b.player1.SD != b.player2.SD));
+	return b.n_turn == 30 || b.player1.SD > 20 || b.player2.SD > 20;
 }
 
 int is_turn_even(struct board b) {
