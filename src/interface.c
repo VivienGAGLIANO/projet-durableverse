@@ -125,16 +125,21 @@ void choice_FISE_FISA(int *nb_FISE, int *nb_FISA, struct ensiie p) {
     int student_cards_drawn = nb_student_card_received(p);
     printf("How many students cards do you want, %s ? You can receive %i card%s this turn !\n", p.player_name, student_cards_drawn, student_cards_drawn > 1 ? "s":"");
 
-    int FISE_wanted;
-    int FISA_wanted;
+    int FISE_wanted = 0;
+    int FISA_wanted = 0;
     printf("FISE cards desired ? ");
     scanf("%i", &FISE_wanted);
 
     printf("FISA cards desired ? ");
     scanf("%i", &FISA_wanted);
 
-    while (FISE_wanted + FISA_wanted != student_cards_drawn) {
-        printf("You have %i student card available, no more no less. Type in a correct combination !\n", student_cards_drawn);
+    while (FISE_wanted + FISA_wanted != student_cards_drawn || FISE_wanted < 0 || FISA_wanted < 0 ) {
+        if (FISE_wanted + FISA_wanted != student_cards_drawn) 
+            printf("You have %i student card available, no more no less. ", student_cards_drawn);
+        if (FISE_wanted < 0 || FISA_wanted < 0)
+            printf("Cannot pick negative student cards number. ");
+        printf("Type in a correct combination !\n");
+        
         printf("FISE cards desired ? ");
         scanf("%i", &FISE_wanted);
 
