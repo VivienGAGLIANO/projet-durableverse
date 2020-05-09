@@ -1,3 +1,1 @@
-ezxml/*
-!ezxml/ezxml.o
-!ezxml/ezxml.h
+ezxml/*.a
