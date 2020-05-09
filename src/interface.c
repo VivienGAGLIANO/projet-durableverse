@@ -11,7 +11,7 @@
 void print_hand(card_list cards) {
     for (int i = 0; i < stack_len(cards); i++) {
         card card = get_card(cards, i);
-        printf("[card number: %i; name: %s; cost: %i]\n", i+1, card.name, card.cost);
+        printf("[card number:"PRINT_CARD_COLOR"%2i"RESET"; name: "PRINT_CARD_COLOR"%s"RESET"; cost: "PRINT_CARD_COLOR"%i"RESET"]\n", i+1, card.name, card.cost);
     }
 }
 
@@ -25,7 +25,9 @@ void print_new_turn(struct board board) {
     printf("------------ Starting turn %i ------------\n\n", board.n_turn);
     sleep(0.3);
 
-    printf("Player %s : %i SD        vs        Player %s : %i SD\n\n", board.player1.player_name, board.player1.SD, board.player2.player_name, board.player2.SD);
+    printf(PLAYER1_COLOR "Player %s : %i SD" RESET, board.player1.player_name, board.player1.SD);
+    printf("        " INVERTED "vs" RESET "        ");
+    printf(PLAYER2_COLOR "Player %s : %i SD\n\n" RESET, board.player2.player_name, board.player2.SD);
     sleep(0.3);
 
     if (new_staff_available(board))
@@ -46,6 +48,7 @@ void print_new_turn(struct board board) {
  */
 void print_new_phase(struct board board, struct ensiie current_player) {
     system("clear");
+    printf("----------------- Turn %2d ------------------\n", board.n_turn);
     printf("------------ Starting new phase ------------\n\n");
     sleep(0.3);
 
@@ -65,7 +68,7 @@ void print_new_phase(struct board board, struct ensiie current_player) {
  */
 void print_board(struct board board) {
     // Player 1 info
-    printf("Player %s\n", board.player1.player_name);
+    printf(PLAYER1_COLOR "Player %s\n", board.player1.player_name);
     printf("SD : %i\n", board.player1.SD);
     printf("Card in hand : %i\n", stack_len(board.player1.hand));
     
@@ -81,11 +84,10 @@ void print_board(struct board board) {
     for (int i = 0; i < stack_len(board.player1.current_staff.cards); i++)
         printf("%s\n", ((card*) board.player1.current_staff.cards->head)->name);
 
-
-    printf("\n\nVS\n\n\n");
+    printf(RESET INVERTED "\n\nVS\n\n\n" RESET);
 
     // Player 2 info
-    printf("Player %s\n", board.player2.player_name);
+    printf(PLAYER2_COLOR "Player %s\n", board.player2.player_name);
     printf("SD : %i\n", board.player2.SD);
     printf("Card in hand : %i\n", stack_len(board.player2.hand));
     
@@ -100,6 +102,8 @@ void print_board(struct board board) {
     printf("Staff cards : \n");
     for (int i = 0; i < stack_len(board.player2.current_staff.cards); i++)
         printf("%s\n", ((card*) board.player2.current_staff.cards->head)->name);
+    
+    printf(RESET);
 }
 
 void choice_FISE_FISA(int *nb_FISE, int *nb_FISA, struct ensiie p) {
@@ -108,18 +112,18 @@ void choice_FISE_FISA(int *nb_FISE, int *nb_FISA, struct ensiie p) {
 
     int FISE_wanted;
     int FISA_wanted;
-    printf("FISE cards desired ?\n");
+    printf("FISE cards desired ? ");
     scanf("%i", &FISE_wanted);
 
-    printf("FISA cards desired ?\n");
+    printf("FISA cards desired ? ");
     scanf("%i", &FISA_wanted);
 
     while (FISE_wanted + FISA_wanted != student_cards_drawn) {
         printf("You have %i student card available, no more no less. Type in a correct combination !\n", student_cards_drawn);
-        printf("FISE cards desired ?\n");
+        printf("FISE cards desired ? ");
         scanf("%i", &FISE_wanted);
 
-        printf("FISA cards desired ?\n");
+        printf("FISA cards desired ? ");
         scanf("%i", &FISA_wanted);
     }
 

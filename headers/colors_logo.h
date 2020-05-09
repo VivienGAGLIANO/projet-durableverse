@@ -47,4 +47,9 @@ ________                     ___.   .__                                 \n\
 #define LOGO_COLOR      BOLDGREEN
 #define GROUPNAME_COLOR BOLDYELLOW
 
+#define PLAYER1_COLOR BOLDBLUE
+#define PLAYER2_COLOR BOLDYELLOW
+
+#define PRINT_CARD_COLOR BOLDGREEN
+
 #endif
