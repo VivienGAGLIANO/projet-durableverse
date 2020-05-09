@@ -108,7 +108,7 @@ void print_board(struct board board) {
 
 void choice_FISE_FISA(int *nb_FISE, int *nb_FISA, struct ensiie p) {
     int student_cards_drawn = nb_student_card_received(p);
-    printf("How many students cards do you want, %s ? You can receive %i cards this turn !\n", p.player_name, student_cards_drawn);
+    printf("How many students cards do you want, %s ? You can receive %i card%s this turn !\n", p.player_name, student_cards_drawn, student_cards_drawn > 1 ? "s":"");
 
     int FISE_wanted;
     int FISA_wanted;
