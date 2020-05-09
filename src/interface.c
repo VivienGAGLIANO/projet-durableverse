@@ -22,7 +22,7 @@ void print_hand(card_list cards) {
  * @param board the game board
  */
 void print_new_turn(struct board board) {
-    system("clear");
+    clear_screen();
     printf("------------ Starting turn %i ------------\n\n", board.n_turn);
     sleep(0.3);
 
@@ -38,7 +38,7 @@ void print_new_turn(struct board board) {
         printf("/!\\ Turn is even : FISA now vanish from the board...\n");
     else 
         printf("/!\\ Turn is odd : FISA now appear on the board...\n");
-    sleep(1);
+    sleep(3);
 }
 
 
@@ -70,6 +70,8 @@ void print_new_phase(struct board board, struct ensiie current_player) {
  * @param board the current board
  */
 void print_board(struct board board) {
+    clear_screen();
+    
     // Player 1 info
     printf(PLAYER1_COLOR "Player %s\n", board.player1.player_name);
     printf("SD : %i\n", board.player1.SD);
@@ -85,7 +87,7 @@ void print_board(struct board board) {
 
     printf("Staff cards : \n");
     for (int i = 0; i < stack_len(board.player1.current_staff.cards); i++)
-        printf("%s\n", ((card*) board.player1.current_staff.cards->head)->name);
+        printf("    %s\n", ((card*) board.player1.current_staff.cards->head)->name);
 
     printf(RESET INVERTED "\n\nVS\n\n\n" RESET);
 
@@ -104,7 +106,9 @@ void print_board(struct board board) {
 
     printf("Staff cards : \n");
     for (int i = 0; i < stack_len(board.player2.current_staff.cards); i++)
-        printf("%s\n", ((card*) board.player2.current_staff.cards->head)->name);
+        printf("    %s\n", ((card*) board.player2.current_staff.cards->head)->name);
+
+    printf("\n\n\n");
     
     printf(RESET);
 }
@@ -125,16 +129,21 @@ void choice_FISE_FISA(int *nb_FISE, int *nb_FISA, struct ensiie p) {
     int student_cards_drawn = nb_student_card_received(p);
     printf("How many students cards do you want, %s ? You can receive %i card%s this turn !\n", p.player_name, student_cards_drawn, student_cards_drawn > 1 ? "s":"");
 
-    int FISE_wanted;
-    int FISA_wanted;
+    int FISE_wanted = 0;
+    int FISA_wanted = 0;
     printf("FISE cards desired ? ");
     scanf("%i", &FISE_wanted);
 
     printf("FISA cards desired ? ");
     scanf("%i", &FISA_wanted);
 
-    while (FISE_wanted + FISA_wanted != student_cards_drawn) {
-        printf("You have %i student card available, no more no less. Type in a correct combination !\n", student_cards_drawn);
+    while (FISE_wanted + FISA_wanted != student_cards_drawn || FISE_wanted < 0 || FISA_wanted < 0 ) {
+        if (FISE_wanted + FISA_wanted != student_cards_drawn) 
+            printf("You have %i student card available, no more no less. ", student_cards_drawn);
+        if (FISE_wanted < 0 || FISA_wanted < 0)
+            printf("Cannot pick negative student cards number. ");
+        printf("Type in a correct combination !\n");
+
         printf("FISE cards desired ? ");
         scanf("%i", &FISE_wanted);
 
