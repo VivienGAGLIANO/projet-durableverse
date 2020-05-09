@@ -217,11 +217,11 @@ void welcome_screen(char* name1, char* name2) {
     clear_screen();
     print_logo();
     printf("First player name: ");
-    scanf("%s", name1);
+    scanf("%[^\n]%*c", name1);
 
     clear_screen();
     print_logo();
     printf("First player name: %s", name1);
     printf("                Second player name: ");
-    scanf("%s", name2);
+    scanf("%[^\n]%*c", name2);
 }
