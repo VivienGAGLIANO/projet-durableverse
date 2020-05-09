@@ -56,7 +56,7 @@ struct board* new_board(char* name1, char* name2) {
 	board->n_turn = 0;
 	board->player1 = player1;
 	board->player2 = player2;
-	
+
 	board->player1.opponent = &board->player2;
 	board->player2.opponent = &board->player1;
 
@@ -112,7 +112,7 @@ void play_phase(struct board board, struct ensiie* p) {
 	// Playing cards
 	int chosen_card_index;
 	int ep = available_EP(board, *p);
-	while ((chosen_card_index = choice_card(board, *p)) != -1)
+	while ((chosen_card_index = choice_card(board, *p, ep)) != -1)
 		play_card(p, &ep, chosen_card_index);
 }
 
