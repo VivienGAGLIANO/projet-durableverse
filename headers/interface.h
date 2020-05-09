@@ -9,8 +9,9 @@
  * @brief prints the hand
  * @details displays the given card list as a hand, in the format of a list with : card index in hand list, name of the card and energy cost.
  * @param cards the card_list to print as a hand
+ * @param highlight_card the index of the card to highlight, -1 for highlighting no card
  */
-void print_hand(card_list cards);
+void print_hand(card_list cards, int highlight_card);
 
 /**
  * @brief prints new turn information 

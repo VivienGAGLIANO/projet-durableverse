@@ -12,11 +12,15 @@
  * @brief prints the hand
  * @details displays the given card list as a hand, in the format of a list with : card index in hand list, name of the card and energy cost.
  * @param cards the card_list to print as a hand
+ * @param highlight_card the index of the card to highlight, -1 for highlighting no card
  */
-void print_hand(card_list cards) {
+void print_hand(card_list cards, int highlight_card) {
     for (int i = 0; i < stack_len(cards); i++) {
         card card = get_card(cards, i);
-        printf("[card number:"PRINT_CARD_COLOR"%2i"RESET"; name: "PRINT_CARD_COLOR"%s"RESET"; cost: "PRINT_CARD_COLOR"%i"RESET"]\n", i+1, card.name, card.cost);
+        if (i == highlight_card)
+            printf(INVERTED "[card number:%2i; name: %s; cost: %i]\n" RESET, i+1, card.name, card.cost);
+        else
+            printf("[card number:"PRINT_CARD_COLOR"%2i"RESET"; name: "PRINT_CARD_COLOR"%s"RESET"; cost: "PRINT_CARD_COLOR"%i"RESET"]\n", i+1, card.name, card.cost);
     }
     printf("\n");
 }
@@ -76,7 +80,7 @@ void print_new_turn(struct board board) {
  * @param current_player the player which is currently playing
  */
 void print_new_phase(struct board board, struct ensiie current_player) {
-    system("clear");
+    clear_screen();
 
     // Getting terminal size
     struct winsize termsize;
@@ -106,7 +110,7 @@ void print_new_phase(struct board board, struct ensiie current_player) {
 
     print_board(board);
 
-    print_hand(current_player.hand);
+    print_hand(current_player.hand, -1);
 }
 
 
@@ -166,8 +170,8 @@ void print_board(struct board board) {
     printf(PLAYER2_COLOR "Student cards :\n");
     
     // FISE
-    int FISE_size1 = 11 + log10(board.player1.current_students.FISE_count ? board.player1.current_students.FISE_count: 1) + 1; // 11 corresponds to number of char in ____FISE_:_
-    int FISE_size2 = 11 + log10(board.player2.current_students.FISE_count ? board.player2.current_students.FISE_count: 1) + 1;
+    int FISE_size1 = 11 + log10(board.player1.current_students.FISE_count ? board.player1.current_students.FISE_count : 1) + 1; // 11 corresponds to number of char in ____FISE_:_
+    int FISE_size2 = 11 + log10(board.player2.current_students.FISE_count ? board.player2.current_students.FISE_count : 1) + 1;
 
     printf(PLAYER1_COLOR "    FISE : %i", board.player1.current_students.FISE_count);
     for (int i = 0; i < termsize.ws_col - FISE_size1 - FISE_size2; i++)
@@ -175,8 +179,8 @@ void print_board(struct board board) {
     printf(PLAYER2_COLOR "FISE : %i    \n", board.player2.current_students.FISE_count);
 
     // FISA
-    int FISA_size1 = 11 + log10(board.player1.current_students.FISA_count ? board.player1.current_students.FISA_count: 1) + 1; // 11 corresponds to number of char in ____FISA_:_
-    int FISA_size2 = 11 + log10(board.player2.current_students.FISA_count ? board.player2.current_students.FISA_count: 1) + 1;
+    int FISA_size1 = 11 + log10(board.player1.current_students.FISA_count ? board.player1.current_students.FISA_count : 1) + 1; // 11 corresponds to number of char in ____FISA_:_
+    int FISA_size2 = 11 + log10(board.player2.current_students.FISA_count ? board.player2.current_students.FISA_count : 1) + 1;
 
     printf(PLAYER1_COLOR "    FISA : %i", board.player1.current_students.FISA_count);
     for (int i = 0; i < termsize.ws_col - FISA_size1 - FISA_size2; i++)
@@ -187,7 +191,7 @@ void print_board(struct board board) {
 
     // Staff cards
     printf(PLAYER1_COLOR "Staff cards :");
-    for (int i = 0; i < termsize.ws_col - 2*13; i++) // 14 corresponds to the number of char in Staff cards_:
+    for (int i = 0; i < termsize.ws_col - 2*13; i++) // 13 corresponds to the number of char in Staff cards_:
         printf(" ");
     printf(PLAYER2_COLOR "Staff cards :\n");
 
@@ -329,7 +333,7 @@ void display_card(card card, int width) {
  * @return the index of the card chosen in player's hand, or -1 if the player wants to end his turn
  */
 int choice_card(struct board board, struct ensiie p, int EP) {
-    print_hand(p.hand);
+    print_hand(p.hand, -1);
 
     printf("You have %i Energy Point available, what card would you like to play, %s ? (type 0 if you wish to pass turn)\n", EP, p.player_name);
     int chosen_card_index;
