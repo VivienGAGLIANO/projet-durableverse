@@ -91,7 +91,7 @@ void print_board(struct board board) {
 
     printf("Staff cards : \n");
     for (int i = 0; i < stack_len(board.player1.current_staff.cards); i++)
-        printf("    %s\n", ((card*) board.player1.current_staff.cards->head)->name);
+        printf("    %s\n", get_card(board.player1.current_staff.cards, i).name);
 
     printf(RESET INVERTED "\n\nVS\n\n\n" RESET);
 
@@ -110,7 +110,7 @@ void print_board(struct board board) {
 
     printf("Staff cards : \n");
     for (int i = 0; i < stack_len(board.player2.current_staff.cards); i++)
-        printf("    %s\n", ((card*) board.player2.current_staff.cards->head)->name);
+        printf("    %s\n", get_card(board.player2.current_staff.cards, i).name);
     printf("\n\n\n");
     
     printf(RESET);
