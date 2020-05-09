@@ -139,7 +139,7 @@ enum card_type type_of_card(struct card card) {
 /**
  * @brief gets all staff effects in a list of staff cards
  * @param cards the list of cards to get the effects of
- * @return a effect_list of all the effects of all the cards in `cards`
+ * @return an effect_list of all the effects of all the cards in `cards`
  */
 effect_list get_all_staff_effects(card_list cards) {
 	effect_list effects = create_stack();

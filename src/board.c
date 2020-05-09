@@ -362,5 +362,3 @@ int is_turn_even(struct board b) {
 int new_staff_available(struct board b) {
 	return (b.n_turn - 1)%5 == 0;
 }
-
-
