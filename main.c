@@ -16,7 +16,6 @@ int main() {
     
     while (!is_over(*game_board)) {
         begin_turn(game_board);
-        print_new_turn(*game_board);
 
         if (playerOnePlaysFirst) {
             play_phase(game_board, &game_board->player1);

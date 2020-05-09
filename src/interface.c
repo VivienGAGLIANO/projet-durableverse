@@ -35,10 +35,13 @@ void print_new_turn(struct board board) {
         printf("New staff emplacement available!\n");    
     
     if (is_turn_even(board)) 
-        printf("/!\\ Turn is even : FISA now vanish from the board...\n");
+        printf(BOLDRED "/!\\" RESET " Turn is even : FISA now " BOLDRED "vanish" RESET " from the board...\n");
     else 
-        printf("/!\\ Turn is odd : FISA now appear on the board...\n");
-    sleep(3);
+        printf(BOLDRED "/!\\" RESET " Turn is odd : FISA now " BOLDRED "appear" RESET " on the board...\n");
+    
+    printf("\n[Type in anything to proceed]\n");
+
+    getchar();
 }
 
 
@@ -52,13 +55,14 @@ void print_new_phase(struct board board, struct ensiie current_player) {
     system("clear");
     printf("----------------- Turn %2d ------------------\n", board.n_turn);
     printf("------------ Starting new phase ------------\n\n");
-    sleep(0.3);
+    sleep(0.5);
 
     printf("Player %s, it's your go!\n", current_player.player_name);
-    sleep(0.3);
+
+    printf("\n[Type in anything to proceed]\n");
+    getchar();
 
     print_board(board);
-    printf("\n\n\n");
 
     print_hand(current_player.hand);
 }
@@ -107,7 +111,6 @@ void print_board(struct board board) {
     printf("Staff cards : \n");
     for (int i = 0; i < stack_len(board.player2.current_staff.cards); i++)
         printf("    %s\n", ((card*) board.player2.current_staff.cards->head)->name);
-
     printf("\n\n\n");
     
     printf(RESET);
