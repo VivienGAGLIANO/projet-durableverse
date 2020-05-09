@@ -39,7 +39,7 @@ void print_new_turn(struct board board) {
     else 
         printf(BOLDRED "/!\\" RESET " Turn is odd : FISA now " BOLDRED "appear" RESET " on the board...\n");
     
-    printf("\n[Type in anything to proceed]\n");
+    printf("\n" BOLDWHITE "[Type in anything to proceed]" RESET "\n");
 
     getchar();
 }
@@ -57,9 +57,9 @@ void print_new_phase(struct board board, struct ensiie current_player) {
     printf("------------ Starting new phase ------------\n\n");
     sleep(0.5);
 
-    printf("Player %s, it's your go!\n", current_player.player_name);
+    printf("Player " BOLDCYAN "%s" RESET ", it's your go!\n", current_player.player_name);
 
-    printf("\n[Type in anything to proceed]\n");
+    printf("\n" BOLDWHITE "[Type in anything to proceed]" RESET "\n");
     getchar();
 
     print_board(board);
@@ -172,7 +172,7 @@ int choice_card(struct board board, struct ensiie p, int EP) {
     printf("You have %i Energy Point available, what card would you like to play? (type 0 if you wish to pass turn)\n", EP);
     int chosen_card_index;
 
-    scanf("%i", &chosen_card_index);
+    scanf("%i%*c", &chosen_card_index);
 
     if (chosen_card_index == 0) 
         return -1;
