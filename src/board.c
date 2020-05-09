@@ -95,12 +95,12 @@ void begin_turn(struct board* b) {
 	print_new_turn(*b);
 }
 
-void play_phase(struct board board, struct ensiie* p) {
+void play_phase(struct board *board, struct ensiie* p) {
 	// Drawing cards
 	for (int i = 0; i < nb_card_drawn(*p); i++)
 		draw(p);
 	
-	print_new_phase(board, *p);
+	print_new_phase(*board, *p);
 
 	// Adding student cards
 	int nb_FISE;
@@ -109,10 +109,12 @@ void play_phase(struct board board, struct ensiie* p) {
 	add_student_FISE(nb_FISE, p);
 	add_student_FISA(nb_FISA, p);
 
+	print_board(*board);
+
 	// Playing cards
 	int chosen_card_index;
-	int ep = available_EP(board, *p);
-	while ((chosen_card_index = choice_card(board, *p, ep)) != -1)
+	int ep = available_EP(*board, *p);
+	while ((chosen_card_index = choice_card(*board, *p, ep)) != -1)
 		play_card(p, &ep, chosen_card_index);
 }
 
