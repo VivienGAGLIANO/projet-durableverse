@@ -329,21 +329,23 @@ void end_turn(struct board *board) {
 
 	board->player2.SD += compute_development(*board, board->player2) - compute_durability(*board, board->player1);
 
-	effect_list current_effect1 = get_all_staff_effects(board->player1.current_staff.cards);
-	effect_list current_effect2 = get_all_staff_effects(board->player2.current_staff.cards);
+	effect_list effects_1 = get_all_staff_effects(board->player1.current_staff.cards);
+	effect_list effects_2 = get_all_staff_effects(board->player2.current_staff.cards);
 
 	// SD points gained by staff card
-	while (!is_stack_empty(current_effect1)) {
-		if (((staff_effect*) current_effect1->head)->id == ADD)
-			board->player1.SD += ((staff_effect*) current_effect1->head)->value;
-		if (((staff_effect*) current_effect1->head)->id == RDD)
-			board->player2.SD -= ((staff_effect*) current_effect1->head)->value;
+	while (!is_stack_empty(effects_1)) {
+		staff_effect current_effect = pop_effect(&effects_1);
+		if (current_effect.id == ADD)
+			board->player1.SD += current_effect.value;
+		if (current_effect.id == RDD)
+			board->player2.SD -= current_effect.value;
 	}
-		while (!is_stack_empty(current_effect2)) {
-		if (((staff_effect*) current_effect2->head)->id == ADD)
-			board->player2.SD += ((staff_effect*) current_effect2->head)->value;
-		if (((staff_effect*) current_effect2->head)->id == RDD)
-			board->player1.SD -= ((staff_effect*) current_effect2->head)->value;
+	while (!is_stack_empty(effects_2)) {
+		staff_effect current_effect = pop_effect(&effects_2);
+		if (current_effect.id == ADD)
+			board->player2.SD += current_effect.value;
+		if (current_effect.id == RDD)
+			board->player1.SD -= current_effect.value;
 	}
 
 	// Setting SD point to 0 if they are negative
