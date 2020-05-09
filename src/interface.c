@@ -356,21 +356,34 @@ int choice_card(struct board board, struct ensiie p, int EP) {
     print_hand(p.hand, -1);
 
     printf("You have %i Energy Point available, what card would you like to play, %s ? (type 0 if you wish to pass turn)\n", EP, p.player_name);
-    int chosen_card_index;
-
+    int chosen_card_index = 0, previous_chosen_card;
     scanf("%i%*c", &chosen_card_index);
 
-    if (chosen_card_index == 0) 
-        return -1;
-    if (chosen_card_index > stack_len(p.hand) || chosen_card_index < 0) {
-        printf("Card chosen is outside hand's range. Pick again !\n");
-        return choice_card(board, p, EP);
+    while (chosen_card_index != 0) {
+        if (chosen_card_index > stack_len(p.hand) || chosen_card_index < 0) {
+            print_board(board);
+            printf(BOLDRED "Card chosen is outside hand's range. Pick again !\n" RESET);
+            return choice_card(board, p, EP);
+        }
+
+        print_board(board);
+        print_hand(p.hand, chosen_card_index - 1);
+        display_card(get_card(p.hand, chosen_card_index - 1), 50);
+        printf("%i Energy Point available.\n", EP);
+
+        printf("Card %d chosen ! Enter %d again to confirm, 0 to cancel and finish turn, or another card number to choose another card : ", chosen_card_index, chosen_card_index);
+        previous_chosen_card = chosen_card_index;
+        scanf("%i%*c", &chosen_card_index);
+        if (previous_chosen_card == chosen_card_index) {
+            if (get_card(p.hand, chosen_card_index - 1).cost > EP) {
+                print_board(board);
+                printf(BOLDRED "You don't have enough Energy Points for that ! Pick again ! \n" RESET);
+                return choice_card(board, p, EP);
+            } else
+                return chosen_card_index - 1;
+        }
     }
-    if (get_card(p.hand, chosen_card_index - 1).cost > EP) {
-        printf("You don't have enough Energy Points for that ! Pick again ! \n");
-        return choice_card(board, p, EP);
-    }
-    return chosen_card_index - 1;
+    return -1;
 }
 
 /**

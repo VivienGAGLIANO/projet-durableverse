@@ -114,8 +114,10 @@ void play_phase(struct board *board, struct ensiie* p) {
 	// Playing cards
 	int chosen_card_index;
 	int ep = available_EP(*board, *p);
-	while ((chosen_card_index = choice_card(*board, *p, ep)) != -1)
+	while ((chosen_card_index = choice_card(*board, *p, ep)) != -1) {
 		play_card(p, &ep, chosen_card_index);
+		print_board(*board);
+	}	
 }
 
 int nb_card_drawn(struct ensiie p)
