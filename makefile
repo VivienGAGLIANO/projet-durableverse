@@ -25,6 +25,9 @@ interface.o : $(O)interface.o
 
 stack.o : $(O)stack.o
 
+$(L)ezxml/ezxml.o:
+	@make -C lib/ezxml 2> /dev/null
+
 $(O)stack.o : $(L)stack/stack.c $(L)stack/stack.h obj
 	$(CC) -c $< -o $@
 
@@ -38,7 +41,8 @@ obj:
 	[ -d obj ] || mkdir obj
 
 clean : 
-	rm -vf $(B)* $(O)* 
+	rm -vf $(B)* $(O)*
+	make -C lib/ezxml clean
 
 re :
 	clear; make clean; make durableverse
