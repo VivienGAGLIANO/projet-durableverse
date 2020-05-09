@@ -6,6 +6,7 @@ B = bin/
 L = lib/
 
 durableverse : main.c $(O)card.o $(O)structure.o $(O)interface.o $(O)board.o $(O)stack.o $(L)ezxml/ezxml.o
+	[ -d bin ] || mkdir bin
 	$(CC) $^ -o $(B)$@
 
 run: durableverse
@@ -24,15 +25,17 @@ interface.o : $(O)interface.o
 
 stack.o : $(O)stack.o
 
-$(O)stack.o : $(L)stack/stack.c $(L)stack/stack.h
+$(O)stack.o : $(L)stack/stack.c $(L)stack/stack.h obj
 	$(CC) -c $< -o $@
 
-$(O)interface.o : $(S)interface.c $(H)interface.h $(H)colors_logo.h
+$(O)interface.o : $(S)interface.c $(H)interface.h $(H)colors_logo.h obj
 	$(CC) -c $< -o $@
 
-$(O)%.o : $(S)%.c $(H)%.h
+$(O)%.o : $(S)%.c $(H)%.h obj
 	$(CC) -c $< -o $@
 
+obj:
+	[ -d obj ] || mkdir obj
 
 clean : 
 	rm -vf $(B)* $(O)* 
