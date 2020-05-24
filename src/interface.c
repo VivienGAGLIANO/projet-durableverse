@@ -16,12 +16,13 @@
  * @param highlight_card the index of the card to highlight, -1 for highlighting no card
  */
 void print_hand(card_list cards, int highlight_card) {
+    printf(PRINT_CARD_COLOR "Current hand\n" RESET);
     for (int i = 0; i < stack_len(cards); i++) {
         card card = get_card(cards, i);
         if (i == highlight_card)
-            printf(INVERTED "[card number:%2i; name: %s; cost: %i]\n" RESET, i+1, card.name, card.cost);
+            printf(INVERTED "%2i: %s\n" RESET, i+1, card.name);
         else
-            printf("[card number:"PRINT_CARD_COLOR"%2i"RESET"; name: "PRINT_CARD_COLOR"%s"RESET"; cost: "PRINT_CARD_COLOR"%i"RESET"]\n", i+1, card.name, card.cost);
+            printf(PRINT_CARD_COLOR"%2i: %s\n"RESET, i+1, card.name);
     }
     printf("\n");
 }
@@ -292,14 +293,15 @@ void display_card(card card, int width) {
         printf("_");
     printf(" \n"); 
     
-    // Name & Cost
+    // Name
     for (int i = 0; i < (termsize.ws_col - width) / 2; i++)
         printf(" ");
     printf("|");
-    printf("%s", card.name);
-    for (int i = 0; i < width - (int) strlen(card.name) - ((int) log(card.cost)); i++)
+    for (int i = 0; i < (width - strlen(card.name)) / 2; i++)
         printf(" ");
-    printf("%i", card.cost);
+    printf("%s", card.name);
+    for (int i = 0; i < width - (width - strlen(card.name)) / 2 - strlen(card.name); i++)
+        printf(" ");
     printf("|\n");
 
     for (int i = 0; i < (termsize.ws_col - width) / 2; i++)
@@ -309,12 +311,13 @@ void display_card(card card, int width) {
         printf("_");
     printf("|\n");
 
-    // Type
+    // Cost & Type
     char* type = card.type == ACTION_CARD ? "Action" : "Personnel";
     for (int i = 0; i < (termsize.ws_col - width) / 2; i++)
         printf(" ");
     printf("|");
-    for (int i = 0; i < width - (int) strlen(type); i++)
+    printf("EP: %d", card.cost);
+    for (int i = 0; i < width - (int) strlen(type) - log10(card.cost) - 1 -4; i++)
         printf(" ");
     printf("%s", type);
     printf("|\n");
