@@ -4,6 +4,7 @@
 #include <string.h> // strlen for display_card
 #include <sys/ioctl.h> //ioctl for getting terminal size
 #include <unistd.h> // STDOUT_FILENO for getting terminal size
+#include <stdlib.h> // malloc for split_string
 
 #include "../headers/interface.h"
 
@@ -275,8 +276,9 @@ char** split_string(char* string, int size) {
 
 /**
  * @brief display the given card in terminal ascii art
- * @details the card will be printed with its name, cost, and effect in an ascii art card structure
+ * @details the card will be printed at center of the terminal with its name, cost, and effect in an ascii art card structure
  * @param card the card to display
+ * @param width the width the card should take
  */
 void display_card(card card, int width) {
     // Getting terminal size
@@ -326,27 +328,33 @@ void display_card(card card, int width) {
 
     // Effect : action card
     if (card.type == ACTION_CARD) {
-        for (int i = 0; i < (termsize.ws_col - width) / 2; i++)
-            printf(" ");
-        printf("|");
-        printf("%s", card.desc);
-        for (int i = 0; i < width - (int) strlen(card.desc); i++)
-            printf(" ");
-        printf("|\n");
+        char** split_description = split_string(card.desc, width);
+        for (int j = 0; j < strlen(card.desc) / width + 1; j++) {
+            for (int i = 0; i < (termsize.ws_col - width) / 2; i++)
+                printf(" ");
+            printf("|");
+            printf("%s", split_description[j]);
+            for (int i = 0; i < width - (int) strlen(split_description[j]); i++)
+                printf(" ");
+            printf("|\n");
+        }
     }
 
     // Effect : staff card
     if (card.type == STAFF_CARD) {
         for (int nb_eff = 0; nb_eff < stack_len(card.staff_effect); nb_eff++) {
             char* description = get_effect(card.staff_effect, nb_eff).desc;
-            for (int i = 0; i < (termsize.ws_col - width) / 2; i++)
-                printf(" ");
-            printf("|");
-            printf("%s", description);
-            for (int i = 0; i < width - (int) strlen(description); i++)
-                printf("+");
-            printf("|");
-            printf("%i\n", width - (int) strlen(description));
+            char** split_description = split_string(description, width);
+
+            for (int j = 0; j < strlen(description) / width + 1; j++) {
+                for (int i = 0; i < (termsize.ws_col - width) / 2; i++)
+                    printf(" ");
+                printf("|");
+                printf("%s", split_description[j]);
+                for (int i = 0; i < width - strlen(split_description[j]); i++)
+                    printf(" ");
+                printf("|");
+            }
         }
     }
 
