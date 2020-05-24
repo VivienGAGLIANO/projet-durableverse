@@ -20,9 +20,9 @@ void print_hand(card_list cards, int highlight_card) {
     for (int i = 0; i < stack_len(cards); i++) {
         card card = get_card(cards, i);
         if (i == highlight_card)
-            printf(INVERTED "%2i: %s\n" RESET, i+1, card.name);
+            printf(INVERTED "%2i: %s (%d)\n" RESET, i+1, card.name, card.cost);
         else
-            printf(PRINT_CARD_COLOR"%2i: %s\n"RESET, i+1, card.name);
+            printf(PRINT_CARD_COLOR"%2i: %s (%d)\n"RESET, i+1, card.name, card.cost);
     }
     printf("\n");
 }
@@ -285,49 +285,51 @@ void display_card(card card, int width) {
     // Getting terminal size
     struct winsize termsize;
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &termsize);
+
+    printf(BOLDRED);
     
     for (int i = 0; i < (termsize.ws_col - width) / 2; i++)
         printf(" ");
     printf(" ");
     for (int i =0; i < width; i++)
-        printf("_");
+        printf(CARD_FRAME_COLOR "_");
     printf(" \n"); 
     
     // Name
     for (int i = 0; i < (termsize.ws_col - width) / 2; i++)
         printf(" ");
-    printf("|");
+    printf(CARD_FRAME_COLOR "|");
     for (int i = 0; i < (width - strlen(card.name)) / 2; i++)
         printf(" ");
-    printf("%s", card.name);
+    printf(CARD_NAME_COLOR "%s", card.name);
     for (int i = 0; i < width - (width - strlen(card.name)) / 2 - strlen(card.name); i++)
         printf(" ");
-    printf("|\n");
+    printf(CARD_FRAME_COLOR "|\n");
 
     for (int i = 0; i < (termsize.ws_col - width) / 2; i++)
         printf(" ");
-    printf("|");
+    printf(CARD_FRAME_COLOR "|");
     for (int i = 0; i < width; i++)
-        printf("_");
-    printf("|\n");
+        printf(CARD_FRAME_COLOR "_");
+    printf(CARD_FRAME_COLOR "|\n");
 
     // Cost & Type
     char* type = card.type == ACTION_CARD ? "Action" : "Personnel";
     for (int i = 0; i < (termsize.ws_col - width) / 2; i++)
         printf(" ");
-    printf("|");
-    printf("EP: %d", card.cost);
+    printf(CARD_FRAME_COLOR "|");
+    printf(CARD_FX_COLOR "EP: %d", card.cost);
     for (int i = 0; i < width - (int) strlen(type) - log10(card.cost) - 1 -4; i++)
         printf(" ");
     printf("%s", type);
-    printf("|\n");
+    printf(CARD_FRAME_COLOR "|\n");
 
     for (int i = 0; i < (termsize.ws_col - width) / 2; i++)
         printf(" ");
-    printf("|");
+    printf(CARD_FRAME_COLOR "|");
     for (int i = 0; i < width; i++)
-        printf("_");
-    printf("|\n");
+        printf(CARD_FRAME_COLOR "_");
+    printf(CARD_FRAME_COLOR "|\n");
 
     // Effect : action card
     if (card.type == ACTION_CARD) {
@@ -335,11 +337,11 @@ void display_card(card card, int width) {
         for (int j = 0; j < strlen(card.desc) / width + 1; j++) {
             for (int i = 0; i < (termsize.ws_col - width) / 2; i++)
                 printf(" ");
-            printf("|");
-            printf("%s", split_description[j]);
+            printf(CARD_FRAME_COLOR "|");
+            printf(CARD_FX_COLOR "%s", split_description[j]);
             for (int i = 0; i < width - (int) strlen(split_description[j]); i++)
                 printf(" ");
-            printf("|\n");
+            printf(CARD_FRAME_COLOR "|\n");
         }
     }
 
@@ -352,23 +354,25 @@ void display_card(card card, int width) {
             for (int j = 0; j < strlen(description) / width + 1; j++) {
                 for (int i = 0; i < (termsize.ws_col - width) / 2; i++)
                     printf(" ");
-                printf("|");
-                printf("%s", split_description[j]);
+                printf(CARD_FRAME_COLOR "|");
+                printf(CARD_FX_COLOR "%s", split_description[j]);
                 for (int i = 0; i < width - strlen(split_description[j]); i++)
                     printf(" ");
-                printf("|\n");
+                printf(CARD_FRAME_COLOR "|\n");
             }
         }
     }
 
     for (int i = 0; i < (termsize.ws_col - width) / 2; i++)
         printf(" ");
-    printf("|");
+    printf(CARD_FRAME_COLOR "|");
     for (int i =0; i < width; i++)
-        printf("_");
-    printf("|\n");
+        printf(CARD_FRAME_COLOR "_");
+    printf(CARD_FRAME_COLOR "|\n");
 
     printf("\n");
+
+    printf(RESET);
 }
 
 
