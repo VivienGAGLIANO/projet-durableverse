@@ -169,48 +169,7 @@ void print_board(struct board board) {
             printf(PLAYER2_COLOR "%s    \n" RESET, get_card(board.player2.current_staff.cards, nb_staff).name);
     }
 
-    printf("\n\n\n");
-
-    // // Old code
-    
-    // // Player 1 info
-    // printf(PLAYER1_COLOR "Player %s\n", board.player1.player_name);
-    // printf("SD : %i\n", board.player1.SD);
-    // printf("Card in hand : %i\n", stack_len(board.player1.hand));
-    
-    // printf("\n");
-
-    // printf("Student cards : \n");
-    // printf("FISE : %i\n", board.player1.current_students.FISE_count);
-    // printf("FISA : %i\n", board.player1.current_students.FISA_count);
-
-    // printf("\n");
-
-    // printf("Staff cards : \n");
-    // for (int i = 0; i < stack_len(board.player1.current_staff.cards); i++)
-    //     printf("    %s\n", ((card*) board.player1.current_staff.cards->head)->name);
-
-    // printf(RESET INVERTED "\n\nVS\n\n\n" RESET);
-
-    // // Player 2 info
-    // printf(PLAYER2_COLOR "Player %s\n", board.player2.player_name);
-    // printf("SD : %i\n", board.player2.SD);
-    // printf("Card in hand : %i\n", stack_len(board.player2.hand));
-    
-    // printf("\n");
-
-    // printf("Student cards : \n");
-    // printf("FISE : %i\n", board.player2.current_students.FISE_count);
-    // printf("FISA : %i\n", board.player2.current_students.FISA_count);
-
-    // printf("\n");
-
-    // printf("Staff cards : \n");
-    // for (int i = 0; i < stack_len(board.player2.current_staff.cards); i++)
-    //     printf("    %s\n", ((card*) board.player2.current_staff.cards->head)->name);
-    // printf("\n\n\n");
-    
-    printf(RESET);
+    printf(RESET "\n\n\n");
 }
 
 /**
