@@ -42,8 +42,16 @@ void print_new_turn(struct board board) {
     printf("\n\n");
     sleep(0.3);
 
+    int size1 = 7 + strlen(board.player1.player_name) + 6 + log10(board.player1.SD ? board.player1.SD : 1) + 1;
+    int size2 = 7 + strlen(board.player2.player_name) + 6 + log10(board.player2.SD ? board.player2.SD : 1) + 1;
+
     printf(PLAYER1_COLOR "Player %s : %i SD" RESET, board.player1.player_name, board.player1.SD);
-    printf("        " INVERTED "vs" RESET "        ");
+    
+    for (int i = 0; i < termsize.ws_col / 2 - size1 - 1; i++)
+        printf(" ");
+    printf(INVERTED "VS" RESET);
+    for (int i = 0; i < termsize.ws_col - (termsize.ws_col / 2 - 1) - 2 - size2; i++)
+        printf(" ");
     printf(PLAYER2_COLOR "Player %s : %i SD\n\n" RESET, board.player2.player_name, board.player2.SD);
     sleep(0.3);
 
