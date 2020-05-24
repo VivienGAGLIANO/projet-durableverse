@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <unistd.h> // sleep
 #include <math.h> // log10 for display_card
-#include "math.h"
 #include <string.h> // strlen for display_card
+#include <sys/ioctl.h> //ioctl for getting terminal size
+#include <unistd.h> // STDOUT_FILENO for getting terminal size
 
 #include "../headers/interface.h"
 
@@ -79,42 +80,135 @@ void print_new_phase(struct board board, struct ensiie current_player) {
 void print_board(struct board board) {
     clear_screen();
     
-    // Player 1 info
-    printf(PLAYER1_COLOR "Player %s\n", board.player1.player_name);
-    printf("SD : %i\n", board.player1.SD);
-    printf("Card in hand : %i\n", stack_len(board.player1.hand));
-    
+    // Getting terminal size
+    struct winsize termsize;
+    ioctl(STDOUT_FILENO, TIOCGWINSZ, &termsize);
+
+    for (int i = 0; i < termsize.ws_col / 2; i++)
+        printf(" ");
+    printf(RESET INVERTED "VS" RESET);
+    for (int i = 0; i < termsize.ws_col / 2; i++)
+        printf(" ");
     printf("\n");
 
-    printf("Student cards : \n");
-    printf("FISE : %i\n", board.player1.current_students.FISE_count);
-    printf("FISA : %i\n", board.player1.current_students.FISA_count);
+    // Player names
+    int name_size1 = 7 + strlen(board.player1.player_name); // 7 corresponds to number of char in Player_
+    int name_size2 = 7 + strlen(board.player2.player_name);
 
-    printf("\n");
-
-    printf("Staff cards : \n");
-    for (int i = 0; i < stack_len(board.player1.current_staff.cards); i++)
-        printf("    %s\n", ((card*) board.player1.current_staff.cards->head)->name);
-
-    printf(RESET INVERTED "\n\nVS\n\n\n" RESET);
-
-    // Player 2 info
+    printf(PLAYER1_COLOR "Player %s", board.player1.player_name);
+    for (int i = 0; i < termsize.ws_col - name_size1 - name_size2; i++)
+        printf(" ");
     printf(PLAYER2_COLOR "Player %s\n", board.player2.player_name);
-    printf("SD : %i\n", board.player2.SD);
-    printf("Card in hand : %i\n", stack_len(board.player2.hand));
     
+
+    // SD points
+    int SD_size1 = 5 + log10(board.player1.SD ? board.player1.SD : 1) + 1; // 5 corresponds to number of char in SD_:_
+    int SD_size2 = 5 + log10(board.player2.SD ? board.player2.SD : 1) + 1;
+
+    printf(PLAYER1_COLOR "SD : %i", board.player1.SD);
+    for (int i = 0; i < termsize.ws_col - SD_size1 - SD_size2; i++)
+        printf(" ");
+    printf(PLAYER2_COLOR "SD : %i\n", board.player2.SD);
+
+    // Card in hand
+    int hand_size1 = 15 + log10(stack_len(board.player1.hand) ? stack_len(board.player1.hand) : 1) + 1; // 15 corresponds to number of char in Card in hand_:_
+    int hand_size2 = 15 + log10(stack_len(board.player2.hand) ? stack_len(board.player2.hand) : 1) + 1;
+
+    printf(PLAYER1_COLOR "Card in hand : %i", stack_len(board.player1.hand));
+    for (int i = 0; i < termsize.ws_col - hand_size1 - hand_size2; i++)
+        printf(" ");
+    printf(PLAYER2_COLOR "Card in hand : %i\n", stack_len(board.player2.hand));
+
     printf("\n");
 
-    printf("Student cards : \n");
-    printf("FISE : %i\n", board.player2.current_students.FISE_count);
-    printf("FISA : %i\n", board.player2.current_students.FISA_count);
+    // Student cards
+    printf(PLAYER1_COLOR "Student cards :");
+    for (int i = 0; i < termsize.ws_col - 2*15; i++) // 14 corresponds to the number of char in Student cards_:
+        printf(" ");
+    printf(PLAYER2_COLOR "Student cards :\n");
+    
+    // FISE
+    int FISE_size1 = 11 + log10(board.player1.current_students.FISE_count ? board.player1.current_students.FISE_count: 1) + 1; // 11 corresponds to number of char in ____FISE_:_
+    int FISE_size2 = 11 + log10(board.player2.current_students.FISE_count ? board.player2.current_students.FISE_count: 1) + 1;
+
+    printf(PLAYER1_COLOR "    FISE : %i", board.player1.current_students.FISE_count);
+    for (int i = 0; i < termsize.ws_col - FISE_size1 - FISE_size2; i++)
+        printf(" ");
+    printf(PLAYER2_COLOR "FISE : %i    \n", board.player2.current_students.FISE_count);
+
+    // FISA
+    int FISA_size1 = 11 + log10(board.player1.current_students.FISA_count ? board.player1.current_students.FISA_count: 1) + 1; // 11 corresponds to number of char in ____FISA_:_
+    int FISA_size2 = 11 + log10(board.player2.current_students.FISA_count ? board.player2.current_students.FISA_count: 1) + 1;
+
+    printf(PLAYER1_COLOR "    FISA : %i", board.player1.current_students.FISA_count);
+    for (int i = 0; i < termsize.ws_col - FISA_size1 - FISA_size2; i++)
+        printf(" ");
+    printf(PLAYER2_COLOR "FISA : %i    \n", board.player2.current_students.FISA_count);
 
     printf("\n");
 
-    printf("Staff cards : \n");
-    for (int i = 0; i < stack_len(board.player2.current_staff.cards); i++)
-        printf("    %s\n", ((card*) board.player2.current_staff.cards->head)->name);
+    // Staff cards
+    printf(PLAYER1_COLOR "Staff cards :");
+    for (int i = 0; i < termsize.ws_col - 2*13; i++) // 14 corresponds to the number of char in Staff cards_:
+        printf(" ");
+    printf(PLAYER2_COLOR "Staff cards :\n");
+
+    //Staff lists #le génie intervient
+    int nb_staff1 = stack_len(board.player1.current_staff.cards);
+    int nb_staff2 = stack_len(board.player2.current_staff.cards);
+
+    for (int nb_staff = 0; nb_staff < (nb_staff1 < nb_staff2 ? nb_staff2 : nb_staff1); nb_staff++) {
+        int staff_size1 = nb_staff < nb_staff1 ? strlen(get_card(board.player1.current_staff.cards, nb_staff).name) + 4 : 0; // 4 corresponds to the offset to margin before staff card name
+        int staff_size2 = nb_staff < nb_staff2 ? strlen(get_card(board.player2.current_staff.cards, nb_staff).name) + 4 : 0;
+
+        if (nb_staff < nb_staff1)
+            printf(PLAYER1_COLOR "    %s" RESET, get_card(board.player1.current_staff.cards, nb_staff).name);
+        for (int i = 0; i < termsize.ws_col - staff_size1 - staff_size2; i++)
+            printf(" ");
+        if (nb_staff < nb_staff2)
+            printf(PLAYER2_COLOR "%s    \n" RESET, get_card(board.player2.current_staff.cards, nb_staff).name);
+    }
+
     printf("\n\n\n");
+
+    // // Old code
+    
+    // // Player 1 info
+    // printf(PLAYER1_COLOR "Player %s\n", board.player1.player_name);
+    // printf("SD : %i\n", board.player1.SD);
+    // printf("Card in hand : %i\n", stack_len(board.player1.hand));
+    
+    // printf("\n");
+
+    // printf("Student cards : \n");
+    // printf("FISE : %i\n", board.player1.current_students.FISE_count);
+    // printf("FISA : %i\n", board.player1.current_students.FISA_count);
+
+    // printf("\n");
+
+    // printf("Staff cards : \n");
+    // for (int i = 0; i < stack_len(board.player1.current_staff.cards); i++)
+    //     printf("    %s\n", ((card*) board.player1.current_staff.cards->head)->name);
+
+    // printf(RESET INVERTED "\n\nVS\n\n\n" RESET);
+
+    // // Player 2 info
+    // printf(PLAYER2_COLOR "Player %s\n", board.player2.player_name);
+    // printf("SD : %i\n", board.player2.SD);
+    // printf("Card in hand : %i\n", stack_len(board.player2.hand));
+    
+    // printf("\n");
+
+    // printf("Student cards : \n");
+    // printf("FISE : %i\n", board.player2.current_students.FISE_count);
+    // printf("FISA : %i\n", board.player2.current_students.FISA_count);
+
+    // printf("\n");
+
+    // printf("Staff cards : \n");
+    // for (int i = 0; i < stack_len(board.player2.current_staff.cards); i++)
+    //     printf("    %s\n", ((card*) board.player2.current_staff.cards->head)->name);
+    // printf("\n\n\n");
     
     printf(RESET);
 }
@@ -181,10 +275,23 @@ void display_card(card card, int width) {
     printf("|\n");
 
     printf("|");
-    for (int i =0; i < width; i++)
+    for (int i = 0; i < width; i++)
         printf("_");
     printf("|\n");
-    
+
+    // Type
+    char* type = card.type == ACTION_CARD ? "Action" : "Personnel";
+    printf("|");
+    for (int i = 0; i < width - strlen(type); i++)
+        printf(" ");
+    printf("%s", type);
+    printf("|\n");
+
+    printf("|");
+    for (int i = 0; i < width; i++)
+        printf("_");
+    printf("|\n");
+
     // Effect : action card
     if (card.type == ACTION_CARD) {
         printf("|");
