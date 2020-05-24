@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Projet Durableverse" company="" webLink="https://gitlab.com/mathilda_rosset/projet-durableverse" view-date="2020-04-13" view-index="0" gantt-divider-location="300" resource-divider-location="300" version="2.8.10" locale="fr">
+    <description><![CDATA[Bonjour tout le monde, voici le GranttProject pour les tâches à effectuer pour le lot A. Je vous souhaite un bon avancement.]]></description>
+    <view zooming-state="default:2" id="gantt-chart">
+        <field id="tpd3" name="Nom" width="166" order="0"/>
+        <field id="tpd4" name="Date de début" width="64" order="1"/>
+        <field id="tpd5" name="Date de fin" width="64" order="2"/>
+        <timeline><![CDATA[7,2,8]]></timeline>
+        <option id="color.recent"><![CDATA[#009999 #990099 #eea193 #eeed1d #ee6528 #64eaee #66ee5e #ee48a0 #009966 #3300ff]]></option>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nom" width="209" order="0"/>
+        <field id="1" name="Rôle par défaut" width="85" order="1"/>
+    </view>
+    <!-- -->
+    <calendars base-id="Aucun">
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="true"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+        <date year="2020" month="3" date="22" type="WORKING_DAY" color="#009966"><![CDATA[Rendre lot_a]]></date>
+        <date year="2020" month="4" date="26" type="WORKING_DAY" color="#009966"><![CDATA[Rendre lot_b]]></date>
+        <date year="2020" month="5" date="17" type="WORKING_DAY" color="#009966"><![CDATA[Rendre lot_c]]></date>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="0" name="Tâche A1.1" color="#5dd7cf" meeting="false" start="2020-03-06" duration="15" complete="0" thirdDate="2020-03-03" thirdDate-constraint="0" priority="2" expand="true">
+            <notes><![CDATA[Mettre en place le dépôt Git
+Inviter l'encadrant en tant que rapporteur et les autres membres du groupe en tant que développer
+Creer première branche lot_a
+Reflexion quant à la mise en oeuvre du projet
+
+
+]]></notes>
+            <depend id="18" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="18" name="Tâche A1.2" color="#3300ff" meeting="false" start="2020-03-21" duration="2" complete="0" thirdDate="2020-02-26" thirdDate-constraint="0" expand="true">
+            <notes><![CDATA[Coder le main.c + tester]]></notes>
+        </task>
+        <task id="2" name="Tâche A2" color="#952222" meeting="false" start="2020-03-06" duration="15" complete="0" thirdDate="2020-03-06" thirdDate-constraint="1" expand="true">
+            <notes><![CDATA[-Définir le type carte
+-Définir le type plateau
+-Créer une fonction pour créer un nouveau plateau
+-Créer une fonction pour libérer la mémoire du plateau
+-Créer une fonction pour signifier au plateau qu’un nouveau tour commence. Elle permettra par exemple d’incrémenter le compteur de tour, de gérer les carte FISA et de mettre à jour les espaces disponibles pour les cartes
+Personnels sur le plateau.
+-Créer une fonction pour calculer combien de cartes seront piochées par une ENSIIE au début de sa phase
+-Créer une fonction pour qu’une ENSIIE pioche une carte
+]]></notes>
+            <depend id="18" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="7" name="Tâche A3" color="#7a3c7a" meeting="false" start="2020-03-06" duration="15" complete="0" thirdDate="2020-03-03" thirdDate-constraint="0" expand="true">
+            <notes><![CDATA[-Créer une fonction pour calculer combien de cartes Elève une ENSIIE recevra au début de sa phase.
+-Créer une ou deux fonctions pour ajouter une carte Élève de type FISE ou FISA au plateau de jeu d’une ENSIIE.
+Attention, c’est le rôle de interface.h de demander au joueur s’il souhaite une carte FISE ou FISA.
+-Créer une fonction pour calculer le nombre de PE disponibles par une ENSIIE après avoir posé sa ou ses nouvelles
+cartes Élèves.
+-Créer une fonction pour permettre à une ENSIIE de jouer une carte de sa main
+-Créer une fonction pour signifier au plateau que le tour est terminé. Elle permettra, entre autres, de faire le calcul
+des DD gagnés par chaque ENSIIE à la fin du tour.
+-Créer une fonction pour déterminer si la partie est finie, et si oui si un joueur a gagné ou s’il y a égalité.]]></notes>
+        </task>
+        <task id="8" name="Tâche A4" color="#4f844f" meeting="false" start="2020-03-06" duration="15" complete="0" thirdDate="2020-03-03" thirdDate-constraint="0" expand="true">
+            <notes><![CDATA[-Créer une fonction pour afficher en console un message signifiant qu’un nouveau tour commence ; avec toutes les
+informations utiles (notamment si un nouvel espace pour les cartes Personnel est apparu)
+-Créer une fonction pour afficher en console un message signifiant qu’une nouvelle phase commence et l’ENSIIE
+associée à cette phase
+6
+-Créer une fonction pour afficher le plateau
+-Créer une fonction pour demander à un joueur qui reçoit une nouvelle carte Elève s’il souhaite ajouter une carte
+FISE ou FISA.
+-Créer une fonction pour demander à un joueur de choisir une carte de sa main ou de finir sa phase. La fonction ne
+proposera que des cartes de la main qui coûtent moins cher que le nombre de PE du joueur. Si aucune carte
+n’est moins chère, alors seul le choix de finir sa phase est proposé au joueur.
+-Créer une fonction qui affiche le gagnant du jeu ou égalité le cas échéant]]></notes>
+            <depend id="18" type="2" difference="0" hardness="Strong"/>
+            <depend id="53" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="25" name="Tâche B1" color="#ee48a0" meeting="false" start="2020-03-22" duration="32" complete="0" thirdDate="2020-03-09" thirdDate-constraint="0" priority="2" expand="true">
+            <notes><![CDATA[Créez une deuxième branche lot_b. 
+Créer un fichier makefile et quatre dossiers src, obj, bin et headers pour ranger vos fichiers. Remplissez le makefile pour qu’il permette, à terme, de compiler chacun des fichiers sources en fichier objet (.o) et le fichier
+main.o en un exécutable.
+Remplissez le fichier GanttProject avec les différentes tâches du Lot B. Mettez des durées arbitraires sur vos
+tâches. Affectez les ressources aux tâches après décision de qui effectue quelle tâche.]]></notes>
+            <depend id="64" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="29" name="Tâche B2" color="#66ee5e" meeting="false" start="2020-03-22" duration="5" complete="0" thirdDate="2020-03-09" thirdDate-constraint="0" priority="2" expand="true">
+            <notes><![CDATA[Créez un nouveau fichier structure.h qui gérera toutes vos structures de données.
+Ajoutez des types et des fonctions permettant de gérer ces structures (ajout, suppression, lecture du i-eme
+élément, . . .). Documentez ensuite ces fonctions.
+]]></notes>
+            <depend id="30" type="2" difference="0" hardness="Strong"/>
+            <depend id="64" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="30" name="Tâche B3" color="#64eaee" meeting="false" start="2020-03-27" duration="27" complete="0" thirdDate="2020-03-09" thirdDate-constraint="0" priority="2" expand="true">
+            <notes><![CDATA[Implantez toutes les fonctions du fichier structures.h dans un fichier structures.c.]]></notes>
+            <depend id="64" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="35" name="Tâche B4" color="#ee6528" meeting="false" start="2020-03-22" duration="20" complete="0" thirdDate="2020-03-09" thirdDate-constraint="0" priority="2" expand="true">
+            <notes><![CDATA[Implantez le type carte dans le fichier carte.c.
+Ajoutez à carte.h des fonctions utiles pour récupérer des informations sur les cartes : son coût en PE, est-ce qu’il s’agit d’une carte Personnel, Action, . . . ?, la quantité présente dans le deck au départ, . . . En d’autres termes,
+toutes les fonctions qui vous semblent adéquates à vous et à votre référent pour coder le fichier plateau.c et le fichier interface.c des tâches B.6 et B.7. Documentez ensuite ces fonctions.
+Implantez ces fonctions dans carte.c]]></notes>
+            <depend id="41" type="2" difference="0" hardness="Strong"/>
+            <depend id="64" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="41" name="Tâche B5" color="#eeed1d" meeting="false" start="2020-04-11" duration="6" complete="0" thirdDate="2020-03-25" thirdDate-constraint="0" expand="true">
+            <notes><![CDATA[Implantez le type plateau dans le fichier plateau.c.
+Ajoutez à plateau.h des fonctions utiles pour récupérer des informations sur le plateau : récupérer le deck d’une ENSIIE, récupérer la liste de ses cartes en main, sa défausse, le nombre de cartes FISE ou FISA, est-ce qu’on est sur un tour impair ou pair, . . . En d’autres termes, toutes les fonctions qui vous semblent adéquates à vous et à votre référent pour coder les autres fonctions du fichier plateau.c et le fichier interface.c des tâches B.6 et B.7.
+Documentez ensuite ces fonctions.
+Implantez ces fonctions dans plateau.c.]]></notes>
+            <depend id="48" type="2" difference="0" hardness="Strong"/>
+            <depend id="64" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="48" name="Tâche B6" color="#eea193" meeting="false" start="2020-04-17" duration="6" complete="0" thirdDate="2020-03-25" thirdDate-constraint="0" expand="true">
+            <notes><![CDATA[Implantez toutes les fonctions restantes du fichier plateau.h dans le fichier plateau.c.]]></notes>
+            <depend id="64" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="53" name="Tâche B7" color="#990099" meeting="false" start="2020-03-21" duration="33" complete="0" thirdDate="2020-04-11" thirdDate-constraint="0" expand="true">
+            <notes><![CDATA[Implantez toutes les fonctions du fichier interface.h dans le fichier interface.c]]></notes>
+            <depend id="64" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="64" name="Tâche B8" color="#009999" meeting="false" start="2020-04-23" duration="4" complete="0" thirdDate="2020-04-13" thirdDate-constraint="0" expand="true">
+            <notes><![CDATA[Créez sur le dépot git une branche lot_b_test dans laquelle vous effectuerez vos tests sans affecter le code du lot_b. 
+Créez un fichier test.c qui vous permettra de tester. N’hésitez par à modifier le code des autres et à commiter, il n’y a pas de risque, vous êtes sur une autre branche. Vous pouvez utiliser CUnit si vous le souhaitez.
+Effectuez les tests de l’exécutable. 
+Remontez les bugs aux membres du groupe pour déterminer qui doit corrigerce bug. Vous pouvez par exemple commiter sur lot_b_test un code qui démontre le bug. Si le bug est visuel, s’il n’affecte pas le fonctionnement du jeu, s’il n’est pas codage, vous pouvez simplement décrire le bug oralement sans commiter.
+Corrigez ce bug sur la branche lot_b. Puis fusionnez les deux branches et recommencez]]></notes>
+        </task>
+    </tasks>
+    <resources>
+        <resource id="0" name="Mathilda Rosset" function="SoftwareDevelopment:2" contacts="" phone=""/>
+        <resource id="1" name="Lilian Mallardeau" function="SoftwareDevelopment:2" contacts="" phone=""/>
+        <resource id="2" name="Vivien Gagliano" function="SoftwareDevelopment:2" contacts="" phone=""/>
+        <resource id="3" name="Yanis Barillon" function="SoftwareDevelopment:2" contacts="" phone=""/>
+    </resources>
+    <allocations>
+        <allocation task-id="0" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="18" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="29" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="64" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="35" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="53" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="25" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="41" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="30" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="48" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+    </allocations>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+    <roles roleset-name="SoftwareDevelopment"/>
+    <roles>
+        <role id="1" name="Lilian"/>
+        <role id="2" name="Vivien"/>
+        <role id="3" name="Mathilda"/>
+        <role id="4" name="Yanis"/>
+    </roles>
+</project>
