@@ -3,35 +3,35 @@
 <effects>
     <effect>
         <id>AE1</id>
-        <desc>Ajouter X points de Développement à chacune de vos cartes FISE</desc>
+        <desc>Ajouter X point(s) de Développement à chacune de vos cartes FISE</desc>
     </effect>
     <effect>
         <id>AE2</id>
-        <desc>Ajouter X points de Durabilité à chacune de vos cartes FISE</desc>
+        <desc>Ajouter X point(s) de Durabilité à chacune de vos cartes FISE</desc>
     </effect>
     <effect>
         <id>AA1</id>
-        <desc>Ajouter X points de Développement à chacune de vos cartes FISA</desc>
+        <desc>Ajouter X point(s) de Développement à chacune de vos cartes FISA</desc>
     </effect>
     <effect>
         <id>AA2</id>
-        <desc>Ajouter X points de Durabilité à chacune de vos cartes FISA</desc>
+        <desc>Ajouter X point(s) de Durabilité à chacune de vos cartes FISA</desc>
     </effect>
     <effect>
         <id>RE1</id>
-        <desc>Retirer X points de Développement à chacune des cartes FISE de l’adversaire</desc>
+        <desc>Retirer X point(s) de Développement à chacune des cartes FISE de l'adversaire</desc>
     </effect>
     <effect>
         <id>RE2</id>
-        <desc>Retirer X points de Durabilité à chacune des cartes FISE de l’adversaire</desc>
+        <desc>Retirer X point(s) de Durabilité à chacune des cartes FISE de l'adversaire</desc>
     </effect>
     <effect>
         <id>RA1</id>
-        <desc>Retirer X points de Développement à chacune des cartes FISA de l’adversaire</desc>
+        <desc>Retirer X point(s) de Développement à chacune des cartes FISA de l'adversaire</desc>
     </effect>
     <effect>
         <id>RA2</id>
-        <desc>Retirer X points de Durabilité à chacune des cartes FISA de l’adversaire</desc>
+        <desc>Retirer X point(s) de Durabilité à chacune des cartes FISA de l'adversaire</desc>
     </effect>
     <effect>
         <id>ADD</id>
@@ -43,10 +43,10 @@
     </effect>
     <effect>
         <id>DR</id>
-        <desc>Piochez X cartes de plus au début de votre phase</desc>
+        <desc>Piochez X carte(s) de plus au début de votre phase</desc>
     </effect>
     <effect>
         <id>E</id>
-        <desc>Mettez en jeu X cartes Etudiant de plus au début de votre phase</desc>
+        <desc>Mettez en jeu X carte(s) Etudiant de plus au début de votre phase</desc>
     </effect>
 </effects>
