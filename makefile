@@ -7,7 +7,7 @@ L = lib/
 
 durableverse : main.c $(O)card.o $(O)structure.o $(O)interface.o $(O)board.o $(O)stack.o $(L)ezxml/ezxml.o
 	[ -d bin ] || mkdir bin
-	$(CC) $^ -o $(B)$@
+	$(CC) $^ -o $(B)$@ -lm
 
 run: durableverse
 	bin/durableverse
