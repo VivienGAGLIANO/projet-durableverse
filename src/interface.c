@@ -334,7 +334,7 @@ void display_card(card card, int width) {
 int choice_card(struct board board, struct ensiie p, int EP) {
     print_hand(p.hand);
 
-    printf("You have %i Energy Point available, what card would you like to play? (type 0 if you wish to pass turn)\n", EP);
+    printf("You have %i Energy Point available, what card would you like to play, %s ? (type 0 if you wish to pass turn)\n", EP, p.player_name);
     int chosen_card_index;
 
     scanf("%i%*c", &chosen_card_index);
