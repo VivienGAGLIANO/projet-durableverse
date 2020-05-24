@@ -253,6 +253,23 @@ void choice_FISE_FISA(int *nb_FISE, int *nb_FISA, struct ensiie p) {
 }
 
 /**
+ * @brief splits the given string in several pieces of size size
+ * @param string the string to split
+ * @param size the size of each chunk (except the last one which may be smaller)
+ * @return a char** in which the chunks are stored
+ */
+char** split_string(char* string, int size) {
+    int n = (strlen(string) / size) + 1;
+    char** chunks = (char**) malloc(n*sizeof(char*));
+    for (int i = 0; i < n; i++) {
+        chunks[i] = (char*) malloc((size+1)*sizeof(char));
+        strncpy(chunks[i], string + i*size, size);
+        chunks[i][size] = '\0';
+    }
+    return chunks;
+}
+
+/**
  * @brief display the given card in terminal ascii art
  * @details the card will be printed with its name, cost, and effect in an ascii art card structure
  * @param card the card to display
