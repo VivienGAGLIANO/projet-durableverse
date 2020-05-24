@@ -297,10 +297,10 @@ void display_card(card card, int width) {
     for (int i = 0; i < (termsize.ws_col - width) / 2; i++)
         printf(" ");
     printf(CARD_FRAME_COLOR "|");
-    for (int i = 0; i < (width - strlen(card.name)) / 2; i++)
+    for (int i = 0; i < (int) (width - strlen(card.name)) / 2; i++)
         printf(" ");
     printf(CARD_NAME_COLOR "%s" RESET, card.name);
-    for (int i = 0; i < width - (width - strlen(card.name)) / 2 - strlen(card.name); i++)
+    for (int i = 0; i < width - (int) (width - strlen(card.name)) / 2 - (int) strlen(card.name); i++)
         printf(" ");
     printf(CARD_FRAME_COLOR "|\n");
 
@@ -332,7 +332,7 @@ void display_card(card card, int width) {
     // Effect : action card
     if (card.type == ACTION_CARD) {
         char** split_description = split_string(card.desc, width);
-        for (int j = 0; j < strlen(card.desc) / width + 1; j++) {
+        for (int j = 0; j < (int) strlen(card.desc) / width + 1; j++) {
             for (int i = 0; i < (termsize.ws_col - width) / 2; i++)
                 printf(" ");
             printf(CARD_FRAME_COLOR "|");
@@ -349,12 +349,12 @@ void display_card(card card, int width) {
             char* description = get_effect(card.staff_effect, nb_eff).desc;
             char** split_description = split_string(description, width);
 
-            for (int j = 0; j < strlen(description) / width + 1; j++) {
+            for (int j = 0; j < (int) strlen(description) / width + 1; j++) {
                 for (int i = 0; i < (termsize.ws_col - width) / 2; i++)
                     printf(" ");
                 printf(CARD_FRAME_COLOR "|");
                 printf(CARD_FX_COLOR "%s", split_description[j]);
-                for (int i = 0; i < width - strlen(split_description[j]); i++)
+                for (int i = 0; i < width - (int) strlen(split_description[j]); i++)
                     printf(" ");
                 printf(CARD_FRAME_COLOR "|\n");
             }
