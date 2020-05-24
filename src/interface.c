@@ -166,8 +166,6 @@ void choice_FISE_FISA(int *nb_FISE, int *nb_FISA, struct ensiie p) {
  * @param card the card to display
  */
 void display_card(card card, int width) {
-    height = 7;
-
     printf(" ");
     for (int i =0; i < width; i++)
         printf("_");
