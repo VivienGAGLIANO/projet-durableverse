@@ -52,8 +52,8 @@ ________                     ___.   .__                                 \n\
 
 #define PRINT_CARD_COLOR        BOLDGREEN
 
-#define CARD_FRAME_COLOR        BOLDBLUE
-#define CARD_NAME_COLOR         BOLDGREEN
-#define CARD_FX_COLOR           WHITE
+#define CARD_FRAME_COLOR        BOLDYELLOW
+#define CARD_NAME_COLOR         BOLDCYAN INVERTED
+#define CARD_FX_COLOR           RESET
 
 #endif

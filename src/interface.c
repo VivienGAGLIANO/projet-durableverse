@@ -285,8 +285,6 @@ void display_card(card card, int width) {
     // Getting terminal size
     struct winsize termsize;
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &termsize);
-
-    printf(BOLDRED);
     
     for (int i = 0; i < (termsize.ws_col - width) / 2; i++)
         printf(" ");
@@ -301,7 +299,7 @@ void display_card(card card, int width) {
     printf(CARD_FRAME_COLOR "|");
     for (int i = 0; i < (width - strlen(card.name)) / 2; i++)
         printf(" ");
-    printf(CARD_NAME_COLOR "%s", card.name);
+    printf(CARD_NAME_COLOR "%s" RESET, card.name);
     for (int i = 0; i < width - (width - strlen(card.name)) / 2 - strlen(card.name); i++)
         printf(" ");
     printf(CARD_FRAME_COLOR "|\n");
