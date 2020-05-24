@@ -240,7 +240,7 @@ void display_card(card card, int width) {
     // Name & Cost
     printf("|");
     printf("%s", card.name);
-    for (int i = 0; i < width - strlen(card.name) - ((int) log(card.cost)); i++)
+    for (int i = 0; i < width - (int) strlen(card.name) - ((int) log(card.cost)); i++)
         printf(" ");
     printf("%i", card.cost);
     printf("|\n");
@@ -253,7 +253,7 @@ void display_card(card card, int width) {
     // Type
     char* type = card.type == ACTION_CARD ? "Action" : "Personnel";
     printf("|");
-    for (int i = 0; i < width - strlen(type); i++)
+    for (int i = 0; i < width - (int) strlen(type); i++)
         printf(" ");
     printf("%s", type);
     printf("|\n");
@@ -267,7 +267,7 @@ void display_card(card card, int width) {
     if (card.type == ACTION_CARD) {
         printf("|");
         printf("%s", card.desc);
-        for (int i = 0; i < width - strlen(card.desc); i++)
+        for (int i = 0; i < width - (int) strlen(card.desc); i++)
             printf(" ");
         printf("|\n");
     }
@@ -278,10 +278,10 @@ void display_card(card card, int width) {
             char* description = get_effect(card.staff_effect, nb_eff).desc;
             printf("|");
             printf("%s", description);
-            for (int i = 0; i < width - strlen(description); i++)
+            for (int i = 0; i < width - (int) strlen(description); i++)
                 printf("+");
             printf("|");
-            printf("%i\n", width - strlen(description));
+            printf("%i\n", width - (int) strlen(description));
         }
     }
 
