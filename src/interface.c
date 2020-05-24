@@ -353,7 +353,7 @@ void display_card(card card, int width) {
                 printf("%s", split_description[j]);
                 for (int i = 0; i < width - strlen(split_description[j]); i++)
                     printf(" ");
-                printf("|");
+                printf("|\n");
             }
         }
     }
