@@ -1,7 +1,9 @@
 #include <stdio.h>
-#include "../headers/interface.h"
-#include "unistd.h" // sleep
+#include <unistd.h> // sleep
+#include <math.h> // log10 for display_card
+#include <string.h> // strlen for display_card
 
+#include "../headers/interface.h"
 
 
 /**
@@ -157,6 +159,71 @@ void choice_FISE_FISA(int *nb_FISE, int *nb_FISA, struct ensiie p) {
     *nb_FISE = FISE_wanted;
     *nb_FISA = FISA_wanted;
 }
+
+/**
+ * @brief display the given card in terminal ascii art
+ * @details the card will be printed with its name, cost, and effect in an ascii art card structure
+ * @param card the card to display
+ */
+void display_card(card card, int width) {
+    height = 7;
+
+    printf(" ");
+    for (int i =0; i < width; i++)
+        printf("_");
+    printf(" \n");
+    
+    // Cost
+    printf("|");
+    printf("%i", card.cost);
+    for (int i = 0; i < width - log10(card.cost) -1; i++)
+        printf(" ");
+    printf("|\n");
+
+
+    printf(" ");
+    for (int i =0; i < width; i++)
+        printf("_");
+    printf(" \n");
+    
+    // Name
+    printf("|");
+    printf("%s", card.name);
+    for (int i = 0; i < width - strlen(card.name); i++)
+    printf("|\n");
+
+    printf(" ");
+    for (int i =0; i < width; i++)
+        printf("_");
+    printf(" \n");
+    
+    // Effect : action card
+    if (card.type == ACTION_CARD) {
+        printf("|");
+        printf("%s", card.desc);
+        for (int i = 0; i < width - strlen(card.desc); i++)
+            printf(" ");
+        printf("|\n");
+    }
+
+    // Effect : staff card
+    if (card.type == STAFF_CARD) {
+        for (int nb_eff = 0; nb_eff < stack_len(card.staff_effect); nb_eff++) {
+            char* description = get_effect(card.staff_effect, nb_eff).desc;
+            printf("|");
+            printf("%s", description);
+            for (int i = 0; i < width - strlen(description); i++)
+                printf(" ");
+            printf("|\n");
+        }
+    }
+
+    printf(" ");
+    for (int i =0; i < width; i++)
+        printf("_");
+    printf(" \n");
+}
+
 
 /**
  * @brief asks the player to play a card or end his phase

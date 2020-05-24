@@ -49,6 +49,14 @@ void print_board(struct board board);
 void choice_FISE_FISA(int *nb_FISE, int *nb_FISA, struct ensiie p);
 
 /**
+ * @brief display the given card in terminal ascii art
+ * @details the card with given dimension will be printed with its name, cost, and effect in an ascii art card structure
+ * @param card the card to display
+ * @param width the width of the card, meaning the size of its longest character string
+ */
+void display_card(card card, int width);
+
+/**
  * @brief asks the player to play a card or end his phase
  * @details Checks if chosen card's cost doesn't exceed available Energy Point (EP), and asks again with error message if it does. Returns the index of the card chosen in the hand of the player.
  * @param board the game board
