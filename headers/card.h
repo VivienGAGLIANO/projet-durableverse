@@ -81,6 +81,15 @@ enum staff_effect_id convert_staff_fx_id(const char* fx_id);
 enum action_effect convert_action_fx(const char* fx_id);
 
 /**
+ * @brief replaces the character 'X' in the string `desc` with the int X
+ * @param X the int to insert in the string to replace the character 'X'
+ * @param *desc the string in which replace 'X' by given X value
+ * @pre `desc` contains at least once the character 'X'
+ * @return a pointer to the new string, with the character 'X' replaced by the int X
+ */
+char* format_effect_description(int X, char* desc);
+
+/**
  * @brief loads cards in the XML file `filename`, and returns them as a card_list
  * @param filename the XML file in which to search for the cards
  * @pre the file has to be a valid XML file

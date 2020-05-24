@@ -33,6 +33,15 @@ enum action_effect convert_action_fx(const char* fx_id) {
 	return 0;
 }
 
+char* format_effect_description(int X, char* desc) {
+    char *s1 = (char*) malloc(sizeof(char)*strlen(desc));
+    char *s2 = (char*) malloc(sizeof(char)*strlen(desc));
+    sscanf(desc, "%[^X]X%[^\n]", s1, s2);
+    char *s = (char*) malloc(sizeof(char)*(strlen(desc)+1));
+    sprintf(s, "%s%d%s", s1, X, s2);
+    return s;
+}
+
 card_list load_cards(char* filename) {
     ezxml_t xml_cards = ezxml_parse_file(filename);
 	card_list cards = create_stack();
@@ -59,7 +68,7 @@ card_list load_cards(char* filename) {
 			staff_effect fx = {
 				.id = id,
 				.value = value,
-				.desc = effects_description[id]
+				.desc = format_effect_description(value, effects_description[id])
 			};
             add_staff_card_effect(&newcard, fx);
         }
