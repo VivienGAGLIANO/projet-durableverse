@@ -168,14 +168,14 @@
             <name>Diplomation</name>
             <cost>5</cost>
             <number>2</number>
-            <desc>Retirez une carte FISE et une carte FISA du plateau de l’adversaire</desc>
+            <desc>Retirez une carte FISE et une carte FISA du plateau de l'adversaire</desc>
             <effect>RemoveOneFISEFISA</effect>
         </card>
         <card id="27">
             <name>Décharge</name>
             <cost>5</cost>
             <number>4</number>
-            <desc>Mettez la première des cartes Personnel mise en jeu par l’adversaire dans sa défausse.</desc>
+            <desc>Mettez la première des cartes Personnel mise en jeu par l'adversaire dans sa défausse.</desc>
             <effect>DiscardOneStaff</effect>
         </card>
         <card id="28">

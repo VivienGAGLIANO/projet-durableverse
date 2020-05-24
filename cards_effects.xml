@@ -39,7 +39,7 @@
     </effect>
     <effect>
         <id>RDD</id>
-        <desc>L’adversaire retranche X DD au total gagné à la fin du tour</desc>
+        <desc>L'adversaire retranche X DD au total gagné à la fin du tour</desc>
     </effect>
     <effect>
         <id>DR</id>
