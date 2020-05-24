@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <unistd.h> // sleep
 #include <math.h> // log10 for display_card
+#include "math.h"
 #include <string.h> // strlen for display_card
 
 #include "../headers/interface.h"
@@ -169,31 +170,20 @@ void display_card(card card, int width) {
     printf(" ");
     for (int i =0; i < width; i++)
         printf("_");
-    printf(" \n");
+    printf(" \n"); 
     
-    // Cost
-    printf("|");
-    printf("%i", card.cost);
-    for (int i = 0; i < width - log10(card.cost) -1; i++)
-        printf(" ");
-    printf("|\n");
-
-
-    printf(" ");
-    for (int i =0; i < width; i++)
-        printf("_");
-    printf(" \n");
-    
-    // Name
+    // Name & Cost
     printf("|");
     printf("%s", card.name);
-    for (int i = 0; i < width - strlen(card.name); i++)
+    for (int i = 0; i < width - strlen(card.name) - ((int) log(card.cost)); i++)
+        printf(" ");
+    printf("%i", card.cost);
     printf("|\n");
 
-    printf(" ");
+    printf("|");
     for (int i =0; i < width; i++)
         printf("_");
-    printf(" \n");
+    printf("|\n");
     
     // Effect : action card
     if (card.type == ACTION_CARD) {
@@ -211,15 +201,18 @@ void display_card(card card, int width) {
             printf("|");
             printf("%s", description);
             for (int i = 0; i < width - strlen(description); i++)
-                printf(" ");
-            printf("|\n");
+                printf("+");
+            printf("|");
+            printf("%i\n", width - strlen(description));
         }
     }
 
-    printf(" ");
+    printf("|");
     for (int i =0; i < width; i++)
         printf("_");
-    printf(" \n");
+    printf("|\n");
+
+    printf("\n");
 }
 
 
