@@ -18,6 +18,7 @@ void print_hand(card_list cards) {
         card card = get_card(cards, i);
         printf("[card number:"PRINT_CARD_COLOR"%2i"RESET"; name: "PRINT_CARD_COLOR"%s"RESET"; cost: "PRINT_CARD_COLOR"%i"RESET"]\n", i+1, card.name, card.cost);
     }
+    printf("\n");
 }
 
 /**
@@ -27,7 +28,18 @@ void print_hand(card_list cards) {
  */
 void print_new_turn(struct board board) {
     clear_screen();
-    printf("------------ Starting turn %i ------------\n\n", board.n_turn);
+
+    // Getting terminal size
+    struct winsize termsize;
+    ioctl(STDOUT_FILENO, TIOCGWINSZ, &termsize);
+
+    int offset = 16 + log10(board.n_turn) + 1;
+    for (int i = 0; i < (termsize.ws_col - offset) / 2; i++)
+        printf("-");
+    printf(" Starting turn %i ", board.n_turn);
+    for (int i = 0; i < termsize.ws_col - (termsize.ws_col - offset) / 2 - offset; i++)
+        printf("-");
+    printf("\n\n");
     sleep(0.3);
 
     printf(PLAYER1_COLOR "Player %s : %i SD" RESET, board.player1.player_name, board.player1.SD);
