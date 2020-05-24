@@ -123,13 +123,13 @@ void print_board(struct board board) {
     printf(PLAYER2_COLOR "SD : %i\n", board.player2.SD);
 
     // Card in hand
-    int hand_size1 = 15 + log10(stack_len(board.player1.hand) ? stack_len(board.player1.hand) : 1) + 1; // 15 corresponds to number of char in Card in hand_:_
-    int hand_size2 = 15 + log10(stack_len(board.player2.hand) ? stack_len(board.player2.hand) : 1) + 1;
+    int hand_size1 = 16 + log10(stack_len(board.player1.hand) ? stack_len(board.player1.hand) : 1) + 1; // 15 corresponds to number of char in Cards in hand_:_
+    int hand_size2 = 16 + log10(stack_len(board.player2.hand) ? stack_len(board.player2.hand) : 1) + 1;
 
-    printf(PLAYER1_COLOR "Card in hand : %i", stack_len(board.player1.hand));
+    printf(PLAYER1_COLOR "Cards in hand : %i", stack_len(board.player1.hand));
     for (int i = 0; i < termsize.ws_col - hand_size1 - hand_size2; i++)
         printf(" ");
-    printf(PLAYER2_COLOR "Card in hand : %i\n", stack_len(board.player2.hand));
+    printf(PLAYER2_COLOR "Cards in hand : %i\n", stack_len(board.player2.hand));
 
     printf("\n");
 
