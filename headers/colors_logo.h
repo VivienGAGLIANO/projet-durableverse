@@ -43,13 +43,17 @@ ________                     ___.   .__                                 \n\
 #define PEAKY_BLINDERS \
 "                                             ~ Peaky Blinders ~  \n"
 
-#define LOGO            LOGO1
-#define LOGO_COLOR      BOLDGREEN
-#define GROUPNAME_COLOR BOLDYELLOW
+#define LOGO                    LOGO1
+#define LOGO_COLOR              BOLDGREEN
+#define GROUPNAME_COLOR         BOLDYELLOW
 
-#define PLAYER1_COLOR BOLDBLUE
-#define PLAYER2_COLOR BOLDYELLOW
+#define PLAYER1_COLOR           BOLDBLUE
+#define PLAYER2_COLOR           BOLDYELLOW
 
-#define PRINT_CARD_COLOR BOLDGREEN
+#define PRINT_CARD_COLOR        BOLDGREEN
+
+#define CARD_FRAME_COLOR        BOLDBLUE
+#define CARD_NAME_COLOR         BOLDGREEN
+#define CARD_FX_COLOR           WHITE
 
 #endif
