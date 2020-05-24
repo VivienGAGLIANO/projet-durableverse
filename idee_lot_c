@@ -2,3 +2,4 @@
 - affichage de cartes : commande du style "help[nom_carte]" qui affiche les détails de la carte (éventuellement en ascii art pour afficher la carte en physique)
 	-> https://stackoverflow.com/questions/5966903/how-to-get-mousemove-and-mouseclick-in-bash
 - menu avec choix différentes options : load/start new game, setting (langage), exit game
+- ajout des cartes en couleur pour le choix du jeu des cartes, vert celles jouables, rouge celles dont cout > EP 
