@@ -258,12 +258,20 @@ void choice_FISE_FISA(int *nb_FISE, int *nb_FISA, struct ensiie p) {
  * @param card the card to display
  */
 void display_card(card card, int width) {
+    // Getting terminal size
+    struct winsize termsize;
+    ioctl(STDOUT_FILENO, TIOCGWINSZ, &termsize);
+    
+    for (int i = 0; i < (termsize.ws_col - width) / 2; i++)
+        printf(" ");
     printf(" ");
     for (int i =0; i < width; i++)
         printf("_");
     printf(" \n"); 
     
     // Name & Cost
+    for (int i = 0; i < (termsize.ws_col - width) / 2; i++)
+        printf(" ");
     printf("|");
     printf("%s", card.name);
     for (int i = 0; i < width - (int) strlen(card.name) - ((int) log(card.cost)); i++)
@@ -271,6 +279,8 @@ void display_card(card card, int width) {
     printf("%i", card.cost);
     printf("|\n");
 
+    for (int i = 0; i < (termsize.ws_col - width) / 2; i++)
+        printf(" ");
     printf("|");
     for (int i = 0; i < width; i++)
         printf("_");
@@ -278,12 +288,16 @@ void display_card(card card, int width) {
 
     // Type
     char* type = card.type == ACTION_CARD ? "Action" : "Personnel";
+    for (int i = 0; i < (termsize.ws_col - width) / 2; i++)
+        printf(" ");
     printf("|");
     for (int i = 0; i < width - (int) strlen(type); i++)
         printf(" ");
     printf("%s", type);
     printf("|\n");
 
+    for (int i = 0; i < (termsize.ws_col - width) / 2; i++)
+        printf(" ");
     printf("|");
     for (int i = 0; i < width; i++)
         printf("_");
@@ -291,6 +305,8 @@ void display_card(card card, int width) {
 
     // Effect : action card
     if (card.type == ACTION_CARD) {
+        for (int i = 0; i < (termsize.ws_col - width) / 2; i++)
+            printf(" ");
         printf("|");
         printf("%s", card.desc);
         for (int i = 0; i < width - (int) strlen(card.desc); i++)
@@ -302,6 +318,8 @@ void display_card(card card, int width) {
     if (card.type == STAFF_CARD) {
         for (int nb_eff = 0; nb_eff < stack_len(card.staff_effect); nb_eff++) {
             char* description = get_effect(card.staff_effect, nb_eff).desc;
+            for (int i = 0; i < (termsize.ws_col - width) / 2; i++)
+                printf(" ");
             printf("|");
             printf("%s", description);
             for (int i = 0; i < width - (int) strlen(description); i++)
@@ -311,6 +329,8 @@ void display_card(card card, int width) {
         }
     }
 
+    for (int i = 0; i < (termsize.ws_col - width) / 2; i++)
+        printf(" ");
     printf("|");
     for (int i =0; i < width; i++)
         printf("_");
