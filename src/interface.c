@@ -77,8 +77,26 @@ void print_new_turn(struct board board) {
  */
 void print_new_phase(struct board board, struct ensiie current_player) {
     system("clear");
-    printf("----------------- Turn %2d ------------------\n", board.n_turn);
-    printf("------------ Starting new phase ------------\n\n");
+
+    // Getting terminal size
+    struct winsize termsize;
+    ioctl(STDOUT_FILENO, TIOCGWINSZ, &termsize);
+
+    int offset = 7 + log10(board.n_turn ? board.n_turn : 1) + 1; // 7 corresponds to the number of char in _Turn__
+    for (int i = 0; i < (termsize.ws_col - offset) / 2; i++)
+        printf("-");
+    printf(" Turn %d ", board.n_turn);
+    for (int i = 0; i < termsize.ws_col - (termsize.ws_col - offset) / 2 - offset; i++)
+        printf("-");
+    printf("\n");
+    
+    offset = 20; // 2O corresponds to the number of char in _Starting_new_phase_
+    for (int i = 0; i < (termsize.ws_col - offset) / 2; i++)
+        printf("-");
+    printf(" Starting new phase ");
+    for (int i = 0; i < termsize.ws_col - (termsize.ws_col - offset) / 2 - offset; i++)
+        printf("-");
+    printf("\n\n");
     sleep(0.5);
 
     printf("Player " BOLDCYAN "%s" RESET ", it's your go!\n", current_player.player_name);
