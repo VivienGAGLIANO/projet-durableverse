@@ -19,19 +19,19 @@
     </effect>
     <effect>
         <id>RE1</id>
-        <desc>Retirer X point(s) de Développement à chacune des cartes FISE de l’adversaire</desc>
+        <desc>Retirer X point(s) de Développement à chacune des cartes FISE de l'adversaire</desc>
     </effect>
     <effect>
         <id>RE2</id>
-        <desc>Retirer X point(s) de Durabilité à chacune des cartes FISE de l’adversaire</desc>
+        <desc>Retirer X point(s) de Durabilité à chacune des cartes FISE de l'adversaire</desc>
     </effect>
     <effect>
         <id>RA1</id>
-        <desc>Retirer X point(s) de Développement à chacune des cartes FISA de l’adversaire</desc>
+        <desc>Retirer X point(s) de Développement à chacune des cartes FISA de l'adversaire</desc>
     </effect>
     <effect>
         <id>RA2</id>
-        <desc>Retirer X point(s) de Durabilité à chacune des cartes FISA de l’adversaire</desc>
+        <desc>Retirer X point(s) de Durabilité à chacune des cartes FISA de l'adversaire</desc>
     </effect>
     <effect>
         <id>ADD</id>
